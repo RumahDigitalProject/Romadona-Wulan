@@ -5,10 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Wedding of A & B</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { height: 100%; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+    /* ========== RESET & DASAR ========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+      background: #fff7f7;
+    }
 
-    /* ===== Halaman Pembuka ===== */
+    /* ========== HALAMAN PEMBUKA ========== */
     #cover {
       position: relative;
       height: 100vh;
@@ -26,12 +36,13 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.4);
+      background: rgba(0, 0, 0, 0.4);
       z-index: 1;
     }
     #cover-content {
       position: relative;
       z-index: 2;
+      padding: 20px;
     }
     .title {
       font-size: 2em;
@@ -48,24 +59,24 @@
     }
     .btn-open {
       margin-top: 40px;
-      padding: 12px 30px;
+      padding: 14px 40px;
       font-size: 1.1em;
       background: white;
       color: black;
       border: none;
       border-radius: 50px;
       cursor: pointer;
-      transition: 0.3s;
+      transition: all 0.3s ease;
     }
     .btn-open:hover {
       background: #f2f2f2;
+      transform: scale(1.05);
     }
 
-    /* ===== Isi Undangan ===== */
+    /* ========== ISI UNDANGAN ========== */
     #invitation {
       display: none;
       padding: 60px 20px;
-      background: #fff7f7;
       color: #333;
     }
     #invitation.active {
@@ -78,23 +89,70 @@
     }
 
     section {
-      max-width: 700px;
+      max-width: 800px;
       margin: auto;
       text-align: center;
-      padding-bottom: 40px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 40px 20px;
     }
     h2 {
       font-size: 2em;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      color: #b76e79;
     }
     p {
       font-size: 1.1em;
-      line-height: 1.6;
+      line-height: 1.7;
+      color: #444;
+    }
+
+    /* ========== RESPONSIVE DESIGN ========== */
+    @media (max-width: 768px) {
+      .title {
+        font-size: 1.6em;
+      }
+      .names {
+        font-size: 2.3em;
+      }
+      .guest {
+        font-size: 1em;
+      }
+      .btn-open {
+        font-size: 1em;
+        padding: 10px 30px;
+      }
+      section {
+        padding: 30px 15px;
+      }
+      h2 {
+        font-size: 1.7em;
+      }
+      p {
+        font-size: 1em;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .title {
+        font-size: 1.4em;
+      }
+      .names {
+        font-size: 2em;
+      }
+      .guest {
+        font-size: 0.95em;
+      }
+      .btn-open {
+        font-size: 0.9em;
+        padding: 8px 25px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Halaman Pembuka -->
+  <!-- ========== HALAMAN PEMBUKA ========== -->
   <div id="cover">
     <div id="cover-content">
       <p class="title">The Wedding of</p>
@@ -104,7 +162,7 @@
     </div>
   </div>
 
-  <!-- Isi Undangan -->
+  <!-- ========== ISI UNDANGAN ========== -->
   <div id="invitation">
     <section>
       <h2>Assalamu’alaikum Warahmatullahi Wabarakatuh</h2>
@@ -113,12 +171,12 @@
       <p>Yang insya Allah akan dilaksanakan pada:</p>
       <p><b>Hari:</b> Minggu, 20 Oktober 2025</p>
       <p><b>Tempat:</b> Gedung Serbaguna Bahagia</p>
-      <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir.</p>
+      <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
       <p>Wassalamu’alaikum Warahmatullahi Wabarakatuh</p>
     </section>
   </div>
 
-  <!-- Musik -->
+  <!-- ========== MUSIK ========== -->
   <audio id="bgMusic" loop>
     <source src="musik.mp3" type="audio/mpeg">
   </audio>
@@ -129,7 +187,6 @@
     const invitation = document.getElementById('invitation');
     const bgMusic = document.getElementById('bgMusic');
 
-    // Fungsi mulai musik
     function startMusic() {
       const playPromise = bgMusic.play();
       if (playPromise !== undefined) {
@@ -139,7 +196,6 @@
       }
     }
 
-    // Klik tombol buka undangan
     openBtn.addEventListener('click', () => {
       cover.style.display = 'none';
       invitation.classList.add('active');
@@ -148,27 +204,24 @@
       window.scrollTo(0, 0);
     });
 
-    // Musik otomatis berhenti saat tab/browser ditutup
+    // Saat tab ditutup atau direfresh, musik berhenti dan halaman reset
     window.addEventListener('beforeunload', () => {
       bgMusic.pause();
       bgMusic.currentTime = 0;
       localStorage.removeItem('musicPlaying');
     });
 
-    // Saat halaman dimuat ulang
+    // Reset tampilan ke halaman pembuka saat reload
     window.addEventListener('load', () => {
-      // Kembali ke halaman awal
       cover.style.display = 'flex';
       invitation.classList.remove('active');
       window.scrollTo(0, 0);
-
-      // Cek apakah sebelumnya musik aktif
       if (localStorage.getItem('musicPlaying') === 'true') {
         startMusic();
       }
     });
 
-    // Jika keluar lalu buka kembali tab, musik nyala lagi
+    // Jika user keluar lalu kembali, musik nyala lagi otomatis
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'visible' && localStorage.getItem('musicPlaying') === 'true') {
         startMusic();
