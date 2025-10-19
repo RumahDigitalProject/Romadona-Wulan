@@ -5,146 +5,176 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Wedding of A & B</title>
   <style>
-    * {margin: 0; padding: 0; box-sizing: border-box;}
-    body, html {height: 100%; font-family: 'Poppins', sans-serif; scroll-behavior: smooth;}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
 
-    /* Halaman Pembuka */
+    /* ===== Halaman Pembuka ===== */
     #cover {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      position: relative;
+      height: 100vh;
+      width: 100%;
       background: url('foto-pengantin.jpg') center/cover no-repeat;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center; color: white;
-      z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      color: white;
+      overflow: hidden;
     }
-
-    #cover h2 {font-size: 24px; letter-spacing: 2px; opacity: 0.9;}
-    #cover h1 {font-size: 40px; margin: 10px 0; font-weight: bold;}
-    #cover p {font-size: 18px; margin-bottom: 20px;}
-
-    #bukaUndangan {
-      padding: 12px 28px;
-      font-size: 18px;
+    #cover::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 1;
+    }
+    #cover-content {
+      position: relative;
+      z-index: 2;
+    }
+    .title {
+      font-size: 2em;
+      letter-spacing: 2px;
+    }
+    .names {
+      font-size: 3em;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    .guest {
+      margin-top: 15px;
+      font-size: 1.2em;
+    }
+    .btn-open {
+      margin-top: 40px;
+      padding: 12px 30px;
+      font-size: 1.1em;
+      background: white;
+      color: black;
       border: none;
-      background: rgba(255,255,255,0.8);
-      color: #333;
       border-radius: 50px;
       cursor: pointer;
       transition: 0.3s;
     }
-    #bukaUndangan:hover {
-      background: rgba(255,255,255,1);
-      transform: scale(1.05);
+    .btn-open:hover {
+      background: #f2f2f2;
     }
 
-    /* Isi Undangan */
-    #content {
+    /* ===== Isi Undangan ===== */
+    #invitation {
       display: none;
-      background: #fffaf6;
-      min-height: 100vh;
-      padding: 50px 20px;
+      padding: 60px 20px;
+      background: #fff7f7;
+      color: #333;
+    }
+    #invitation.active {
+      display: block;
+      animation: fadeIn 1s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     section {
       max-width: 700px;
       margin: auto;
       text-align: center;
+      padding-bottom: 40px;
     }
-
-    section h2 {
-      font-size: 26px;
+    h2 {
+      font-size: 2em;
       margin-bottom: 10px;
     }
-
-    section p {
+    p {
+      font-size: 1.1em;
       line-height: 1.6;
-      margin-bottom: 30px;
-    }
-
-    /* Musik Player tersembunyi */
-    audio {
-      display: none;
     }
   </style>
 </head>
 <body>
   <!-- Halaman Pembuka -->
   <div id="cover">
-    <h2>The Wedding Of</h2>
-    <h1>Andi & Bunga</h1>
-    <p>Kpd Yth. Tamu Undangan</p>
-    <button id="bukaUndangan">Buka Undangan</button>
+    <div id="cover-content">
+      <p class="title">The Wedding of</p>
+      <h1 class="names">A & B</h1>
+      <p class="guest">Kepada Yth. Tamu Undangan</p>
+      <button class="btn-open" id="openBtn">Buka Undangan</button>
+    </div>
   </div>
 
   <!-- Isi Undangan -->
-  <div id="content">
+  <div id="invitation">
     <section>
       <h2>Assalamu’alaikum Warahmatullahi Wabarakatuh</h2>
-      <p>Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara pernikahan kami.</p>
-
-      <h2>Andi & Bunga</h2>
-      <p>Sabtu, 25 Januari 2026<br>Gedung Serbaguna Harmoni<br>Jl. Merdeka No. 45, Bandung</p>
-
-      <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
-
-      <h2>Terima Kasih</h2>
+      <p>Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan pernikahan kami:</p>
+      <h2>A & B</h2>
+      <p>Yang insya Allah akan dilaksanakan pada:</p>
+      <p><b>Hari:</b> Minggu, 20 Oktober 2025</p>
+      <p><b>Tempat:</b> Gedung Serbaguna Bahagia</p>
+      <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir.</p>
+      <p>Wassalamu’alaikum Warahmatullahi Wabarakatuh</p>
     </section>
   </div>
 
   <!-- Musik -->
-  <audio id="music" loop>
-    <source src="musik.mp3" type="audio/mpeg" />
+  <audio id="bgMusic" loop>
+    <source src="musik.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    const cover = document.getElementById("cover");
-    const content = document.getElementById("content");
-    const music = document.getElementById("music");
-    const bukaBtn = document.getElementById("bukaUndangan");
+    const openBtn = document.getElementById('openBtn');
+    const cover = document.getElementById('cover');
+    const invitation = document.getElementById('invitation');
+    const bgMusic = document.getElementById('bgMusic');
 
-    // Cek apakah user sudah pernah buka sebelumnya
-    const lastScroll = localStorage.getItem("scrollPosition");
-    const alreadyOpened = localStorage.getItem("opened");
-
-    if (alreadyOpened === "true") {
-      cover.style.display = "none";
-      content.style.display = "block";
-      setTimeout(() => {
-        music.play().catch(()=>{});
-        if (lastScroll) window.scrollTo(0, lastScroll);
-      }, 500);
+    // Fungsi mulai musik
+    function startMusic() {
+      const playPromise = bgMusic.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          console.log("Auto-play diblokir browser, menunggu interaksi pengguna.");
+        });
+      }
     }
 
-    // Tombol buka undangan
-    bukaBtn.addEventListener("click", () => {
-      cover.style.opacity = "0";
-      setTimeout(() => {
-        cover.style.display = "none";
-        content.style.display = "block";
-        localStorage.setItem("opened", "true");
-        music.play().catch(()=>{});
-      }, 600);
+    // Klik tombol buka undangan
+    openBtn.addEventListener('click', () => {
+      cover.style.display = 'none';
+      invitation.classList.add('active');
+      startMusic();
+      localStorage.setItem('musicPlaying', 'true');
+      window.scrollTo(0, 0);
     });
 
-    // Simpan posisi scroll secara realtime
-    window.addEventListener("scroll", () => {
-      localStorage.setItem("scrollPosition", window.scrollY);
+    // Musik otomatis berhenti saat tab/browser ditutup
+    window.addEventListener('beforeunload', () => {
+      bgMusic.pause();
+      bgMusic.currentTime = 0;
+      localStorage.removeItem('musicPlaying');
     });
 
-    // Hentikan musik saat keluar/tab tidak aktif
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) {
-        music.pause();
-      } else {
-        music.play().catch(()=>{});
+    // Saat halaman dimuat ulang
+    window.addEventListener('load', () => {
+      // Kembali ke halaman awal
+      cover.style.display = 'flex';
+      invitation.classList.remove('active');
+      window.scrollTo(0, 0);
+
+      // Cek apakah sebelumnya musik aktif
+      if (localStorage.getItem('musicPlaying') === 'true') {
+        startMusic();
       }
     });
 
-    // Hentikan musik saat unload (keluar dari browser/tab)
-    window.addEventListener("beforeunload", () => {
-      music.pause();
+    // Jika keluar lalu buka kembali tab, musik nyala lagi
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible' && localStorage.getItem('musicPlaying') === 'true') {
+        startMusic();
+      } else {
+        bgMusic.pause();
+      }
     });
   </script>
 </body>
