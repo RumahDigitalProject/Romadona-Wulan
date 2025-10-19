@@ -238,68 +238,67 @@
 }
 
 /*JADWAL ACARA*/
+/* ==== SECTION INFO ACARA ==== */
 .info-acara {
+  position: relative;
   max-width: 800px;
-  margin: 50px auto;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  align-items: center;
-}
-
-.kotak-info {
-  background: #fff;
-  border-radius: 60px 60px 12px 12px; /* atas melengkung, bawah agak tumpul */
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-  padding: 40px 25px;
-  width: 90%;
-  max-width: 750px;
+  margin: 80px auto;
+  background: white;
+  border-radius: 120px 120px 0 0; /* 🎯 atas melengkung, bawah datar */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
   text-align: center;
-  transition: all 0.4s ease;
+  padding: 60px 30px 40px;
+  color: #444;
 }
 
-.kotak-info h2 {
+.isi-info h2 {
   color: #b76e79;
+  font-size: 2em;
   margin-bottom: 15px;
 }
 
-.kotak-info p {
-  font-size: 1.05em;
+.isi-info .tanggal,
+.isi-info .waktu,
+.isi-info .tempat {
+  font-size: 1.1em;
+  margin-bottom: 10px;
   line-height: 1.6;
 }
 
-.btn-lokasi {
-  margin-top: 20px;
+.btn-maps {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 25px;
   background: #b76e79;
-  color: #fff;
-  border: none;
-  padding: 12px 25px;
-  border-radius: 30px;
-  cursor: pointer;
-  font-size: 1em;
-  transition: background 0.3s ease, transform 0.3s ease;
+  color: white;
+  padding: 12px 28px;
+  border-radius: 40px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
-.btn-lokasi:hover {
-  background: #a85d6b;
+.btn-maps:hover {
+  background: #9b5662;
   transform: scale(1.05);
 }
 
-.maps-wrapper {
-  display: none;
-  margin-top: 20px;
-  overflow: hidden;
-  border-radius: 20px;
-  max-height: 0;
-  transition: max-height 0.8s ease, opacity 0.6s ease;
-  opacity: 0;
+.btn-maps i {
+  font-size: 1.2em;
 }
 
-.maps-wrapper.show {
-  display: block;
-  max-height: 500px;
-  opacity: 1;
+/* Responsif */
+@media (max-width: 600px) {
+  .info-acara {
+    margin: 60px 15px;
+    padding: 50px 20px 35px;
+    border-radius: 80px 80px 0 0;
+  }
+  .isi-info h2 { font-size: 1.6em; }
+  .isi-info .tanggal, .isi-info .waktu, .isi-info .tempat { font-size: 1em; }
 }
+
 
   </style>
 </head>
@@ -376,49 +375,17 @@
   </div>
 </section>
 
-  <!-- === JADWAL ACARA === -->
+<!-- === INFORMASI ACARA === -->
 <section class="info-acara">
-
-  <!-- Kotak Pertama -->
-  <div class="kotak-info">
-    <h2>Akad Nikah</h2>
-    <p><b>Hari/Tanggal:</b> Selasa, 11 November 2025</p>
-    <p><b>Waktu:</b> 11.00 WIB – Selesai</p>
-    <p><b>Tempat:</b> Kampung Berkah Kletek RT 01 RW 07, Wlingi</p>
-
-    <button id="toggleMapBtn1" class="btn-lokasi">
-      <i class="fa-solid fa-location-dot"></i> Lihat Lokasi
-    </button>
-
-    <div class="maps-wrapper" id="mapsWrapper1">
-      <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d246.88265633577853!2d112.31077619636692!3d-8.088987948549908!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sid!2sid!4v1760879868488!5m2!1sid!2sid"
-        width="100%" height="300" style="border:0;" allowfullscreen loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
-    </div>
-  </div>
-
-  <!-- Kotak Kedua -->
-  <div class="kotak-info">
+  <div class="isi-info">
     <h2>Resepsi Pernikahan</h2>
-    <p><b>Hari/Tanggal:</b> Senin, 10 November 2025</p>
-    <p><b>Waktu:</b> 08.00 WIB – Selesai</p>
-    <p><b>Tempat:</b> Kampung Berkah Kletek RT 01 RW 07, Wlingi</p>
-
-    <button id="toggleMapBtn2" class="btn-lokasi">
-      <i class="fa-solid fa-location-dot"></i> Lihat Lokasi
-    </button>
-
-    <div class="maps-wrapper" id="mapsWrapper2">
-      <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d246.88265633577853!2d112.31077619636692!3d-8.088987948549908!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sid!2sid!4v1760879868488!5m2!1sid!2sid"
-        width="100%" height="300" style="border:0;" allowfullscreen loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
-    </div>
+    <p class="tanggal">Senin, 10 November 2025</p>
+    <p class="waktu">Pukul 08.00 WIB - Selesai</p>
+    <p class="tempat">Kampung Berkah Kletek<br>RT 1 / RW 7, Wlingi</p>
+    <a class="btn-maps" href="https://maps.app.goo.gl/2aDDirCWKkKFMiZG9" target="_blank">
+      <i class="fa-solid fa-map-location-dot"></i> Lihat Lokasi
+    </a>
   </div>
-
 </section>
 
 
@@ -493,19 +460,6 @@
   countdown(); // langsung tampil saat halaman dibuka
   const timer = setInterval(countdown, 1000);
 
-  // === MAPS TOGGLE ===
-  const toggleMapBtn1 = document.getElementById('toggleMapBtn1');
-  const toggleMapBtn2 = document.getElementById('toggleMapBtn2');
-  const mapsWrapper1 = document.getElementById('mapsWrapper1');
-  const mapsWrapper2 = document.getElementById('mapsWrapper2');
-
-  toggleMapBtn1.addEventListener('click', () => {
-    mapsWrapper1.classList.toggle('show');
-  });
-
-  toggleMapBtn2.addEventListener('click', () => {
-    mapsWrapper2.classList.toggle('show');
-  });
 </script>
 </body>
 </html>
