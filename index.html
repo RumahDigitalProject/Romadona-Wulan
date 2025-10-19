@@ -87,7 +87,33 @@
 
 @media(max-width:480px){ .slide-foto img{height:400px;} 
 }
+    /* Container utama slideshow */
+    .slideshow {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+    }
 
+    /* Setiap slide (gambar latar belakang) */
+    .slide {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      animation: fadeSlide 15s infinite;
+    }
+
+    .slide1 {
+      background-image: url('sri.webp');
+      animation-delay: 0s;
+    }
+
+    .slide2 {
+      background-image: url('romadona.webp');
+      animation-delay: 3s;
+    }
     /* BACKGROUND KHUSUS */
     .bg-section-khusus {
       background-image: url('beground-date.webp');
@@ -216,7 +242,10 @@
   </div>
 
   <!-- ISI -->
-
+<!-- Bagian slideshow -->
+<div class="slideshow">
+<div class="slide slide1"></div>
+<div class="slide slide2"></div>
   
   <div id="invitation">
     <section class="bg-section-khusus">
