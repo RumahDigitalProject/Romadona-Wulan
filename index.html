@@ -5,227 +5,201 @@
   <meta property="og:title" content="Undangan Romadona & Wulan" />
   <meta property="og:description" content="Official Invitation Digital Romadona & Wulan | By Rumah Digital." />
   <meta property="og:image" content="https://rumahdigitalproject.github.io/Irawan-Ayu/fotoku.jpg" />
-  <meta property="og:url" content="https://rumahdigitalproject.github.io/Irawan-Ayu/" />
+  <meta property="og:url" content="https://rumahdigitalproject.github.io/Romadona-Wulan" />
 
   <meta charset="UTF-8" />
   <meta name="theme-color" content="#000" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="preload" href="galeri8.webp" as="image" />
   <title>The Wedding of Romadona & Wulan</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
-    /* =================== RESET =================== */
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; background:#fff7f7; }
+    /* RESET */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; background: #fff7f7; overflow-x: hidden; }
 
-    /* =================== HALAMAN PEMBUKA =================== */
+    /* COVER */
     #cover {
       position: fixed;
       z-index: 9999;
-      top: 0; left: 0; width: 100%; height: 100vh;
+      top: 0; left: 0;
+      width: 100%; height: 100vh;
       background: url('foto1.webp') center/cover no-repeat;
-      display:flex; justify-content:center; align-items:center; flex-direction:column;
-      text-align:center; color:white; overflow:hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      color: white;
+      transition: opacity 1s ease;
     }
-    /* overlay gelap supaya tulisan terlihat */
     #cover::after {
-      content:'';
-      position:absolute; top:0; left:0; right:0; bottom:0;
-      background: rgba(0,0,0,0.4); z-index:1;
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1;
     }
     #cover-content {
-      position:relative; z-index:2; margin-top:150px;
+      position: relative;
+      z-index: 2;
+      padding: 20px;
+      animation: fadeInUp 1.5s ease;
     }
-    #cover-content .title { font-size:2.2em; letter-spacing:2px; padding:15px; }
-    #cover-content .names { font-size:3em; font-weight:bold; margin-bottom:15px; }
-    #cover-content .guest { font-size:1.2em; margin-bottom:25px; }
+    #cover-content .title { font-size: 2em; margin-bottom: 10px; letter-spacing: 2px; }
+    #cover-content .names { font-size: 3em; font-weight: bold; margin-bottom: 15px; }
+    #cover-content .guest { font-size: 1.2em; margin-bottom: 25px; }
     .btn-open {
-      padding:14px 40px; font-size:1.1em; border:none; border-radius:50px;
-      cursor:pointer; background:white; color:black; display:inline-flex; align-items:center; gap:8px; transition:all 0.3s;
+      padding: 14px 40px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      background: white;
+      color: black;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s;
     }
-    .btn-open:hover { background:#f2f2f2; transform:scale(1.05); }
-    .btn-open i { color:#b76e79; font-size:1.2em; }
+    .btn-open:hover { background: #f2f2f2; transform: scale(1.05); }
+    .btn-open i { color: #b76e79; font-size: 1.2em; }
 
-    /* =================== HALAMAN ISI =================== */
-    #invitation { display:none; color:#333; }
-    #invitation.active {
-      display:block;
-      animation:fadeIn 1s ease forwards;
+    /* ANIMASI MASUK */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
+
+    /* HALAMAN ISI */
+    #invitation { 
+      display: none;
+      animation: fadeIn 1.5s ease forwards;
+      will-change: transform, opacity;
+    }
+
     @keyframes fadeIn {
-      from{opacity:0; transform:translateY(30px);}
-      to{opacity:1; transform:translateY(0);}
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    section {
-      max-width:800px;
-      margin:40px auto;
-      padding:40px 20px;
-      background:white;
-      border-radius:16px;
-      box-shadow:0 4px 20px rgba(0,0,0,0.08);
-      text-align:center;
-    }
-
-    /* Tulisan Bismillah */
-    .bismillah { font-family:'Scheherazade New', serif; font-size:2.5em; color:#b76e79; margin-bottom:20px; }
-
-    h2 { font-size:2em; margin-bottom:15px; color:#b76e79; }
-    p { font-size:1.1em; line-height:1.7; margin-bottom:15px; color:#444; }
-
-    /* FOTO PENGANTIN */
-    .foto-section { position:relative; width:100%; max-width:600px; margin:40px auto; }
-    .foto-section img { width:100%; border-radius:16px; }
-    .overlay-text { text-align:center; margin-top:15px; }
-    .overlay-text h3 { font-size:1.8em; font-weight:bold; margin-bottom:5px; }
-    .overlay-text p { font-size:1em; color:#555; }
-
-    /* =================== RESPONSIVE =================== */
-    @media(max-width:768px){
-      #cover-content .title{font-size:1.8em;}
-      #cover-content .names{font-size:2.5em;}
-      #cover-content .guest{font-size:1em;}
-      .btn-open{font-size:1em; padding:10px 30px;}
-      .bismillah{font-size:2em;}
-      h2{font-size:1.7em;}
-      .overlay-text h3{font-size:1.5em;}
-    }
-    @media(max-width:480px){
-      #cover-content .title{font-size:1.5em;}
-      #cover-content .names{font-size:2em;}
-      #cover-content .guest{font-size:0.95em;}
-      .btn-open{font-size:0.9em; padding:8px 25px;}
-      .bismillah{font-size:1.6em;}
-      h2{font-size:1.5em;}
-      .overlay-text h3{font-size:1.3em;}
-    }
-
-    /* BACKGROUND KHUSUS HANYA UNTUK BAGIAN BISMILLAH SAMPAI PENGANTIN */
+    /* BACKGROUND KHUSUS */
     .bg-section-khusus {
       background-image: url('beground-date.webp');
       background-repeat: repeat-y;
       background-size: cover;
       background-position: center top;
-      background-attachment: fixed; /* background diam */
+      background-attachment: fixed;
       background-color: #fff;
       padding: 80px 20px;
       margin-bottom: 0;
       min-height: 100vh;
     }
 
+    /* KONTEN */
+    .bismillah {
+      text-align: center;
+      font-size: 22px;
+      font-family: 'Scheherazade New', serif;
+      margin: 60px 0 30px;
+      color: #b76e79;
+      direction: rtl;
+    }
+
+    .salam-undangan {
+      text-align: center;
+      font-size: 15px;
+      color: #444;
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    /* BOX PUTIH */
     .box-putih-kecil {
-      background: rgba(255, 255, 255, 0.97); /* Putih transparan */
-      background-size: cover;
+      background: rgba(255, 255, 255, 0.96);
       border: 3px solid #f3a302;
       border-radius: 999px;
       aspect-ratio: 9 / 16;
       max-width: 320px;
       width: 100%;
-      padding: 10px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      padding: 15px 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       text-align: center;
       color: #7b1f26;
-      margin: 20px auto; /* center horizontally */
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
     }
 
-    /* ==== PENYESUAIAN BISMILLAH ==== */
-    .bismillah {
-      text-align: center;
-      font-size: 18px;
-      font-family: 'Scheherazade New', serif;
-      margin-top: 80px;
-      margin-bottom: 30px;
-      direction: rtl;
-    }
-
-    /* ==== PENYESUAIAN SALAM DAN KALIMAT UNDANGAN ==== */
-    .salam-undangan {
-      text-align: center;
-      font-family: 'Poppins', sans-serif;
-      font-size: 15px;
-      color: #444;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    /* MEMASTIKAN POSISI FOTO & ISI PENGANTIN DI TENGAH SECARA SIMETRIS */
+    /* PROFIL */
     .profil {
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       flex-wrap: wrap;
       gap: 40px;
-      text-align: center;
       margin-bottom: 60px;
+      text-align: center;
     }
 
-    /* FOTO PENGANTIN: SETENGAH BADAN + BINGKAI MODERN */
     .foto {
       display: block;
-      margin: 0 auto;
+      margin: 20px auto 10px;
       width: 220px;
       height: 290px;
       object-fit: cover;
-      border-radius: 50% / 60%; /* OVAL vertikal */
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 50% / 60%;
       border: 4px solid #eee;
-      /* default posisi object; bisa disesuaikan untuk masing-masing foto */
-      object-position: center center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     }
 
-    /* Geser sedikit foto pengantin pria (foto pertama) agar tidak mepet ke atas */
-    .profil .pengantin:first-child .foto {
-      object-position: center 30%;
-    }
-
-    /* NAMA PENGANTIN */
     .nama-pengantin {
       font-family: 'Great Vibes', cursive;
       font-size: 28px;
-      margin-top: 16px;
+      margin-top: 10px;
       color: #f3a302;
       line-height: 1.3;
     }
 
-    /* NAMA ORANG TUA */
     .orang-tua {
-      font-family: 'Poppins', sans-serif;
       font-size: 15px;
       color: #555;
       margin-top: 4px;
     }
 
-    /* ALAMAT */
     .alamat {
-      font-family: 'Poppins', sans-serif;
       font-size: 12px;
       color: #555;
     }
 
-    /* SIMBOL & DI TENGAH */
     .and-symbol {
       font-size: 58px;
       font-family: 'Great Vibes', cursive;
-      margin: 20px;
       color: #f3a302;
+      align-self: center;
+      margin: 0 10px;
     }
 
-    /* Small screens: buat box putih lebih lebar agar konten muat */
-    @media (max-width: 420px) {
-      .box-putih-kecil { max-width: 90%; aspect-ratio: auto; padding: 18px; }
-      .foto { width: 160px; height: 210px; }
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      #cover-content .names { font-size: 2.4em; }
+      .bismillah { font-size: 20px; }
+      .foto { width: 190px; height: 250px; }
+      .and-symbol { font-size: 50px; }
+    }
+    @media (max-width: 480px) {
+      #cover-content .names { font-size: 2em; }
+      .bismillah { font-size: 18px; }
+      .foto { width: 170px; height: 230px; }
+      .and-symbol { font-size: 46px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- =================== HALAMAN PEMBUKA =================== -->
+  <!-- COVER -->
   <div id="cover">
     <div id="cover-content">
       <p class="title">The Wedding of</p>
@@ -237,27 +211,21 @@
     </div>
   </div>
 
-  <!-- =================== HALAMAN ISI =================== -->
+  <!-- ISI -->
   <div id="invitation">
-    <!-- BAGIAN DENGAN BACKGROUND KHUSUS -->
-    <!-- === BISMILLAH ARAB === -->
     <section class="bg-section-khusus">
       <div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
-
-      <!-- === SALAM DAN KALIMAT UNDANGAN === -->
       <div class="salam-undangan">
         Assalamu'alaikum Wr. Wb.<br/>
-        Maha suci Allah SWT yang telah menciptakan mahkluk-Nya berpasang - pasangan.<br/>
+        Maha suci Allah SWT yang telah menciptakan makhluk-Nya berpasang-pasangan.<br/>
         Tanpa mengurangi rasa hormat, kami bermaksud mengundang Bapak/Ibu/Saudara/i<br/>
         untuk menghadiri acara pernikahan kami.
       </div>
 
       <div class="box-putih-kecil">
-        <!-- === PROFIL PENGANTIN === -->
         <div class="profil">
-          <!-- Pengantin pria -->
           <div class="pengantin">
-            <img alt="Pengantin Laki-laki" class="foto" src="romadona.webp"/>
+            <img alt="Pengantin Laki-laki" class="foto" src="romadona.webp" loading="lazy"/>
             <h2 class="nama-pengantin">Romadona</h2>
             <p class="orang-tua">Putra dari Bapak Katimin &amp; Ibu Jamiati</p>
             <p class="alamat">( Desa Krisik, Dsn Rambut Monte RT 01 RW 04, Gandusari )</p>
@@ -265,9 +233,8 @@
 
           <div class="and-symbol">&amp;</div>
 
-          <!-- Pengantin wanita -->
           <div class="pengantin">
-            <img alt="Pengantin Perempuan" class="foto" src="sri.webp"/>
+            <img alt="Pengantin Perempuan" class="foto" src="sri.webp" loading="lazy"/>
             <h2 class="nama-pengantin">Sri Wulandari</h2>
             <p class="orang-tua">Putri dari Bapak Triman Wahyudi &amp; Ibu Sunarti</p>
             <p class="alamat">( Kampung Berkah Kletek RT 01 RW 07, Wlingi )</p>
@@ -277,43 +244,40 @@
     </section>
   </div>
 
-  <!-- =================== MUSIK =================== -->
-  <audio id="bgMusic" loop>
+  <!-- MUSIK -->
+  <audio id="bgMusic" loop preload="none">
     <source src="musik.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    // Ambil elemen
     const openBtn = document.getElementById('openBtn');
     const cover = document.getElementById('cover');
     const invitation = document.getElementById('invitation');
     const bgMusic = document.getElementById('bgMusic');
 
-    // Fungsi play musik
-    function startMusic(){
+    function startMusic() {
       const playPromise = bgMusic.play();
-      if(playPromise !== undefined){
-        playPromise.catch(()=>console.log("Auto-play diblokir browser, tunggu interaksi."));
+      if (playPromise !== undefined) {
+        playPromise.catch(() => console.log("Auto-play diblokir browser."));
       }
     }
 
-    // Klik tombol buka undangan
-    openBtn.addEventListener('click', ()=>{
-      cover.style.display = 'none';
-      invitation.classList.add('active');
-      document.body.style.overflow = 'auto'; // scroll aktif di halaman isi
-      startMusic();
+    openBtn.addEventListener('click', () => {
+      cover.style.opacity = '0';
+      setTimeout(() => {
+        cover.style.display = 'none';
+        invitation.style.display = 'block';
+        startMusic();
+      }, 800);
     });
 
-    // Pause musik saat tab tidak aktif
-    document.addEventListener('visibilitychange', ()=>{
-      if(document.visibilityState==='visible'){
-        if(invitation.classList.contains('active')) startMusic();
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        startMusic();
       } else {
         bgMusic.pause();
       }
     });
   </script>
-
 </body>
 </html>
