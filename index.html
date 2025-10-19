@@ -237,6 +237,82 @@
   opacity: 0.9;
 }
 
+/*JADWAL ACARA*/
+  .info-acara {
+  display: flex;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+.kotak-info {
+  background: #fff;
+  /* 🎯 hanya bagian atas melengkung besar, bawah sedikit saja */
+  border-top-left-radius: 100px;
+  border-top-right-radius: 100px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+  padding: 40px 25px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: #333;
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+
+.kotak-info h2 {
+  color: #b76e79;
+  margin-bottom: 15px;
+}
+
+.kotak-info p {
+  font-size: 1em;
+  margin-bottom: 8px;
+}
+
+.btn-lokasi {
+  margin-top: 20px;
+  background: #b76e79;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-lokasi:hover {
+  background: #9b5a64;
+}
+
+/* Maps disembunyikan dulu */
+.maps-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.8s ease;
+  margin-top: 15px;
+  border-radius: 15px; /* biar sudut bawah map juga lembut */
+}
+
+.maps-wrapper.show {
+  max-height: 350px; /* tinggi saat map muncul */
+}
+.kotak-info::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: white;
+  border-top-left-radius: 100px;
+  border-top-right-radius: 100px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
+}
+
+
   </style>
 </head>
 <body>
@@ -311,7 +387,29 @@
     <div><span id="seconds">00</span><small>Detik</small></div>
   </div>
 </section>
-  
+
+<!-- === JADWAL ACARA === -->
+<section class="info-acara">
+  <div class="kotak-info">
+    <h2>Resepsi Pernikahan</h2>
+    <p><b>Hari/Tanggal:</b> Minggu, 20 Oktober 2025</p>
+    <p><b>Waktu:</b> 09.00 WIB – Selesai</p>
+    <p><b>Tempat:</b> Gedung Serbaguna Bahagia</p>
+
+    <button id="toggleMapBtn" class="btn-lokasi">
+      <i class="fa-solid fa-location-dot"></i> Lihat Lokasi
+    </button>
+
+    <div class="maps-wrapper" id="mapsWrapper">
+      <!-- Ganti URL src di bawah ini dengan link embed map kamu -->
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.566104648948!2d112.2308426!3d-7.049274499999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7e3d80a8c2353%3A0x1d3b9ff9b0c47cf4!2sGedung%20Serbaguna!5e0!3m2!1sid!2sid!4v1694953884205!5m2!1sid!2sid" 
+        width="100%" height="300" style="border:0;" allowfullscreen loading="lazy">
+      </iframe>
+    </div>
+  </div>
+</section>
+
   <!-- MUSIK -->
   <audio id="bgMusic" loop preload="none">
     <source src="musik.mp3" type="audio/mpeg">
@@ -379,7 +477,19 @@
   countdown(); // <-- ini penting biar tampil langsung
   const timer = setInterval(countdown, 1000);
   
+ // JADWAL ACARA  
+const toggleMapBtn = document.getElementById('toggleMapBtn');
+  const mapsWrapper = document.getElementById('mapsWrapper');
 
+  toggleMapBtn.addEventListener('click', () => {
+    mapsWrapper.classList.toggle('show');
+
+    if (mapsWrapper.classList.contains('show')) {
+      toggleMapBtn.innerHTML = '<i class="fa-solid fa-location-dot"></i> Sembunyikan Lokasi';
+    } else {
+      toggleMapBtn.innerHTML = '<i class="fa-solid fa-location-dot"></i> Lihat Lokasi';
+    }
+  });
 </script>
 </body>
 </html>
