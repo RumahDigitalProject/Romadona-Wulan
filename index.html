@@ -372,6 +372,62 @@
   }
 }
 
+/* ======== UCAPAN & KEHADIRAN ======== */
+.wishes-section {
+  background: linear-gradient(180deg, #fff7f7 0%, #fff 100%);
+  padding: 60px 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  text-align: center;
+  margin: 60px auto;
+  max-width: 700px;
+}
+.judul-wishes {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.5em;
+  color: #b76e79;
+  margin-bottom: 10px;
+}
+.deskripsi-wishes {
+  font-size: 1em;
+  color: #555;
+  margin-bottom: 25px;
+}
+.wishes-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+.wishes-form input, .wishes-form select, .wishes-form textarea {
+  width: 90%;
+  max-width: 500px;
+  padding: 12px 15px;
+  border: 1.5px solid #f3a302;
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1em;
+  outline: none;
+  transition: all 0.3s;
+}
+.wishes-form input:focus, .wishes-form select:focus, .wishes-form textarea:focus {
+  box-shadow: 0 0 8px rgba(243,163,2,0.4);
+  border-color: #b76e79;
+}
+.wishes-form button {
+  background: #b76e79;
+  color: white;
+  border: none;
+  padding: 12px 40px;
+  border-radius: 30px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.wishes-form button:hover {
+  background: #a15666;
+  transform: scale(1.05);
+}
 
 
   </style>
@@ -475,6 +531,23 @@
   </div>
 </section>
 
+<!-- ========== BAGIAN WISHES & KEHADIRAN ========== -->
+<section class="wishes-section">
+  <h2 class="judul-wishes">Ucapan & Kehadiran</h2>
+  <p class="deskripsi-wishes">Kirimkan ucapan doa atau konfirmasi kehadiran Anda untuk kedua mempelai 💌</p>
+
+  <div class="wishes-form">
+    <input type="text" id="nama" placeholder="Nama Anda" required>
+    <select id="status">
+      <option value="" disabled selected>Konfirmasi Kehadiran</option>
+      <option value="Hadir">Hadir</option>
+      <option value="Tidak Hadir">Tidak Hadir</option>
+      <option value="Masih Ragu">Masih Ragu</option>
+    </select>
+    <textarea id="pesan" rows="4" placeholder="Tulis ucapan dan doa terbaikmu..."></textarea>
+    <button onclick="kirimWishes()">Kirim ke WhatsApp</button>
+  </div>
+</section>
 
 
 
@@ -547,6 +620,30 @@
 
   countdown(); // langsung tampil saat halaman dibuka
   const timer = setInterval(countdown, 1000);
+
+// Kirim ucapan & kehadiran via WhatsApp
+function kirimWishes() {
+  const nama = document.getElementById('nama').value.trim();
+  const status = document.getElementById('status').value;
+  const pesan = document.getElementById('pesan').value.trim();
+
+  if (!nama || !status) {
+    alert('Mohon isi nama dan status kehadiran terlebih dahulu 🙏');
+    return;
+  }
+
+  // Ganti dengan nomor WA pengantin (gunakan format internasional tanpa +)
+  const nomorWa = '6285706889273'; // contoh: 6285234567890
+
+  const teks = `✨ *Ucapan & Kehadiran* ✨%0A
+Nama: ${nama}%0A
+Kehadiran: ${status}%0A
+Ucapan: ${pesan || '-'}%0A%0A
+Dikirim melalui Undangan Digital 💌`;
+
+  const url = `https://wa.me/${nomorWa}?text=${teks}`;
+  window.open(url, '_blank');
+}
 
 </script>
 </body>
