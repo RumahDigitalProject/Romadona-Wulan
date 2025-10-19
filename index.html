@@ -5,12 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Wedding of A & Wulan</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
-  /* ===== RESET ===== */
+  /* =================== RESET =================== */
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; background:#fff7f7; }
 
-  /* ===== HALAMAN PEMBUKA ===== */
+  /* =================== HALAMAN PEMBUKA =================== */
   #cover {
     position: relative;
     height: 100vh;
@@ -19,14 +20,14 @@
     display:flex; justify-content:center; align-items:center; flex-direction:column;
     text-align:center; color:white; overflow:hidden;
   }
+  /* overlay gelap supaya tulisan terlihat */
   #cover::after {
     content:'';
     position:absolute; top:0; left:0; right:0; bottom:0;
     background: rgba(0,0,0,0.4); z-index:1;
   }
   #cover-content {
-    position:relative; z-index:2;
-    padding:20px;
+    position:relative; z-index:2; padding:20px;
   }
   #cover-content .title { font-size:2.2em; letter-spacing:2px; margin-bottom:15px; }
   #cover-content .names { font-size:3em; font-weight:bold; margin-bottom:15px; }
@@ -38,14 +39,22 @@
   .btn-open:hover { background:#f2f2f2; transform:scale(1.05); }
   .btn-open i { color:#b76e79; font-size:1.2em; }
 
-  /* ===== HALAMAN ISI ===== */
+  /* =================== HALAMAN ISI =================== */
   #invitation { display:none; color:#333; }
-  #invitation.active { display:block; animation:fadeIn 1s ease forwards; }
-  @keyframes fadeIn { from{opacity:0; transform:translateY(30px);} to{opacity:1; transform:translateY(0);} }
+
+  #invitation.active { 
+    display:block; 
+    animation:fadeIn 1s ease forwards; 
+  }
+
+  @keyframes fadeIn { 
+    from{opacity:0; transform:translateY(30px);} 
+    to{opacity:1; transform:translateY(0);} 
+  }
 
   section { max-width:800px; margin:40px auto; padding:40px 20px; background:white; border-radius:16px; box-shadow:0 4px 20px rgba(0,0,0,0.08); text-align:center; }
 
-  /* Bismillah */
+  /* Tulisan Bismillah */
   .bismillah { font-family:'Scheherazade New', serif; font-size:2.5em; color:#b76e79; margin-bottom:20px; }
 
   h2 { font-size:2em; margin-bottom:15px; color:#b76e79; }
@@ -58,7 +67,7 @@
   .overlay-text h3 { font-size:1.8em; font-weight:bold; margin-bottom:5px; }
   .overlay-text p { font-size:1em; color:#555; }
 
-  /* RESPONSIVE */
+  /* =================== RESPONSIVE =================== */
   @media(max-width:768px){
     #cover-content .title{font-size:1.8em;}
     #cover-content .names{font-size:2.5em;}
@@ -81,23 +90,27 @@
 </head>
 <body>
 
-<!-- HALAMAN PEMBUKA -->
+<!-- =================== HALAMAN PEMBUKA =================== -->
 <div id="cover">
   <div id="cover-content">
     <p class="title">The Wedding of</p>
     <h1 class="names">A & Wulan</h1>
     <p class="guest">Kepada Yth. Bapak/Ibu/Saudara/i</p>
-    <button class="btn-open" id="openBtn"><i class="fa-solid fa-envelope"></i> Buka Undangan</button>
+    <button class="btn-open" id="openBtn">
+      <i class="fa-solid fa-envelope"></i> Buka Undangan
+    </button>
   </div>
 </div>
 
-<!-- HALAMAN ISI -->
+<!-- =================== HALAMAN ISI =================== -->
 <div id="invitation">
+  <!-- Tulisan Bismillah -->
   <section>
     <p class="bismillah">بسم الله الرحمن الرحيم</p>
     <p>Mahasuci Allah yang telah menciptakan makhluk-Nya, tanpa mengurangi rasa hormat kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam pernikahan kami.</p>
   </section>
 
+  <!-- FOTO PENGANTIN PEREMPUAN -->
   <div class="foto-section">
     <img src="pengantin-wanita.jpg" alt="Pengantin Perempuan">
     <div class="overlay-text">
@@ -107,6 +120,7 @@
     </div>
   </div>
 
+  <!-- FOTO PENGANTIN PRIA -->
   <div class="foto-section">
     <img src="pengantin-pria.jpg" alt="Pengantin Pria">
     <div class="overlay-text">
@@ -117,40 +131,42 @@
   </div>
 </div>
 
-<!-- MUSIK -->
+<!-- =================== MUSIK =================== -->
 <audio id="bgMusic" loop>
   <source src="musik.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-const openBtn = document.getElementById('openBtn');
-const cover = document.getElementById('cover');
-const invitation = document.getElementById('invitation');
-const bgMusic = document.getElementById('bgMusic');
+  // Ambil elemen
+  const openBtn = document.getElementById('openBtn');
+  const cover = document.getElementById('cover');
+  const invitation = document.getElementById('invitation');
+  const bgMusic = document.getElementById('bgMusic');
 
-function startMusic(){
-  const playPromise = bgMusic.play();
-  if(playPromise !== undefined){
-    playPromise.catch(()=>console.log("Auto-play diblokir, menunggu interaksi."));
+  // Fungsi play musik
+  function startMusic(){
+    const playPromise = bgMusic.play();
+    if(playPromise !== undefined){
+      playPromise.catch(()=>console.log("Auto-play diblokir browser, tunggu interaksi."));
+    }
   }
-}
 
-// Tombol buka undangan
-openBtn.addEventListener('click', ()=>{
-  cover.style.display = 'none';
-  invitation.classList.add('active');
-  document.body.style.overflow = 'auto'; // scroll aktif
-  startMusic();
-});
+  // Klik tombol buka undangan
+  openBtn.addEventListener('click', ()=>{
+    cover.style.display = 'none';
+    invitation.classList.add('active');
+    document.body.style.overflow = 'auto'; // scroll aktif di halaman isi
+    startMusic();
+  });
 
-// Auto-pause musik jika tab tidak aktif
-document.addEventListener('visibilitychange', ()=>{
-  if(document.visibilityState==='visible'){
-    if(invitation.classList.contains('active')) startMusic();
-  }else{
-    bgMusic.pause();
-  }
-});
+  // Pause musik saat tab tidak aktif
+  document.addEventListener('visibilitychange', ()=>{
+    if(document.visibilityState==='visible'){
+      if(invitation.classList.contains('active')) startMusic();
+    } else {
+      bgMusic.pause();
+    }
+  });
 </script>
 
 </body>
