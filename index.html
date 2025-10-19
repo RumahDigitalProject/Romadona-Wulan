@@ -97,6 +97,52 @@
     h2{font-size:1.5em;}
     .overlay-text h3{font-size:1.3em;}
   }
+  /* MEMASTIKAN POSISI FOTO & ISI PENGANTIN DI TENGAH SECARA SIMETRIS */
+.profil {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  text-align: center;
+  margin-bottom: 60px;
+}
+  /* FOTO PENGANTIN: SETENGAH BADAN + BINGKAI MODERN */
+.foto {
+  display: block;
+  margin: 0 auto;
+  width: 220px;
+  height: 290px;
+  object-fit: cover;
+  border-radius: 50% / 60%; /* OVAL vertikal */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border: 4px solid #eee;
+}
+
+/* NAMA PENGANTIN */
+.nama-pengantin {
+  font-family: 'Great Vibes', cursive;
+  font-size: 28px;
+  margin-top: 16px;
+  color: #f3a302; 
+  line-height: 1.3;
+}
+
+/* NAMA ORANG TUA */
+.orang-tua {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  color: #555;
+  margin-top: 4px;
+}
+
+/* SIMBOL & DI TENGAH */
+.and-symbol {
+  font-size: 58px;
+  font-family: 'Great Vibes', cursive;
+  margin: 20px;
+  color: #f3a302; 
+}
 </style>
 </head>
 <body>
