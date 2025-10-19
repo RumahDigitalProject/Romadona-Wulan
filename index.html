@@ -83,6 +83,26 @@
       from { opacity: 0; transform: translateY(40px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    /* === SLIDER FOTO OTOMATIS === */
+.slide-foto {
+  position: relative;
+  max-width: 360px;
+  margin: 40px auto;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.slide-foto img {
+  width: 100%; height: 480px;
+  object-fit: cover;
+  border-radius: 16px;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.slide.active img { opacity: 1; }
+
+@media(max-width:480px){ .slide-foto img{height:400px;} }
+
 
     /* BACKGROUND KHUSUS */
     .bg-section-khusus {
@@ -212,6 +232,12 @@
   </div>
 
   <!-- ISI -->
+  <!-- ===== SLIDE FOTO OTOMATIS ===== -->
+<div class="slide-foto">
+  <div class="slide active"><img src="galeri1.webp" alt="Foto 1"></div>
+  <div class="slide"><img src="galeri2.webp" alt="Foto 2"></div>
+</div>
+
   <div id="invitation">
     <section class="bg-section-khusus">
       <div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
@@ -277,7 +303,17 @@
       } else {
         bgMusic.pause();
       }
-    });
+      let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+
+function showSlide(n) {
+  slides.forEach((s, i) => s.classList.toggle('active', i === n));
+}
+
+setInterval(() => {
+  currentSlide = (currentSlide + 1) % slides.length;
+  showSlide(currentSlide);
+}, 4000);
   </script>
 </body>
 </html>
