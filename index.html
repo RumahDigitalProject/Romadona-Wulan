@@ -1,292 +1,229 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <!-- Open Graph -->
-  <meta property="og:title" content="Undangan Romadona & Wulan" />
-  <meta property="og:description" content="Official Invitation Digital Romadona & Wulan | By Rumah Digital." />
-  <meta property="og:image" content="https://rumahdigitalproject.github.io/Irawan-Ayu/fotoku.jpg" />
-  <meta property="og:url" content="https://rumahdigitalproject.github.io/Irawan-Ayu/" />
-
   <meta charset="UTF-8" />
-  <meta name="theme-color" content="#000" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <link rel="preload" href="galeri8.webp" as="image" />
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Wedding of Romadona & Wulan</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<style>
-  /* =================== RESET =================== */
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; background:#fff7f7; }
+  <title>The Wedding of A & WULAN</title>
+  <style>
+    /* ===== RESET & DASAR ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+      background: #fff7f7;
+      overflow: hidden; /* awal scroll terkunci */
+    }
 
-  /* =================== HALAMAN PEMBUKA =================== */
-  #cover {
-    position: fixed; 
-    z-index: 9999;
-    top: 0; left: 0; width: 100%; height: 100vh; 
-    background: url('foto1.webp') center/cover no-repeat;
-    display:flex; justify-content:center; align-items:center; flex-direction:column;
-    text-align:center; color:white; overflow:hidden;
-  }
-  /* overlay gelap supaya tulisan terlihat */
-  #cover::after {
-    content:'';
-    position:absolute; top:0; left:0; right:0; bottom:0;
-    background: rgba(0,0,0,0.4); z-index:1;
-  }
-  #cover-content {
-    position:relative; z-index:2; margin-top:150px;
-  }
-  #cover-content .title { font-size:2.2em; letter-spacing:2px; padding:15px; }
-  #cover-content .names { font-size:3em; font-weight:bold; margin-bottom:15px; }
-  #cover-content .guest { font-size:1.2em; margin-bottom:25px; }
-  .btn-open {
-    padding:14px 40px; font-size:1.1em; border:none; border-radius:50px;
-    cursor:pointer; background:white; color:black; display:inline-flex; align-items:center; gap:8px; transition:all 0.3s;
-  }
-  .btn-open:hover { background:#f2f2f2; transform:scale(1.05); }
-  .btn-open i { color:#b76e79; font-size:1.2em; }
+    /* ===== HALAMAN PEMBUKA ===== */
+    #cover {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      background: url('foto-pengantin.jpg') center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      color: white;
+      overflow: hidden;
+    }
+    #cover::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+    #cover-content {
+      position: relative;
+      z-index: 2;
+      padding-top: 150px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .title { font-size: 2em; letter-spacing: 2px; margin-bottom: 25px; }
+    .names { font-size: 3em; font-weight: bold; margin-bottom: 80px; }
+    .guest { margin-top: 80px; font-size: 1.1em; margin-bottom: 25px; }
+    .btn-open {
+      margin-top: 25px;
+      padding: 14px 40px;
+      font-size: 1.1em;
+      background: white;
+      color: black;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-open:hover { background: #f2f2f2; transform: scale(1.05); }
+    .btn-open i { font-size: 1.2em; color: #b76e79; }
 
-  /* =================== HALAMAN ISI =================== */
-  #invitation { display:none; color:#333; }
+    /* ===== ISI UNDANGAN ===== */
+    #invitation { display: none; padding: 0; color: #333; }
+    #invitation.active { display: block; animation: fadeIn 1s ease forwards; }
 
-  #invitation.active { 
-    display:block; 
-    animation:fadeIn 1s ease forwards; 
-  }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-  @keyframes fadeIn { 
-    from{opacity:0; transform:translateY(30px);} 
-    to{opacity:1; transform:translateY(0);} 
-  }
+    /* ===== FOTO BAGIAN ATAS ISI UNDANGAN ===== */
+    #top-photo {
+      position: relative;
+      width: 100%;
+      height: 350px;
+      overflow: hidden;
+    }
+    #top-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%; /* geser foto sedikit ke bawah agar tidak mepet */
+    }
+    #top-photo .overlay-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+    }
+    #top-photo .overlay-text .title { font-size: 2em; margin-bottom: 10px; letter-spacing: 2px; }
+    #top-photo .overlay-text .names { font-size: 3em; font-weight: bold; }
 
-  section { max-width:800px; margin:40px auto; padding:40px 20px; background:white; border-radius:16px; box-shadow:0 4px 20px rgba(0,0,0,0.08); text-align:center; }
+    /* ===== SECTION ===== */
+    section {
+      max-width: 800px;
+      margin: -50px auto 0 auto; /* tetap menyatu dengan foto tapi presisi di tengah */
+      text-align: center;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 60px 20px 50px; /* tambahkan jarak agar isi tidak terlalu mepet */
+      position: relative;
+      z-index: 1;
+    }
+    h2 { font-size: 2em; margin-bottom: 15px; color: #b76e79; }
+    p { font-size: 1.1em; line-height: 1.7; color: #444; }
 
-  /* Tulisan Bismillah */
-  .bismillah { font-family:'Scheherazade New', serif; font-size:2.5em; color:#b76e79; margin-bottom:20px; }
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .title { font-size: 1.6em; }
+      .names { font-size: 2.3em; }
+      .guest { font-size: 1em; }
+      .btn-open { font-size: 1em; padding: 10px 30px; }
+      section { padding: 40px 15px; }
+      h2 { font-size: 1.7em; }
+      p { font-size: 1em; }
+      #top-photo { height: 250px; }
+      #top-photo .overlay-text .title { font-size: 1.5em; }
+      #top-photo .overlay-text .names { font-size: 2em; }
+    }
 
-  h2 { font-size:2em; margin-bottom:15px; color:#b76e79; }
-  p { font-size:1.1em; line-height:1.7; margin-bottom:15px; color:#444; }
-
-  /* FOTO PENGANTIN */
-  .foto-section { position:relative; width:100%; max-width:600px; margin:40px auto; }
-  .foto-section img { width:100%; border-radius:16px; }
-  .overlay-text { text-align:center; margin-top:15px; }
-  .overlay-text h3 { font-size:1.8em; font-weight:bold; margin-bottom:5px; }
-  .overlay-text p { font-size:1em; color:#555; }
-
-  /* =================== RESPONSIVE =================== */
-  @media(max-width:768px){
-    #cover-content .title{font-size:1.8em;}
-    #cover-content .names{font-size:2.5em;}
-    #cover-content .guest{font-size:1em;}
-    .btn-open{font-size:1em; padding:10px 30px;}
-    .bismillah{font-size:2em;}
-    h2{font-size:1.7em;}
-    .overlay-text h3{font-size:1.5em;}
-  }
-  @media(max-width:480px){
-    #cover-content .title{font-size:1.5em;}
-    #cover-content .names{font-size:2em;}
-    #cover-content .guest{font-size:0.95em;}
-    .btn-open{font-size:0.9em; padding:8px 25px;}
-    .bismillah{font-size:1.6em;}
-    h2{font-size:1.5em;}
-    .overlay-text h3{font-size:1.3em;}
-  }
-  /* BACKGROUND KHUSUS HANYA UNTUK BAGIAN BISMILLAH SAMPAI PENGANTIN */
-.bg-section-khusus {
-  background-image: url('beground-date.webp');
-  background-repeat: repeat-y;
-  background-size: cover; /* ubah ke cover agar full section */
-  background-position: center top;
-  background-attachment: fixed; /* 🎯 ini bikin background diam */
-  background-color: #fff;
-  padding: 80px 20px;
-  margin-bottom: 0px;
-  min-height: 100vh;
-}
-.box-putih-kecil {
-  background: rgba(255, 255, 255, 0.97); /* Putih transparan */
-  background-size: cover;
-  border: 3px solid #f3a302; 
-  border-radius: 999px;
-  aspect-ratio: 9 / 16;
-  max-width: 320px;
-  width: 100%;
-  padding: 10px 10px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-  text-align: center;
-  color: #7b1f26;
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-      /* ==== PENYESUAIAN BISMILLAH ==== */
-.bismillah {
-  text-align: center;
-  font-size: 18px;
-  font-family: 'Scheherazade New', serif; /* Font Arab lebih indah */
-  margin-top: 80px;
-  margin-bottom: 30px;
-  direction: rtl; /* agar kaligrafi arab tampil natural */
-}
-
-/* ==== PENYESUAIAN SALAM DAN KALIMAT UNDANGAN ==== */
-.salam-undangan {
-  text-align: center;
-  font-family: 'Poppins', sans-serif;
-  font-size: 15px;
-  color: #444;
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-  /* MEMASTIKAN POSISI FOTO & ISI PENGANTIN DI TENGAH SECARA SIMETRIS */
-.profil {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 40px;
-  text-align: center;
-  margin-bottom: 60px;
-}
-  /* FOTO PENGANTIN: SETENGAH BADAN + BINGKAI MODERN */
-.foto {
-  display: block;
-  margin: 0 auto;
-  width: 220px;
-  height: 290px;
-  object-fit: cover;
-  border-radius: 50% / 60%; /* OVAL vertikal */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  border: 4px solid #eee;
-}
-
-/* NAMA PENGANTIN */
-.nama-pengantin {
-  font-family: 'Great Vibes', cursive;
-  font-size: 28px;
-  margin-top: 16px;
-  color: #f3a302; 
-  line-height: 1.3;
-}
-
-/* NAMA ORANG TUA */
-.orang-tua {
-  font-family: 'Poppins', sans-serif;
-  font-size: 15px;
-  color: #555;
-  margin-top: 4px;
-}
-/* ALAMAT */
-.alamat {
-  font-family: 'Poppins', sans-serif;
-  font-size: 12px;
-  color: #555;
-}
-/* SIMBOL & DI TENGAH */
-.and-symbol {
-  font-size: 58px;
-  font-family: 'Great Vibes', cursive;
-  margin: 20px;
-  color: #f3a302; 
-}
-</style>
+    @media (max-width: 480px) {
+      .title { font-size: 1.4em; }
+      .names { font-size: 2em; }
+      .guest { font-size: 0.95em; }
+      .btn-open { font-size: 0.9em; padding: 8px 25px; }
+      #top-photo { height: 200px; }
+      #top-photo .overlay-text .title { font-size: 1.3em; }
+      #top-photo .overlay-text .names { font-size: 1.6em; }
+    }
+  </style>
 </head>
 <body>
-
-<!-- =================== HALAMAN PEMBUKA =================== -->
-<div id="cover">
-  <div id="cover-content">
-    <p class="title">The Wedding of</p>
-    <h1 class="names">ROMADONA & SRI WULANDARI</h1>
-    <p class="guest">Kepada Yth. Bapak/Ibu/Saudara/i</p>
-    <button class="btn-open" id="openBtn">
-      <i class="fa-solid fa-envelope"></i> Buka Undangan
-    </button>
+  <!-- ===== HALAMAN PEMBUKA ===== -->
+  <div id="cover">
+    <div id="cover-content">
+      <p class="title">The Wedding of</p>
+      <h1 class="names">A & WULAN</h1>
+      <p class="guest">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+      <button class="btn-open" id="openBtn">
+        <i class="fa-solid fa-envelope"></i> Buka Undangan
+      </button>
+    </div>
   </div>
-</div>
 
-<!-- =================== HALAMAN ISI =================== -->
-<div id="invitation">
-</section>
-<!-- BAGIAN DENGAN BACKGROUND KHUSUS -->
-<!-- === BISMILLAH ARAB === -->
-<section class="bg-section-khusus">
-<div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
-<!-- === SALAM DAN KALIMAT UNDANGAN === -->
-<div class="salam-undangan">
-      Assalamu'alaikum Wr. Wb.<br/>
-      Maha suci Allah SWT yang telah menciptakan mahkluk-Nya berpasang - pasangan.<br/>
-      Tanpa mengurangi rasa hormat, kami bermaksud mengundang Bapak/Ibu/Saudara/i<br/>
-      untuk menghadiri acara pernikahan kami.
-</div>
+  <!-- ===== ISI UNDANGAN ===== -->
+  <div id="invitation">
+    <!-- Foto bagian atas -->
+    <div id="top-photo">
+      <img src="foto-isi.jpg" alt="Foto Pengantin">
+      <div class="overlay-text">
+        <p class="title">The Wedding of</p>
+        <h1 class="names">A & WULAN</h1>
+      </div>
+    </div>
 
-<div class="box-putih-kecil">
-<!-- === PROFIL PENGANTIN === -->
-<div class="profil">
-<!-- Pengantin pria -->
-<div class="pengantin">
-<img alt="Pengantin Laki-laki" class="foto" src="romadona.webp"/>
-<h2 class="nama-pengantin">Romadona</h2>
-<p class="orang-tua">Putra dari Bapak Katimin &amp; Ibu Jamiati</p>
-<p class="alamat">( Desa Krisik, Dsn Rambut Monte RT 01 RW 04, Gandusari )</p>
-</div>
-<div class="and-symbol">&amp;</div>
-<!-- Pengantin wanita -->
-<div class="pengantin">
-<img alt="Pengantin Perempuan" class="foto" src="sri.webp"/>
-<h2 class="nama-pengantin">Sri Wulandari</h2>
-<p class="orang-tua">Putri dari Bapak Triman Wahyudi &amp; Ibu Sunarti</p>
-<p class="alamat">( Kampung Berkah Kletek RT 01 RW 07, Wlingi )</p>
-</div>
-</div>
-</div>
-</section>
-  
+    <section>
+      <h2>Assalamu’alaikum Warahmatullahi Wabarakatuh</h2>
+      <p>Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan pernikahan kami:</p>
+      <h2>A & B</h2>
+      <p>Yang insya Allah akan dilaksanakan pada:</p>
+      <p><b>Hari:</b> Minggu, 20 Oktober 2025</p>
+      <p><b>Tempat:</b> Gedung Serbaguna Bahagia</p>
+      <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
+      <p>Wassalamu’alaikum Warahmatullahi Wabarakatuh</p>
+    </section>
+  </div>
 
-<!-- =================== MUSIK =================== -->
-<audio id="bgMusic" loop>
-  <source src="musik.mp3" type="audio/mpeg">
-</audio>
+  <audio id="bgMusic" loop>
+    <source src="musik.mp3" type="audio/mpeg">
+  </audio>
 
-<script>
-  // Ambil elemen
-  const openBtn = document.getElementById('openBtn');
-  const cover = document.getElementById('cover');
-  const invitation = document.getElementById('invitation');
-  const bgMusic = document.getElementById('bgMusic');
+  <script>
+    const openBtn = document.getElementById('openBtn');
+    const cover = document.getElementById('cover');
+    const invitation = document.getElementById('invitation');
+    const bgMusic = document.getElementById('bgMusic');
 
-  // Fungsi play musik
-  function startMusic(){
-    const playPromise = bgMusic.play();
-    if(playPromise !== undefined){
-      playPromise.catch(()=>console.log("Auto-play diblokir browser, tunggu interaksi."));
+    function startMusic() {
+      const playPromise = bgMusic.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          console.log("Auto-play diblokir browser, menunggu interaksi pengguna.");
+        });
+      }
     }
-  }
 
-  // Klik tombol buka undangan
-  openBtn.addEventListener('click', ()=>{
-    cover.style.display = 'none';
-    invitation.classList.add('active');
-    document.body.style.overflow = 'auto'; // scroll aktif di halaman isi
-    startMusic();
-  });
+    openBtn.addEventListener('click', () => {
+      cover.style.display = 'none';
+      invitation.classList.add('active');
+      document.body.style.overflow = 'auto';
+      startMusic();
+      localStorage.setItem('musicPlaying', 'true');
+      window.scrollTo(0, 0);
+    });
 
-  // Pause musik saat tab tidak aktif
-  document.addEventListener('visibilitychange', ()=>{
-    if(document.visibilityState==='visible'){
-      if(invitation.classList.contains('active')) startMusic();
-    } else {
+    window.addEventListener('beforeunload', () => {
       bgMusic.pause();
-    }
-  });
-</script>
+      bgMusic.currentTime = 0;
+      localStorage.removeItem('musicPlaying');
+    });
 
+    window.addEventListener('load', () => {
+      cover.style.display = 'flex';
+      invitation.classList.remove('active');
+      document.body.style.overflow = 'hidden';
+      window.scrollTo(0, 0);
+      if (localStorage.getItem('musicPlaying') === 'true') startMusic();
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible' && localStorage.getItem('musicPlaying') === 'true') {
+        startMusic();
+      } else {
+        bgMusic.pause();
+      }
+    });
+  </script>
 </body>
 </html>
