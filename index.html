@@ -24,10 +24,9 @@
 
   /* =================== HALAMAN PEMBUKA =================== */
   #cover {
-    position: relative;
-    height: 100vh;
-    width: 100%;
-    background: url('foto1.webp') center/cover no-repeat;
+    position: fixed; z-index: 9999;
+    top: 0; left: 0; width: 100%; height: 100vh; 
+    background: url('foto1.webp') center/cover no-repeat / contain;
     display:flex; justify-content:center; align-items:center; flex-direction:column;
     text-align:center; color:white; overflow:hidden;
   }
