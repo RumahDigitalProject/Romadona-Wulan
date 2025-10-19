@@ -97,6 +97,35 @@
     h2{font-size:1.5em;}
     .overlay-text h3{font-size:1.3em;}
   }
+  /* BACKGROUND KHUSUS HANYA UNTUK BAGIAN BISMILLAH SAMPAI PENGANTIN */
+.bg-section-khusus {
+  background-image: url('beground-date.webp');
+  background-repeat: repeat-y;
+  background-size: cover; /* ubah ke cover agar full section */
+  background-position: center top;
+  background-attachment: fixed; /* 🎯 ini bikin background diam */
+  background-color: #fff;
+  padding: 80px 20px;
+  margin-bottom: 0px;
+  min-height: 100vh;
+}
+.box-putih-kecil {
+  background: rgba(255, 255, 255, 0.97); /* Putih transparan */
+  background-size: cover;
+  border: 3px solid #f3a302; 
+  border-radius: 999px;
+  aspect-ratio: 9 / 16;
+  max-width: 320px;
+  width: 100%;
+  padding: 10px 10px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  text-align: center;
+  color: #7b1f26;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
   /* MEMASTIKAN POSISI FOTO & ISI PENGANTIN DI TENGAH SECARA SIMETRIS */
 .profil {
   display: flex;
@@ -167,7 +196,6 @@
     <p>Mahasuci Allah yang telah menciptakan makhluk-Nya, tanpa mengurangi rasa hormat kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam pernikahan kami.</p>
   </section>
 
-  </section>
 <!-- BAGIAN DENGAN BACKGROUND KHUSUS -->
 <section class="bg-section-khusus">
 <div class="box-putih-kecil">
@@ -179,47 +207,28 @@
       Tanpa mengurangi rasa hormat, kami bermaksud mengundang Bapak/Ibu/Saudara/i<br/>
       untuk menghadiri acara pernikahan kami.
   </div>
+ </section>
 <!-- === PROFIL PENGANTIN === -->
 <div class="profil">
 <!-- Pengantin pria -->
 <div class="pengantin">
-<img alt="Pengantin Laki-laki" class="foto" src="pengantinlaki.webp"/>
-<h2 class="nama-pengantin">Bambang Irawan</h2>
-<p class="orang-tua">Putra dari Alm. Bapak Santoso &amp; Ibu Warsiah</p>
-<p class="orang-tua">( Tirtomoyo )</p>
+<img alt="Pengantin Laki-laki" class="foto" src="romadona.webp"/>
+<h2 class="nama-pengantin">Romadona</h2>
+<p class="orang-tua">Putra dari Bapak Katimin &amp; Ibu Jamiati</p>
+<p class="orang-tua">( Desa Krisik, Dsn Rambut Monte RT 01 RW 04, Gandusari )</p>
 </div>
 <div class="and-symbol">&amp;</div>
 <!-- Pengantin wanita -->
 <div class="pengantin">
-<img alt="Pengantin Perempuan" class="foto" src="pengantinwanita.webp"/>
-<h2 class="nama-pengantin">Ayu Septianingrum</h2>
-<p class="orang-tua">Putri dari Bapak Suwardi &amp; Ibu Katemi</p>
-<p class="orang-tua">( Tulungrejo )</p>
+<img alt="Pengantin Perempuan" class="foto" src="sriwulandari.webp"/>
+<h2 class="nama-pengantin">Sri Wulandari</h2>
+<p class="orang-tua">Putri dari Bapak Triman Wahyudi &amp; Ibu Sunarti</p>
+<p class="orang-tua">( Kampung Berkah Kletek RT 01 RW 07, Wlingi )</p>
 </div>
 </div>
 </div>
 </section>
   
-  <!-- FOTO PENGANTIN PRIA -->
-  <div class="foto-section">
-    <img src="romadona.jpg" alt="Pengantin Pria">
-    <div class="overlay-text">
-      <h3>Romadona</h3>
-      <p>Putra dari Bapak Katimin & Ibu Jamiati</p>
-      <p>Alamat: Desa Krisik, Dsn Rambut Monte RT 01 RW 04, Gandusari</p>
-    </div>
-  </div>
-  
-  <!-- FOTO PENGANTIN PEREMPUAN -->
-  <div class="foto-section">
-    <img src="sri wulandari.jpg" alt="Pengantin Perempuan">
-    <div class="overlay-text">
-      <h3>Sri Wulandari</h3>
-      <p>Putri dari Bapak Triman Wahyudi & Ibu Sunarti</p>
-      <p>Alamat: Kampung Berkah Kletek RT 01 RW 07, Wlingi</p>
-    </div>
-  </div>
-</div>
 
 <!-- =================== MUSIK =================== -->
 <audio id="bgMusic" loop>
