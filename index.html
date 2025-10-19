@@ -224,10 +224,13 @@
 
     // saat halaman dibuka atau direfresh, tampilkan kembali halaman pembuka
 window.addEventListener('load', () => {
-  cover.style.display = 'flex';          // tampilkan halaman pembuka
-  invitation.classList.remove('active'); // sembunyikan isi undangan
-  document.body.style.overflow = 'hidden'; // scroll halaman awal terkunci
+  // tampilkan halaman pembuka saat reload
+  cover.style.display = 'flex';
+  invitation.classList.remove('active');
+  document.body.style.overflow = 'hidden'; // scroll terkunci di halaman pembuka
   window.scrollTo(0, 0);
+
+  // musik otomatis play jika sebelumnya sudah diputar
   if (localStorage.getItem('musicPlaying') === 'true') {
     startMusic();
   }
