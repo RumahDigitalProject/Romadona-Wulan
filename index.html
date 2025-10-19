@@ -238,84 +238,75 @@
 }
 
 /*JADWAL ACARA*/
-  .info-acara {
+.info-acara {
   display: flex;
-  justify-content: center;
-  padding: 60px 20px;
+  flex-direction: column; /* biar atas-bawah */
+  align-items: center;
+  gap: 40px; /* jarak antar kotak */
+  padding: 20px;
 }
 
 .kotak-info {
-  position: relative;
-  background: #fff;
   width: 90%;
-  max-width: 600px;
-  padding: 40px 25px;
-  margin: auto;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+  background: #fff;
+  padding: 30px 20px;
   text-align: center;
   color: #333;
-  transition: all 0.5s ease;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  transition: all 0.4s ease;
   overflow: hidden;
 
-  /* 🎯 bentuk lengkung sempurna di atas, bawah tetap sedikit melengkung */
-  border-top-left-radius: 300px 100px;
-  border-top-right-radius: 300px 100px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  /* 🎯 bentuk: atas melengkung besar, bawah sedikit radius */
+  border-top-left-radius: 120px 60px;
+  border-top-right-radius: 120px 60px;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
 }
 
 .kotak-info h2 {
   color: #b76e79;
-  margin-bottom: 15px;
+  font-size: 1.6em;
+  margin-bottom: 10px;
 }
 
 .kotak-info p {
-  font-size: 1em;
-  margin-bottom: 8px;
+  font-size: 1.05em;
+  margin-bottom: 6px;
 }
 
 .btn-lokasi {
-  margin-top: 20px;
+  margin-top: 15px;
   background: #b76e79;
-  color: white;
+  color: #fff;
   border: none;
-  padding: 12px 25px;
-  border-radius: 30px;
+  padding: 10px 24px;
+  border-radius: 25px;
+  font-size: 0.95em;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .btn-lokasi:hover {
-  background: #9b5a64;
+  background: #a55d6c;
+  transform: scale(1.05);
 }
 
-/* Maps disembunyikan dulu */
+/* Maps animasi muncul halus */
 .maps-wrapper {
   max-height: 0;
+  opacity: 0;
   overflow: hidden;
-  transition: max-height 0.8s ease;
+  transition: all 0.6s ease;
   margin-top: 15px;
-  border-radius: 15px; /* biar sudut bawah map juga lembut */
+  border-radius: 10px;
 }
 
 .maps-wrapper.show {
-  max-height: 350px; /* tinggi saat map muncul */
+  max-height: 400px;
+  opacity: 1;
 }
-.kotak-info::before {
-  content: "";
-  position: absolute;
-  top: -40px;
-  left: 0;
-  width: 100%;
-  height: 40px;
-  background: white;
-  border-top-left-radius: 100px;
-  border-top-right-radius: 100px;
-  box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
-}
-.kotak-info {
-  margin-bottom: 40px; /* jarak antar kotak */
-}
+
 
 
   </style>
@@ -393,13 +384,13 @@
   </div>
 </section>
 
-<!-- === JADWAL ACARA === -->
+  <!-- === JADWAL ACARA === -->
 <section class="info-acara">
   <!-- Kotak Pertama -->
   <div class="kotak-info">
     <h2>Akad Nikah</h2>
     <p><b>Hari/Tanggal:</b> Selasa, 11 November 2025</p>
-    <p><b>Waktu:</b> 11.00 WIB – Selesak</p>
+    <p><b>Waktu:</b> 11.00 WIB – Selesai</p>
     <p><b>Tempat:</b> Kampung Berkah Kletek RT 01 RW 07, Wlingi</p>
 
     <button id="toggleMapBtn1" class="btn-lokasi">
@@ -408,7 +399,7 @@
 
     <div class="maps-wrapper" id="mapsWrapper1">
       <iframe 
-        src="https://maps.app.goo.gl/f5bppT8MPzwaaFCb7?g_st=ac!..." 
+        src="https://maps.app.goo.gl/f5bppT8MPzwaaFCb7?g_st=ac" 
         width="100%" height="300" style="border:0;" allowfullscreen loading="lazy">
       </iframe>
     </div>
@@ -427,7 +418,7 @@
 
     <div class="maps-wrapper" id="mapsWrapper2">
       <iframe 
-        src="https://maps.app.goo.gl/f5bppT8MPzwaaFCb7?g_st=ac!..." 
+        src="https://maps.app.goo.gl/f5bppT8MPzwaaFCb7?g_st=ac" 
         width="100%" height="300" style="border:0;" allowfullscreen loading="lazy">
       </iframe>
     </div>
@@ -503,25 +494,22 @@
   const timer = setInterval(countdown, 1000);
   
  // JADWAL ACARA  
-  // Untuk kotak pertama
-  const toggleMapBtn1 = document.getElementById('toggleMapBtn1');
-  const mapsWrapper1 = document.getElementById('mapsWrapper1');
-  toggleMapBtn1.addEventListener('click', () => {
-    mapsWrapper1.classList.toggle('show');
-    toggleMapBtn1.innerHTML = mapsWrapper1.classList.contains('show') ?
-      '<i class="fa-solid fa-location-dot"></i> Sembunyikan Lokasi' :
-      '<i class="fa-solid fa-location-dot"></i> Lihat Lokasi';
-  });
+  // Fungsi toggle map
+  function toggleMap(btnId, mapId) {
+    const btn = document.getElementById(btnId);
+    const map = document.getElementById(mapId);
 
-  // Untuk kotak kedua
-  const toggleMapBtn2 = document.getElementById('toggleMapBtn2');
-  const mapsWrapper2 = document.getElementById('mapsWrapper2');
-  toggleMapBtn2.addEventListener('click', () => {
-    mapsWrapper2.classList.toggle('show');
-    toggleMapBtn2.innerHTML = mapsWrapper2.classList.contains('show') ?
-      '<i class="fa-solid fa-location-dot"></i> Sembunyikan Lokasi' :
-      '<i class="fa-solid fa-location-dot"></i> Lihat Lokasi';
-  });
+    btn.addEventListener('click', () => {
+      map.classList.toggle('show');
+      btn.innerHTML = map.classList.contains('show')
+        ? '<i class="fa-solid fa-location-dot"></i> Sembunyikan Lokasi'
+        : '<i class="fa-solid fa-location-dot"></i> Lihat Lokasi';
+    });
+  }
+
+  // Aktifkan untuk kedua kotak
+  toggleMap('toggleMapBtn1', 'mapsWrapper1');
+  toggleMap('toggleMapBtn2', 'mapsWrapper2');
 </script>
 </body>
 </html>
