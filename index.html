@@ -5,7 +5,7 @@
   <meta property="og:title" content="Undangan Romadona & Wulan" />
   <meta property="og:description" content="Official Invitation Digital Romadona & Wulan | By Rumah Digital." />
   <meta property="og:image" content="https://rumahdigitalproject.github.io/Irawan-Ayu/fotoku.jpg" />
-  <meta property="og:url" content="https://rumahdigitalproject.github.io/Romadona-Wulan" />
+  <meta property="og:url" content="https://rumahdigitalproject.github.io/Irawan-Ayu/" />
 
   <meta charset="UTF-8" />
   <meta name="theme-color" content="#000" />
@@ -83,7 +83,7 @@
       from { opacity: 0; transform: translateY(40px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    /* === SLIDER FOTO OTOMATIS === */
+/* === SLIDER FOTO OTOMATIS === */
 .slide-foto {
   position: relative;
   max-width: 360px;
@@ -101,8 +101,8 @@
 }
 .slide.active img { opacity: 1; }
 
-@media(max-width:480px){ .slide-foto img{height:400px;} }
-
+@media(max-width:480px){ .slide-foto img{height:400px;} 
+}
 
     /* BACKGROUND KHUSUS */
     .bg-section-khusus {
@@ -232,12 +232,13 @@
   </div>
 
   <!-- ISI -->
-  <!-- ===== SLIDE FOTO OTOMATIS ===== -->
+<!-- ===== SLIDE FOTO OTOMATIS ===== -->
 <div class="slide-foto">
   <div class="slide active"><img src="galeri1.webp" alt="Foto 1"></div>
   <div class="slide"><img src="galeri2.webp" alt="Foto 2"></div>
 </div>
 
+  
   <div id="invitation">
     <section class="bg-section-khusus">
       <div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
@@ -275,45 +276,50 @@
     <source src="musik.mp3" type="audio/mpeg">
   </audio>
 
-  <script>
-    const openBtn = document.getElementById('openBtn');
-    const cover = document.getElementById('cover');
-    const invitation = document.getElementById('invitation');
-    const bgMusic = document.getElementById('bgMusic');
+<script>
+  const openBtn = document.getElementById('openBtn');
+  const cover = document.getElementById('cover');
+  const invitation = document.getElementById('invitation');
+  const bgMusic = document.getElementById('bgMusic');
 
-    function startMusic() {
-      const playPromise = bgMusic.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => console.log("Auto-play diblokir browser."));
-      }
+  function startMusic() {
+    const playPromise = bgMusic.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => console.log("Auto-play diblokir browser."));
     }
+  }
 
-    openBtn.addEventListener('click', () => {
-      cover.style.opacity = '0';
-      setTimeout(() => {
-        cover.style.display = 'none';
-        invitation.style.display = 'block';
-        startMusic();
-      }, 800);
-    });
+  openBtn.addEventListener('click', () => {
+    cover.style.opacity = '0';
+    setTimeout(() => {
+      cover.style.display = 'none';
+      invitation.style.display = 'block';
+      startMusic();
+    }, 800);
+  });
 
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible') {
-        startMusic();
-      } else {
-        bgMusic.pause();
-      }
-      let currentSlide = 0;
-const slides = document.querySelectorAll('.slide');
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      startMusic();
+    } else {
+      bgMusic.pause();
+    }
+  });
 
-function showSlide(n) {
-  slides.forEach((s, i) => s.classList.toggle('active', i === n));
-}
+  /* === SLIDER FOTO OTOMATIS === */
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
 
-setInterval(() => {
-  currentSlide = (currentSlide + 1) % slides.length;
-  showSlide(currentSlide);
-}, 4000);
-  </script>
+  function showSlide(n) {
+    slides.forEach((s, i) => s.classList.toggle('active', i === n));
+  }
+
+  if (slides.length > 0) {
+    setInterval(() => {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }, 4000);
+  }
+</script>
 </body>
 </html>
