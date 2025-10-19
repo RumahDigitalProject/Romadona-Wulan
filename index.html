@@ -346,15 +346,19 @@
       bgMusic.pause();
     }
   });
-// === COUNTDOWN ===
-  const countdown = () => {
-    // Ganti ke tanggal acara kamu di sini (format: Tahun, Bulan-1, Tanggal, Jam, Menit, Detik)
-    const targetDate = new Date("2025, 11, 10, 8, 0, 0").getTime(); // contoh: 25 November 2025 jam 08:00
-
+// === COUNTDOWN REALTIME ===
+  function countdown() {
+    // 📅 Ganti tanggal & waktu acara di sini (ingat bulan dihitung dari 0)
+    const acara = new Date(2025, 10, 10, 8, 0, 0).getTime(); // 25 Nov 2025, 08:00
     const now = new Date().getTime();
     const selisih = acara - now;
 
-    if (selisih < 0) {
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
+    if (selisih <= 0) {
       document.getElementById("countdown").innerHTML = "<p>Acara Sedang Berlangsung 🎉</p>";
       clearInterval(timer);
       return;
@@ -365,12 +369,14 @@
     const minutes = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((selisih % (1000 * 60)) / 1000);
 
-    document.getElementById("days").textContent = days.toString().padStart(2, "0");
-    document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
-    document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0");
-    document.getElementById("seconds").textContent = seconds.toString().padStart(2, "0");
-  };
+    daysEl.textContent = days.toString().padStart(2, "0");
+    hoursEl.textContent = hours.toString().padStart(2, "0");
+    minutesEl.textContent = minutes.toString().padStart(2, "0");
+    secondsEl.textContent = seconds.toString().padStart(2, "0");
+  }
 
+  // Jalankan countdown pertama kali, lalu setiap 1 detik
+  countdown(); // <-- ini penting biar tampil langsung
   const timer = setInterval(countdown, 1000);
   
 
