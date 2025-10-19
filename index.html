@@ -239,76 +239,67 @@
 
 /*JADWAL ACARA*/
 .info-acara {
+  max-width: 800px;
+  margin: 50px auto;
   display: flex;
-  flex-direction: column; /* biar atas-bawah */
+  flex-direction: column;
+  gap: 40px;
   align-items: center;
-  gap: 40px; /* jarak antar kotak */
-  padding: 20px;
 }
 
 .kotak-info {
-  width: 90%;
-  max-width: 700px;
   background: #fff;
+  border-radius: 60px 60px 12px 12px; /* atas melengkung, bawah agak tumpul */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
   padding: 40px 25px;
+  width: 90%;
+  max-width: 750px;
   text-align: center;
-  color: #333;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
   transition: all 0.4s ease;
-  overflow: hidden;
-  margin: auto;
-
-  /* 🎯 bentuk kubah sempurna di atas, bawah sedikit radius */
-  border-top-left-radius: 350px 150px;
-  border-top-right-radius: 350px 150px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
 }
 
 .kotak-info h2 {
   color: #b76e79;
-  font-size: 1.6em;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .kotak-info p {
   font-size: 1.05em;
-  margin-bottom: 6px;
+  line-height: 1.6;
 }
 
 .btn-lokasi {
-  margin-top: 15px;
+  margin-top: 20px;
   background: #b76e79;
   color: #fff;
   border: none;
-  padding: 10px 24px;
-  border-radius: 25px;
-  font-size: 0.95em;
+  padding: 12px 25px;
+  border-radius: 30px;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+  font-size: 1em;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .btn-lokasi:hover {
-  background: #a55d6c;
+  background: #a85d6b;
   transform: scale(1.05);
 }
 
-/* Maps animasi muncul halus */
 .maps-wrapper {
-  max-height: 0;
-  opacity: 0;
+  display: none;
+  margin-top: 20px;
   overflow: hidden;
-  transition: all 0.6s ease;
-  margin-top: 15px;
-  border-radius: 10px;
+  border-radius: 20px;
+  max-height: 0;
+  transition: max-height 0.8s ease, opacity 0.6s ease;
+  opacity: 0;
 }
 
 .maps-wrapper.show {
-  max-height: 400px;
+  display: block;
+  max-height: 500px;
   opacity: 1;
 }
-
-
 
   </style>
 </head>
@@ -387,6 +378,7 @@
 
   <!-- === JADWAL ACARA === -->
 <section class="info-acara">
+
   <!-- Kotak Pertama -->
   <div class="kotak-info">
     <h2>Akad Nikah</h2>
@@ -400,8 +392,9 @@
 
     <div class="maps-wrapper" id="mapsWrapper1">
       <iframe 
-        src="<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d493.7651894706931!2d112.310871345897!3d-8.089088535739615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sid!2sid!4v1760879628061!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>" 
-        width="100%" height="300" style="border:0;" allowfullscreen loading="lazy">
+        src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d246.88265633577853!2d112.31077619636692!3d-8.088987948549908!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sid!2sid!4v1760879868488!5m2!1sid!2sid"
+        width="100%" height="300" style="border:0;" allowfullscreen loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
       </iframe>
     </div>
   </div>
@@ -419,12 +412,15 @@
 
     <div class="maps-wrapper" id="mapsWrapper2">
       <iframe 
-        src="<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d493.7651894706931!2d112.310871345897!3d-8.089088535739615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sid!2sid!4v1760879628061!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>" 
-        width="100%" height="300" style="border:0;" allowfullscreen loading="lazy">
+        src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d246.88265633577853!2d112.31077619636692!3d-8.088987948549908!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sid!2sid!4v1760879868488!5m2!1sid!2sid"
+        width="100%" height="300" style="border:0;" allowfullscreen loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
       </iframe>
     </div>
   </div>
+
 </section>
+
 
 
   <!-- MUSIK -->
@@ -495,22 +491,44 @@
   const timer = setInterval(countdown, 1000);
   
  // JADWAL ACARA  
-  // Fungsi toggle map
-  function toggleMap(btnId, mapId) {
-    const btn = document.getElementById(btnId);
-    const map = document.getElementById(mapId);
+const openBtn = document.getElementById('openBtn');
+  const cover = document.getElementById('cover');
+  const invitation = document.getElementById('invitation');
+  const bgMusic = document.getElementById('bgMusic');
 
-    btn.addEventListener('click', () => {
-      map.classList.toggle('show');
-      btn.innerHTML = map.classList.contains('show')
-        ? '<i class="fa-solid fa-location-dot"></i> Sembunyikan Lokasi'
-        : '<i class="fa-solid fa-location-dot"></i> Lihat Lokasi';
-    });
+  function startMusic() {
+    const playPromise = bgMusic.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => console.log("Auto-play diblokir browser."));
+    }
   }
 
-  // Aktifkan untuk kedua kotak
-  toggleMap('toggleMapBtn1', 'mapsWrapper1');
-  toggleMap('toggleMapBtn2', 'mapsWrapper2');
+  openBtn.addEventListener('click', () => {
+    cover.style.opacity = '0';
+    setTimeout(() => {
+      cover.style.display = 'none';
+      invitation.style.display = 'block';
+      startMusic();
+    }, 800);
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') startMusic();
+    else bgMusic.pause();
+  });
+
+  // ===== MAPS TOGGLE =====
+  const toggleMapBtn1 = document.getElementById('toggleMapBtn1');
+  const toggleMapBtn2 = document.getElementById('toggleMapBtn2');
+  const mapsWrapper1 = document.getElementById('mapsWrapper1');
+  const mapsWrapper2 = document.getElementById('mapsWrapper2');
+
+  toggleMapBtn1.addEventListener('click', () => {
+    mapsWrapper1.classList.toggle('show');
+  });
+  toggleMapBtn2.addEventListener('click', () => {
+    mapsWrapper2.classList.toggle('show');
+  });
 </script>
 </body>
 </html>
