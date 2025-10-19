@@ -429,11 +429,13 @@
   </audio>
 
 <script>
+  // === ELEMEN UTAMA ===
   const openBtn = document.getElementById('openBtn');
   const cover = document.getElementById('cover');
   const invitation = document.getElementById('invitation');
   const bgMusic = document.getElementById('bgMusic');
 
+  // === FUNGSI PLAY MUSIK ===
   function startMusic() {
     const playPromise = bgMusic.play();
     if (playPromise !== undefined) {
@@ -441,6 +443,7 @@
     }
   }
 
+  // === AKSI BUKA UNDANGAN ===
   openBtn.addEventListener('click', () => {
     cover.style.opacity = '0';
     setTimeout(() => {
@@ -450,6 +453,7 @@
     }, 800);
   });
 
+  // === MUSIK BERHENTI SAAT TAB TIDAK AKTIF ===
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') {
       startMusic();
@@ -457,10 +461,10 @@
       bgMusic.pause();
     }
   });
-// === COUNTDOWN REALTIME ===
+
+  // === COUNTDOWN REALTIME ===
   function countdown() {
-    // 📅 Ganti tanggal & waktu acara di sini (ingat bulan dihitung dari 0)
-    const acara = new Date(2025, 10, 10, 8, 0, 0).getTime(); // 25 Nov 2025, 08:00
+    const acara = new Date(2025, 10, 10, 8, 0, 0).getTime(); // 📅 10 Nov 2025, 08:00
     const now = new Date().getTime();
     const selisih = acara - now;
 
@@ -486,38 +490,10 @@
     secondsEl.textContent = seconds.toString().padStart(2, "0");
   }
 
-  // Jalankan countdown pertama kali, lalu setiap 1 detik
-  countdown(); // <-- ini penting biar tampil langsung
+  countdown(); // langsung tampil saat halaman dibuka
   const timer = setInterval(countdown, 1000);
-  
- // JADWAL ACARA  
-const openBtn = document.getElementById('openBtn');
-  const cover = document.getElementById('cover');
-  const invitation = document.getElementById('invitation');
-  const bgMusic = document.getElementById('bgMusic');
 
-  function startMusic() {
-    const playPromise = bgMusic.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(() => console.log("Auto-play diblokir browser."));
-    }
-  }
-
-  openBtn.addEventListener('click', () => {
-    cover.style.opacity = '0';
-    setTimeout(() => {
-      cover.style.display = 'none';
-      invitation.style.display = 'block';
-      startMusic();
-    }, 800);
-  });
-
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') startMusic();
-    else bgMusic.pause();
-  });
-
-  // ===== MAPS TOGGLE =====
+  // === MAPS TOGGLE ===
   const toggleMapBtn1 = document.getElementById('toggleMapBtn1');
   const toggleMapBtn2 = document.getElementById('toggleMapBtn2');
   const mapsWrapper1 = document.getElementById('mapsWrapper1');
@@ -526,6 +502,7 @@ const openBtn = document.getElementById('openBtn');
   toggleMapBtn1.addEventListener('click', () => {
     mapsWrapper1.classList.toggle('show');
   });
+
   toggleMapBtn2.addEventListener('click', () => {
     mapsWrapper2.classList.toggle('show');
   });
