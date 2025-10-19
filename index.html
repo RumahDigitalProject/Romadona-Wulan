@@ -200,6 +200,61 @@
       .foto { width: 170px; height: 230px; }
       .and-symbol { font-size: 46px; }
     }
+    /*HITUNG MUNDUR*/
+.countdown-grid {
+  display: flex;
+ background: rgba(255, 255, 255, 0.97); /* Putih transparan */
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: nowrap;
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+/* Animasi untuk .ucapan-box: slide in from left */
+.ucapan1-box {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.6s ease-out;
+}
+.ucapan1-box {
+  background: rgba(255, 255, 255, 0.97); /* Putih transparan */
+  background-size: cover;
+  padding: 40px 30px 40px;
+  max-width: 500px;
+  text-align: center;
+  border-radius: 40px 40px 80px 80px; /* bagian bawah melengkung */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  position: relative;
+}
+.ucapan-box.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+.countdown-item.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delay berurutan tiap item */
+.countdown-item:nth-child(1) { transition-delay: 0.1s; }
+.countdown-item:nth-child(2) { transition-delay: 0.2s; }
+.countdown-item:nth-child(3) { transition-delay: 0.3s; }
+.countdown-item:nth-child(4) { transition-delay: 0.4s; }
+
+.count-number {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 1px;
+  color: #ffffff;
+}
+
+.count-label {
+  font-size: 14px;
+  color: #ffffff;
+}
   </style>
 </head>
 <body>
@@ -263,6 +318,31 @@
       (QS. Ar-Rum: 21)
     </p>
 </div>
+
+<!-- Countdown Section -->
+<section id="ucapan">
+  <div class="ucapan1-box">
+    <div class="countdown-grid">
+      <div class="countdown-item">
+        <div class="count-number" id="hari">00</div>
+        <div class="count-label">Hari</div>
+      </div>
+      <div class="countdown-item">
+        <div class="count-number" id="jam">00</div>
+        <div class="count-label">Jam</div>
+      </div>
+      <div class="countdown-item">
+        <div class="count-number" id="menit">00</div>
+        <div class="count-label">Menit</div>
+      </div>
+      <div class="countdown-item">
+        <div class="count-number" id="detik">00</div>
+        <div class="count-label">Detik</div>
+      </div>
+    </div>
+    <p class="judul-acara">05 OKTOBER 2025</p>
+  </div>
+</section>
   
   <!-- MUSIK -->
   <audio id="bgMusic" loop preload="none">
@@ -298,7 +378,25 @@
       bgMusic.pause();
     }
   });
+// COUNTDOWN UTAMA (DIGUNAKAN DI BOX UCAPAN)
+const targetDate = new Date("2025-10-05T08:00:00").getTime();
 
+setInterval(() => {
+  const now = new Date().getTime();
+  const selisih = targetDate - now;
+
+  const hari = Math.floor(selisih / (1000 * 60 * 60 * 24));
+  const jam = Math.floor((selisih % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const menit = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
+  const detik = Math.floor((selisih % (1000 * 60)) / 1000);
+
+  document.getElementById("hari").innerText = hari.toString().padStart(2, '0');
+  document.getElementById("jam").innerText = jam.toString().padStart(2, '0');
+  document.getElementById("menit").innerText = menit.toString().padStart(2, '0');
+  document.getElementById("detik").innerText = detik.toString().padStart(2, '0');
+}, 1000);
+  }
+  });
 
 </script>
 </body>
