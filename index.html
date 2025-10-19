@@ -237,7 +237,6 @@
   opacity: 0.9;
 }
 
-/*JADWAL ACARA*/
 /* ==== SECTION INFO ACARA ==== */
 .info-acara {
   position: relative;
@@ -310,16 +309,17 @@
   font-family: 'Great Vibes', cursive;
   font-size: 2.8em;
   color: #b76e79;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
   letter-spacing: 1px;
   animation: fadeDown 1.2s ease both;
 }
 
+/* Grid 2 kolom × 3 baris */
 .galeri-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 20px;
-  max-width: 900px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 25px;
+  max-width: 800px;
   margin: auto;
   padding: 0 10px;
 }
@@ -335,7 +335,7 @@
 
 .foto-item img {
   width: 100%;
-  height: 300px;
+  height: 360px;
   object-fit: cover;
   transition: transform 0.8s ease;
 }
@@ -349,7 +349,7 @@
   transform: scale(1.1);
 }
 
-/* Animasi halus saat muncul */
+/* Animasi muncul */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(40px); }
   to { opacity: 1; transform: translateY(0); }
@@ -359,15 +359,19 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsif */
+/* Responsif untuk HP */
 @media (max-width: 600px) {
+  .galeri-container {
+    grid-template-columns: 1fr; /* 1 kolom di layar kecil */
+  }
   .foto-item img {
-    height: 250px;
+    height: 320px;
   }
   .judul-galeri {
     font-size: 2.2em;
   }
 }
+
 
 
   </style>
@@ -462,14 +466,15 @@
 <section class="galeri-section">
   <h2 class="judul-galeri">Galeri</h2>
   <div class="galeri-container">
-    <div class="foto-item"><img src="sri.webp" alt="Galeri 1"></div>
+    <div class="foto-item"><img src="galeri1.webp" alt="Galeri 1"></div>
     <div class="foto-item"><img src="galeri2.webp" alt="Galeri 2"></div>
-    <div class="foto-item"><img src="romadona.webp" alt="Galeri 3"></div>
+    <div class="foto-item"><img src="galeri3.webp" alt="Galeri 3"></div>
     <div class="foto-item"><img src="galeri4.webp" alt="Galeri 4"></div>
     <div class="foto-item"><img src="galeri5.webp" alt="Galeri 5"></div>
     <div class="foto-item"><img src="galeri6.webp" alt="Galeri 6"></div>
   </div>
 </section>
+
 
 
 
