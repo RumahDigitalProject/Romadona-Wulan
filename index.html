@@ -349,7 +349,7 @@
 // === COUNTDOWN ===
   const countdown = () => {
     // Ganti ke tanggal acara kamu di sini (format: Tahun, Bulan-1, Tanggal, Jam, Menit, Detik)
-    const acara = new Date(2025, 11, 11, 8, 0, 0).getTime(); // contoh: 25 November 2025 jam 08:00
+    const targetDate = new Date("2025-11-10T08:00:00").getTime(); // contoh: 25 November 2025 jam 08:00
 
     const now = new Date().getTime();
     const selisih = acara - now;
