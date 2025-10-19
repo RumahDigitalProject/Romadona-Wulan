@@ -245,21 +245,23 @@
 }
 
 .kotak-info {
+  position: relative;
   background: #fff;
-  /* 🎯 hanya bagian atas melengkung besar, bawah sedikit saja */
-  border-top-left-radius: 100px;
-  border-top-right-radius: 100px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-
-  padding: 40px 25px;
   width: 90%;
   max-width: 600px;
+  padding: 40px 25px;
+  margin: auto;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   text-align: center;
   color: #333;
   transition: all 0.5s ease;
   overflow: hidden;
+
+  /* 🎯 bentuk lengkung sempurna di atas, bawah tetap sedikit melengkung */
+  border-top-left-radius: 300px 100px;
+  border-top-right-radius: 300px 100px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .kotak-info h2 {
@@ -310,6 +312,9 @@
   border-top-left-radius: 100px;
   border-top-right-radius: 100px;
   box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
+}
+.kotak-info {
+  margin-bottom: 40px; /* jarak antar kotak */
 }
 
 
@@ -390,25 +395,45 @@
 
 <!-- === JADWAL ACARA === -->
 <section class="info-acara">
+  <!-- Kotak Pertama -->
   <div class="kotak-info">
-    <h2>Resepsi Pernikahan</h2>
-    <p><b>Hari/Tanggal:</b> Minggu, 20 Oktober 2025</p>
-    <p><b>Waktu:</b> 09.00 WIB – Selesai</p>
-    <p><b>Tempat:</b> Gedung Serbaguna Bahagia</p>
+    <h2>Akad Nikah</h2>
+    <p><b>Hari/Tanggal:</b> Selasa, 11 November 2025</p>
+    <p><b>Waktu:</b> 11.00 WIB – Selesak</p>
+    <p><b>Tempat:</b> Kampung Berkah Kletek RT 01 RW 07, Wlingi</p>
 
-    <button id="toggleMapBtn" class="btn-lokasi">
+    <button id="toggleMapBtn1" class="btn-lokasi">
       <i class="fa-solid fa-location-dot"></i> Lihat Lokasi
     </button>
 
-    <div class="maps-wrapper" id="mapsWrapper">
-      <!-- Ganti URL src di bawah ini dengan link embed map kamu -->
+    <div class="maps-wrapper" id="mapsWrapper1">
       <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.566104648948!2d112.2308426!3d-7.049274499999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7e3d80a8c2353%3A0x1d3b9ff9b0c47cf4!2sGedung%20Serbaguna!5e0!3m2!1sid!2sid!4v1694953884205!5m2!1sid!2sid" 
+        src="https://maps.app.goo.gl/f5bppT8MPzwaaFCb7?g_st=ac!..." 
+        width="100%" height="300" style="border:0;" allowfullscreen loading="lazy">
+      </iframe>
+    </div>
+  </div>
+
+  <!-- Kotak Kedua -->
+  <div class="kotak-info">
+    <h2>Resepsi Pernikahan</h2>
+    <p><b>Hari/Tanggal:</b> Senin, 10 November 2025</p>
+    <p><b>Waktu:</b> 08.00 WIB – Selesai</p>
+    <p><b>Tempat:</b> Kampung Berkah Kletek RT 01 RW 07, Wlingi</p>
+
+    <button id="toggleMapBtn2" class="btn-lokasi">
+      <i class="fa-solid fa-location-dot"></i> Lihat Lokasi
+    </button>
+
+    <div class="maps-wrapper" id="mapsWrapper2">
+      <iframe 
+        src="https://maps.app.goo.gl/f5bppT8MPzwaaFCb7?g_st=ac!..." 
         width="100%" height="300" style="border:0;" allowfullscreen loading="lazy">
       </iframe>
     </div>
   </div>
 </section>
+
 
   <!-- MUSIK -->
   <audio id="bgMusic" loop preload="none">
@@ -478,17 +503,24 @@
   const timer = setInterval(countdown, 1000);
   
  // JADWAL ACARA  
-const toggleMapBtn = document.getElementById('toggleMapBtn');
-  const mapsWrapper = document.getElementById('mapsWrapper');
+  // Untuk kotak pertama
+  const toggleMapBtn1 = document.getElementById('toggleMapBtn1');
+  const mapsWrapper1 = document.getElementById('mapsWrapper1');
+  toggleMapBtn1.addEventListener('click', () => {
+    mapsWrapper1.classList.toggle('show');
+    toggleMapBtn1.innerHTML = mapsWrapper1.classList.contains('show') ?
+      '<i class="fa-solid fa-location-dot"></i> Sembunyikan Lokasi' :
+      '<i class="fa-solid fa-location-dot"></i> Lihat Lokasi';
+  });
 
-  toggleMapBtn.addEventListener('click', () => {
-    mapsWrapper.classList.toggle('show');
-
-    if (mapsWrapper.classList.contains('show')) {
-      toggleMapBtn.innerHTML = '<i class="fa-solid fa-location-dot"></i> Sembunyikan Lokasi';
-    } else {
-      toggleMapBtn.innerHTML = '<i class="fa-solid fa-location-dot"></i> Lihat Lokasi';
-    }
+  // Untuk kotak kedua
+  const toggleMapBtn2 = document.getElementById('toggleMapBtn2');
+  const mapsWrapper2 = document.getElementById('mapsWrapper2');
+  toggleMapBtn2.addEventListener('click', () => {
+    mapsWrapper2.classList.toggle('show');
+    toggleMapBtn2.innerHTML = mapsWrapper2.classList.contains('show') ?
+      '<i class="fa-solid fa-location-dot"></i> Sembunyikan Lokasi' :
+      '<i class="fa-solid fa-location-dot"></i> Lihat Lokasi';
   });
 </script>
 </body>
