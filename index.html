@@ -392,24 +392,25 @@
 
 /* === INFORMASI ACARA === */
 .info-acara {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  width: 90%;
-  max-width: 320px;
-  margin: 80px auto;
-
-  background: white;
-  border-radius: 140px 140px 25px 25px; /* atas melengkung, bawah tumpul */
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-
+  background: rgba(255, 255, 255, 0.97); /* Putih transparan */
+  background-size: cover;
+  border: 3px solid #f3a302; 
+  border-radius: 999px;
+  aspect-ratio: 9 / 14;
+  max-width: 280px;
+  width: 100%;
+  padding: 20px 24px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   text-align: center;
-  padding: 50px 25px 35px;
-  color: #444;
-  z-index: 2;
+  color: #7b1f26;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Media query agar tidak mepet di HP kecil */
+@media (max-width: 480px) {
 }
 
 
