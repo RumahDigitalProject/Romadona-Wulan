@@ -236,20 +236,17 @@
   }
       }
     
-    /* === BACKGROUND KHUSUS === */
+    /* BACKGROUND KHUSUS HANYA UNTUK BAGIAN BISMILLAH SAMPAI PENGANTIN */
 .bg-section-khusus {
-  position: relative;
-  background-image: url('dasar.webp'); /* ganti .jpg jadi .webp biar ringan */
-  background-repeat: no-repeat;
-  background-size: cover; /* cover tetap dipakai tapi diatur ulang via JS */
-  background-position: center center;
-  background-attachment: scroll; /* lebih ringan daripada fixed di HP */
+  background-image: url('dasar.webp');
+  background-repeat: repeat-y;
+  background-size: cover; /* ubah ke cover agar full section */
+  background-position: center top;
+  background-attachment: scroll; /* 🎯 ini bikin background diam */
   background-color: #fff;
   padding: 80px 20px;
-  margin-bottom: 0;
+  margin-bottom: 0px;
   min-height: 100vh;
-  overflow: hidden;
-  transition: background-position 0.3s ease-out;
 }
     /* KONTEN */
     .bismillah {
