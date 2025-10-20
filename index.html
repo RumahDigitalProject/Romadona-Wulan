@@ -761,8 +761,6 @@
   </audio>
 
 <script>
-  // Pastikan AOS sudah dimuat di <head>
-  AOS.init();
 
   // === AMBIL ELEMEN DOM ===
   const openBtn = document.getElementById("openBtn");
@@ -779,29 +777,7 @@
     }
   }
 
-  // === FORM RSVP (UCAPAN & KEHADIRAN) ===
-  document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("rsvpForm");
-    if (!form) return;
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const nama = document.getElementById("nama").value.trim();
-      const ucapan = document.getElementById("pesanUcapan").value.trim();
-      const kehadiran = document.getElementById("kehadiran").value;
-
-      if (!nama || !ucapan || !kehadiran) {
-        alert("Isi semua kolom terlebih dahulu!");
-        return;
-      }
-
-      const nomorWhatsApp = "6285706889273";
-      const pesan = `Halo, saya *${nama}*\nUcapan: ${ucapan}\nKehadiran: *${kehadiran}*`;
-      const url = `https://wa.me/${nomorWhatsApp}?text=${encodeURIComponent(pesan)}`;
-      window.open(url, "_blank");
-    });
-  });
+  
 
   // === AKSI BUKA UNDANGAN ===
   openBtn.addEventListener("click", () => {
