@@ -526,61 +526,75 @@
   }
 }
 
-/* ======== UCAPAN & KEHADIRAN ======== */
-.wishes-section {
-  background: linear-gradient(180deg, #fff7f7 0%, #fff 100%);
-  padding: 60px 20px;
+/* RSVP SECTION */
+#rsvp {
+  color: #fff;
+  padding: 40px 24px;
+  margin: 40px auto;
   border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  max-width: 480px;
   text-align: center;
-  margin: 60px auto;
-  max-width: 700px;
 }
-.judul-wishes {
+
+#rsvp h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
   font-family: 'Great Vibes', cursive;
-  font-size: 2.5em;
-  color: #b76e79;
-  margin-bottom: 10px;
 }
-.deskripsi-wishes {
-  font-size: 1em;
-  color: #555;
-  margin-bottom: 25px;
+
+/* Sembunyikan label */
+#rsvp label {
+  display: none;
 }
-.wishes-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  align-items: center;
+
+#rsvp input,
+#rsvp textarea,
+#rsvp select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  font-size: 16px;
+  box-sizing: border-box;
 }
-.wishes-form input, .wishes-form select, .wishes-form textarea {
-  width: 90%;
-  max-width: 500px;
-  padding: 12px 15px;
-  border: 1.5px solid #f3a302;
-  border-radius: 12px;
-  font-family: 'Poppins', sans-serif;
-  font-size: 1em;
-  outline: none;
-  transition: all 0.3s;
+
+/* Placeholder style */
+#rsvp input::placeholder,
+#rsvp textarea::placeholder {
+  color: #999;
+  font-style: italic;
 }
-.wishes-form input:focus, .wishes-form select:focus, .wishes-form textarea:focus {
-  box-shadow: 0 0 8px rgba(243,163,2,0.4);
-  border-color: #b76e79;
+
+/* Placeholder untuk select */
+#rsvp select:invalid {
+  color: #999;
+  font-style: italic;
 }
-.wishes-form button {
-  background: #b76e79;
+
+#rsvp button {
+  width: 100%;
+  padding: 14px;
+  background: #f3a302; 
   color: white;
   border: none;
-  padding: 12px 40px;
-  border-radius: 30px;
-  font-size: 1em;
+  border-radius: 10px;
+  font-size: 18px;
   cursor: pointer;
   transition: 0.3s;
 }
-.wishes-form button:hover {
-  background: #a15666;
-  transform: scale(1.05);
+
+#rsvp button:hover {
+  background: #f3a302; ;
+}
+
+.form-wrapper {
+  max-width: 200px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 
@@ -722,22 +736,21 @@
 </div>
 </section>
 
-<!-- ========== BAGIAN WISHES & KEHADIRAN ========== -->
-<section class="wishes-section">
-  <h2 class="judul-wishes">Ucapan & Kehadiran</h2>
-  <p class="deskripsi-wishes">Kirimkan ucapan doa atau konfirmasi kehadiran Anda untuk kedua mempelai 💌</p>
-
-  <div class="wishes-form">
-    <input type="text" id="nama" placeholder="Nama Anda" required>
-    <select id="status">
-      <option value="" disabled selected>Konfirmasi Kehadiran</option>
-      <option value="Hadir">Hadir</option>
-      <option value="Tidak Hadir">Tidak Hadir</option>
-      <option value="Masih Ragu">Masih Ragu</option>
-    </select>
-    <textarea id="pesan" rows="4" placeholder="Tulis ucapan dan doa terbaikmu..."></textarea>
-    <button onclick="kirimWishes()">Kirim ke WhatsApp</button>
-  </div>
+<!-- RSVP Section -->
+<section data-aos="fade-up" id="rsvp">
+<h2>Wishes</h2>
+<form id="rsvpForm">
+<div class="form-wrapper" data-aos="fade-up" data-aos-delay="200">
+<input id="nama" placeholder="Tulis namamu di sini..." required="" type="text"/>
+<textarea id="pesanUcapan" placeholder="Berikan ucapan atau doa..." required=""></textarea>
+<select id="kehadiran" required="">
+<option disabled="" hidden="" selected="" value="">Pilih status kehadiran...</option>
+<option value="Hadir">Hadir</option>
+<option value="Tidak Hadir">Tidak Hadir</option>
+</select>
+<button type="submit">Kirim</button>
+</div>
+</form>
 </section>
 
 
@@ -748,6 +761,40 @@
   </audio>
 
 <script>
+  // === WISHES ===
+  AOS.init();
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("rsvpForm");
+
+    if (form) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const nama = document.getElementById("nama").value.trim();
+        const ucapan = document.getElementById("pesanUcapan").value.trim();
+        const kehadiran = document.getElementById("kehadiran").value;
+
+        if (!nama || !ucapan || !kehadiran) {
+          alert("Isi semua kolom terlebih dahulu!");
+          return;
+        }
+
+        const nomorWhatsApp = "6285706889273";
+        const pesan = `Halo, saya *${nama}*\nUcapan: ${ucapan}\nKehadiran: *${kehadiran}*`;
+
+        const url = `https://wa.me/${nomorWhatsApp}?text=${encodeURIComponent(pesan)}`;
+        window.open(url, "_blank");
+      });
+    }
+  });
+
+//ANIMASI SRVP
+  AOS.init({
+    once: false, // animasi bisa aktif lagi saat scroll ke atas
+    duration: 800,
+    easing: 'ease-out',
+  });
   // === ELEMEN UTAMA ===
   const openBtn = document.getElementById('openBtn');
   const cover = document.getElementById('cover');
