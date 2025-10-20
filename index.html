@@ -761,47 +761,61 @@
   </audio>
 
 <script>
+  // Pastikan AOS sudah dimuat di <head>
   AOS.init();
 
+  // === AMBIL ELEMEN DOM ===
+  const openBtn = document.getElementById("openBtn");
+  const cover = document.getElementById("cover");
+  const invitation = document.getElementById("invitation");
+  const bgMusic = document.getElementById("bgMusic");
+  let timer;
+
+  // === FUNGSI PLAY MUSIK ===
+  function startMusic() {
+    const playPromise = bgMusic.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => console.log("Auto-play diblokir browser."));
+    }
+  }
+
+  // === FORM RSVP (UCAPAN & KEHADIRAN) ===
   document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("rsvpForm");
+    if (!form) return;
 
-    if (form) {
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
 
-        const nama = document.getElementById("nama").value.trim();
-        const ucapan = document.getElementById("pesanUcapan").value.trim();
-        const kehadiran = document.getElementById("kehadiran").value;
+      const nama = document.getElementById("nama").value.trim();
+      const ucapan = document.getElementById("pesanUcapan").value.trim();
+      const kehadiran = document.getElementById("kehadiran").value;
 
-        if (!nama || !ucapan || !kehadiran) {
-          alert("Isi semua kolom terlebih dahulu!");
-          return;
-        }
+      if (!nama || !ucapan || !kehadiran) {
+        alert("Isi semua kolom terlebih dahulu!");
+        return;
+      }
 
-        const nomorWhatsApp = "6285706889273";
-        const pesan = `Halo, saya *${nama}*\nUcapan: ${ucapan}\nKehadiran: *${kehadiran}*`;
-
-        const url = `https://wa.me/${nomorWhatsApp}?text=${encodeURIComponent(pesan)}`;
-        window.open(url, "_blank");
-      });
-    }
+      const nomorWhatsApp = "6285706889273";
+      const pesan = `Halo, saya *${nama}*\nUcapan: ${ucapan}\nKehadiran: *${kehadiran}*`;
+      const url = `https://wa.me/${nomorWhatsApp}?text=${encodeURIComponent(pesan)}`;
+      window.open(url, "_blank");
+    });
   });
 
-
   // === AKSI BUKA UNDANGAN ===
-  openBtn.addEventListener('click', () => {
-    cover.style.opacity = '0';
+  openBtn.addEventListener("click", () => {
+    cover.style.opacity = "0";
     setTimeout(() => {
-      cover.style.display = 'none';
-      invitation.style.display = 'block';
+      cover.style.display = "none";
+      invitation.style.display = "block";
       startMusic();
     }, 800);
   });
 
   // === MUSIK BERHENTI SAAT TAB TIDAK AKTIF ===
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') {
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
       startMusic();
     } else {
       bgMusic.pause();
@@ -836,33 +850,7 @@
     secondsEl.textContent = seconds.toString().padStart(2, "0");
   }
 
-  countdown(); // langsung tampil saat halaman dibuka
-  const timer = setInterval(countdown, 1000);
-
-// Kirim ucapan & kehadiran via WhatsApp
-function kirimWishes() {
-  const nama = document.getElementById('nama').value.trim();
-  const status = document.getElementById('status').value;
-  const pesan = document.getElementById('pesan').value.trim();
-
-  if (!nama || !status) {
-    alert('Mohon isi nama dan status kehadiran terlebih dahulu 🙏');
-    return;
+  timer = setInterval(countdown, 1000);
+  countdown(); // langsung tampil
   }
-
-  // Ganti dengan nomor WA pengantin (gunakan format internasional tanpa +)
-  const nomorWa = '6285706889273'; // contoh: 6285234567890
-
-  const teks = `✨ *Ucapan & Kehadiran* ✨%0A
-Nama: ${nama}%0A
-Kehadiran: ${status}%0A
-Ucapan: ${pesan || '-'}%0A%0A
-Dikirim melalui Undangan Digital 💌`;
-
-  const url = `https://wa.me/${nomorWa}?text=${teks}`;
-  window.open(url, '_blank');
-}
-
 </script>
-</body>
-</html>
