@@ -236,18 +236,35 @@
   }
       }
     
-    /* BACKGROUND KHUSUS */
-    .bg-section-khusus {
-      background-image: url('dasar.jpg');
-      background-repeat: repeat-y;
-      background-size: cover;
-      background-position: center top;
-      background-attachment: fixed;
-      background-color: #fff;
-      padding: 80px 20px;
-      margin-bottom: 0;
-      min-height: 100vh;
-    }
+    /* === BACKGROUND KHUSUS === */
+.bg-section-khusus {
+  position: relative;
+  background-image: url('dasar.webp'); /* ganti .jpg jadi .webp biar ringan */
+  background-repeat: no-repeat;
+  background-size: cover; /* cover tetap dipakai tapi diatur ulang via JS */
+  background-position: center center;
+  background-attachment: scroll; /* lebih ringan daripada fixed di HP */
+  background-color: #fff;
+  padding: 80px 20px;
+  margin-bottom: 0;
+  min-height: 100vh;
+  overflow: hidden;
+  transition: background-position 0.3s ease-out;
+}
+
+/* Supaya isi tetap rapi di tengah */
+.bg-section-khusus > * {
+  position: relative;
+  z-index: 2;
+}
+.bg-section-khusus::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.25); /* lapisan lembut biar teks kontras */
+  z-index: 1;
+}
+
 
     /* KONTEN */
     .bismillah {
@@ -864,11 +881,12 @@ serta doa restunya, kami ucapkan terima kasih.</p>
   timer = setInterval(countdown, 1000);
   countdown(); // langsung tampil
   
-  window.addEventListener('scroll', function() {
-  document.querySelectorAll('.bg-section-khusus, .galeri-section').forEach(el => {
-    let speed = 0.3; // semakin kecil, semakin lembut efek parallax
-    let offset = window.scrollY * speed;
-    el.style.backgroundPositionY = `${offset}px`;
+  document.addEventListener("scroll", () => {
+    const bg = document.querySelector(".bg-section-khusus");
+    if (!bg) return;
+
+    const scrollY = window.scrollY;
+    const speed = 0.2; // ubah 0.1–0.4 sesuai kehalusan yang kamu mau
+    bg.style.backgroundPositionY = -(scrollY * speed) + "px";
   });
-});
 </script>
