@@ -788,25 +788,6 @@
     }
   });
 
-//ANIMASI SRVP
-  AOS.init({
-    once: false, // animasi bisa aktif lagi saat scroll ke atas
-    duration: 800,
-    easing: 'ease-out',
-  });
-  // === ELEMEN UTAMA ===
-  const openBtn = document.getElementById('openBtn');
-  const cover = document.getElementById('cover');
-  const invitation = document.getElementById('invitation');
-  const bgMusic = document.getElementById('bgMusic');
-
-  // === FUNGSI PLAY MUSIK ===
-  function startMusic() {
-    const playPromise = bgMusic.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(() => console.log("Auto-play diblokir browser."));
-    }
-  }
 
   // === AKSI BUKA UNDANGAN ===
   openBtn.addEventListener('click', () => {
