@@ -863,4 +863,12 @@ serta doa restunya, kami ucapkan terima kasih.</p>
 
   timer = setInterval(countdown, 1000);
   countdown(); // langsung tampil
+  
+  window.addEventListener('scroll', function() {
+  document.querySelectorAll('.bg-section-khusus, .galeri-section').forEach(el => {
+    let speed = 0.3; // semakin kecil, semakin lembut efek parallax
+    let offset = window.scrollY * speed;
+    el.style.backgroundPositionY = `${offset}px`;
+  });
+});
 </script>
