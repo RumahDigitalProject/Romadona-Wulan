@@ -390,8 +390,19 @@
   opacity: 0.9;
 }
 
-/* === INFORMASI ACARA === */
-.info-acara {
+/* DATE*/
+  .acara {
+  background: #7b1f26 url('beground-date.webp') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed; /* 🎯 INI YANG BIKIN BACKGROUND DIAM */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  position: relative;
+  z-index: 1;
+}
+.box-acara {
   background: rgba(255, 255, 255, 0.97); /* Putih transparan */
   background-size: cover;
   border: 3px solid #f3a302; 
@@ -412,54 +423,126 @@
 /* Media query agar tidak mepet di HP kecil */
 @media (max-width: 480px) {
 }
-
-
-.isi-info h2 {
-  color: #b76e79;
-  font-size: 2em;
+/* === JADWAL ACARA === */
+.jadwal-box {
+  background: white;
+  border-radius: 50px;
+  padding: 40px 30px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.hari {
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.tanggal {
+   text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  font-weight: bold;
+  display: inline-block;
+  width: 80px;
+}
+.bulan {
+   text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.jam {
+   text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  color: #444;
+  line-height: 1.6;
   margin-bottom: 15px;
 }
-
-.isi-info .tanggal,
-.isi-info .waktu,
-.isi-info .tempat {
-  font-size: 1.1em;
-  margin-bottom: 10px;
+.lokasi {
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  color: #444;
   line-height: 1.6;
+  margin-bottom: 20px;
+}
+.judul {
+  font-family: 'Great Vibes', cursive;
+  font-size: 35px;
+  color:  #f3a302; 
+  margin-bottom: 20px;
+  text-align: center;
+}
+.bingkai-emas {
+  font-size: 24px;
+  font-weight: bold;
+}
+.bingkai-emas .tanggal {
+  font-size: 64px;
+  margin: 10px 0;
+}
+.bg-static {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('beground-date.webp') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  z-index: -1;
+  pointer-events: none;
+}
+/* Default: sembunyi dan posisi awal */
+.slide-in-left,
+.slide-in-right {
+  opacity: 0;
+  transition: all 0.8s ease-out;
 }
 
-.btn-maps {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 25px;
-  background: #b76e79;
+.slide-in-left {
+  transform: translateX(-80px);
+}
+.slide-in-right {
+  transform: translateX(80px);
+}
+
+/* Saat masuk layar */
+.slide-in-left.show,
+.slide-in-right.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/*MAPAS*/
+.tombol-maps {
+  text-align: center;
+  margin: 24px 0;
+}
+
+.tombol-maps a {
+  display: inline-block;
+  background-color:  #f3a302; 
   color: white;
-  padding: 12px 28px;
-  border-radius: 40px;
   text-decoration: none;
-  font-weight: 500;
-  transition: all 0.3s ease;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 14px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+  transition: background-color 0.3s ease;
 }
 
-.btn-maps:hover {
-  background: #9b5662;
-  transform: scale(1.05);
-}
-
-.btn-maps i {
-  font-size: 1.2em;
-}
-
-/* Responsif */
-@media (max-width: 600px) {
-  .info-acara {
-    margin: 60px 15px;
-    padding: 50px 20px 35px;
-    border-radius: 80px 80px 0 0;
-  }
-  .isi-info h2 { font-size: 1.6em; }
-  .isi-info .tanggal, .isi-info .waktu, .isi-info .tempat { font-size: 1em; }
+.tombol-maps a:hover {
+  background-color:  #f3a302; 
 }
 
 /* ==== GALERI FOTO ==== */
@@ -705,17 +788,24 @@
   </div>
 </section>
 
-<!-- === INFORMASI ACARA === -->
-<section class="info-acara">
-  <div class="isi-info">
-    <h2>Resepsi Pernikahan</h2>
-    <p class="tanggal">Senin, 10 November 2025</p>
-    <p class="waktu">Pukul 08.00 WIB - Selesai</p>
-    <p class="tempat">Kampung Berkah Kletek<br>RT 1 / RW 7, Wlingi</p>
-    <a class="btn-maps" href="https://maps.app.goo.gl/2aDDirCWKkKFMiZG9" target="_blank">
-      <i class="fa-solid fa-map-location-dot"></i> Lihat Lokasi
-    </a>
-  </div>
+<!-- ACARA: Akad -->
+<section class="acara" style="position: relative;">
+<div class="bg-static"></div> <!-- 🎯 background diam hanya untuk section ini -->
+<div class="box-acara fade-in-up">
+<div class="bingkai-emas slide-in-right">
+<p class="judul">Akad Nikah</p>
+<p class="orang-tua">Selasa</p>
+<p class="tanggal">11</p>
+<p class="orang-tua">November 2025</p>
+<p class="orang-tua">10:00 WIB – Selesai</p>
+<div class="ikon-rumah">-------🏠-------</div>
+<p class="orang-tua">Kampung Berkah kletek RT 07 / RW 10</p>
+<!-- Tombol Maps untuk Akad -->
+<div class="tombol-maps">
+<a href="https://maps.app.goo.gl/2V8rYx2Y5ag4q1NL9" rel="noopener" target="_blank">📍 Lihat Maps</a>
+</div>
+</div>
+</div>
 </section>
 
 <!-- Galeri -->
