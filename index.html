@@ -389,18 +389,28 @@
   opacity: 0.9;
 }
 
-/* ==== SECTION INFO ACARA ==== */
+/* === INFORMASI ACARA === */
 .info-acara {
-  position: center top;
-  max-width: 320px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  width: 90%;
+  max-width: 600px;
   margin: 80px auto;
+
   background: white;
-  border-radius: 120px 120px 20px 20px; /* 🎯 atas melengkung, bawah datar */
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  border-radius: 140px 140px 25px 25px; /* atas melengkung, bawah tumpul */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+
   text-align: center;
-  padding: 40px 20px 30px;
+  padding: 50px 25px 35px;
   color: #444;
+  z-index: 2;
 }
+
 
 .isi-info h2 {
   color: #b76e79;
