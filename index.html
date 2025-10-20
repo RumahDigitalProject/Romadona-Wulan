@@ -239,7 +239,7 @@
     
     /* BACKGROUND KHUSUS HANYA UNTUK BAGIAN BISMILLAH SAMPAI PENGANTIN */
 .bg-section-khusus {
-  background-image: url('dasar.webp');
+  background-image: url('dasar.jpg');
   background-repeat: no-repeat;
   background-size: contain; /* ubah ke cover agar full section */
   background-position: center top;
@@ -870,5 +870,12 @@ serta doa restunya, kami ucapkan terima kasih.</p>
   timer = setInterval(countdown, 1000);
   countdown(); // langsung tampil
   
+  window.addEventListener("scroll", () => {
+  const depan = document.querySelector(".box-putih-kecil");
+  const scrollY = window.scrollY;
+  // Gerakkan latar depan sedikit lebih cepat dari konten
+  depan.style.transform = `translateY(${scrollY * 0.3}px)`;
+});
+
   
 </script>
