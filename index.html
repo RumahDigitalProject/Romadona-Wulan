@@ -1013,58 +1013,74 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  // elemen utama
   const openBtn = document.getElementById("openBtn");
   const cover = document.getElementById("cover");
-
-  // cari invitation baik id maupun class (robust)
+  // cari invitation baik id atau class (robust)
   const invitation = document.getElementById("invitation") || document.querySelector(".invitation");
-
-  // form RSVP (pastikan id="rsvpForm" ada di HTML)
-  const form = document.getElementById("rsvpForm");
-
   const menu = document.getElementById("menuNavigasi");
   const bgMusic = document.getElementById("bgMusic");
   let timer;
+  let isOpened = false; // status: apakah user sudah membuka undangan
 
-  // helper: safePlay untuk menghindari error autoplay
-  function safePlayAudio(audioEl) {
-    if (!audioEl) return;
-    const p = audioEl.play();
-    if (p !== undefined) p.catch(err => console.warn("Autoplay ditolak:", err));
+  // safe play/pause
+  function safePlay() {
+    if (!bgMusic) return;
+    const p = bgMusic.play();
+    if (p !== undefined) p.catch(err => console.warn("Play ditolak:", err));
+  }
+  function safePause() {
+    if (!bgMusic) return;
+    try { bgMusic.pause(); } catch(e){/*ignore*/ }
   }
 
-  // Pasang listener tombol buka (jika elemen ada)
+  // === Klik tombol Buka Undangan ===
   if (openBtn && cover && invitation) {
     openBtn.addEventListener("click", () => {
-      // transisi cover
+      // buka UI
       cover.style.opacity = "0";
       setTimeout(() => {
         cover.style.display = "none";
-
-        // tampilkan invitation: jika elemen mempunyai style display inline, override
         invitation.style.display = "block";
-
-        // play musik aman
-        safePlayAudio(bgMusic);
-
-        // tampilkan menu navigasi jika ada
+        isOpened = true;            // tandai sudah dibuka
+        // putar musik *hanya saat ini* (karena user klik)
+        safePlay();
+        // tampilkan menu bila ada
         if (menu) menu.classList.add("show");
-
-        // scroll ke atas isi untuk memastikan tampilan rapi
         window.scrollTo({ top: 0, behavior: "smooth" });
       }, 600);
     });
   } else {
-    // debugging hint: log kalau salah satu elemen penting hilang
     if (!openBtn) console.warn("openBtn not found");
     if (!cover) console.warn("cover not found");
     if (!invitation) console.warn("invitation not found (expected id='invitation' or class='invitation')");
   }
 
-  // Pasang listener form RSVP kalau ada
+  // === Pause / Resume saat visibility / fokus (hanya jika sudah dibuka) ===
+  document.addEventListener("visibilitychange", () => {
+    if (!isOpened) return; // belum buka undangan → jangan sentuh musik
+    if (document.visibilityState === "visible") safePlay();
+    else safePause();
+  });
+
+  window.addEventListener("blur", () => {
+    if (!isOpened) return;
+    safePause();
+  });
+
+  window.addEventListener("focus", () => {
+    if (!isOpened) return;
+    safePlay();
+  });
+
+  // Pastikan juga saat unload (tab ditutup / reload) musik berhenti
+  window.addEventListener("beforeunload", () => {
+    safePause();
+  });
+
+  // === RSVP form (jika ada) ===
+  const form = document.getElementById("rsvpForm");
   if (form) {
-    form.addEventListener("submit", function (e) {
+    form.addEventListener("submit", (e) => {
       e.preventDefault();
       const nama = document.getElementById("nama")?.value.trim() || "";
       const ucapan = document.getElementById("pesanUcapan")?.value.trim() || "";
@@ -1082,36 +1098,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Countdown (safe: hanya jika elemen ada)
+  // === Countdown (safe) ===
   function countdown() {
-    const acara = new Date(2025, 10, 10, 8, 0, 0).getTime(); // 10 Nov 2025 08:00
+    const target = new Date(2025, 10, 10, 8, 0, 0).getTime();
     const now = Date.now();
-    const selisih = acara - now;
-
+    const diff = target - now;
     const daysEl = document.getElementById("days");
     const hoursEl = document.getElementById("hours");
     const minutesEl = document.getElementById("minutes");
     const secondsEl = document.getElementById("seconds");
-
     if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
-
-    if (selisih <= 0) {
-      document.getElementById("countdown").innerHTML = "<p>Acara Sedang Berlangsung 🎉</p>";
-      clearInterval(timer);
-      return;
-    }
-
-    const days = Math.floor(selisih / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((selisih % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((selisih % (1000 * 60)) / 1000);
-
-    daysEl.textContent = String(days).padStart(2, "0");
-    hoursEl.textContent = String(hours).padStart(2, "0");
-    minutesEl.textContent = String(minutes).padStart(2, "0");
-    secondsEl.textContent = String(seconds).padStart(2, "0");
+    if (diff <= 0) { document.getElementById("countdown").innerHTML = "<p>Acara Sedang Berlangsung 🎉</p>"; return; }
+    const d = Math.floor(diff / (1000*60*60*24));
+    const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+    const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+    const s = Math.floor((diff % (1000*60)) / 1000);
+    daysEl.textContent = String(d).padStart(2,"0");
+    hoursEl.textContent = String(h).padStart(2,"0");
+    minutesEl.textContent = String(m).padStart(2,"0");
+    secondsEl.textContent = String(s).padStart(2,"0");
   }
-
   timer = setInterval(countdown, 1000);
   countdown();
 });
