@@ -762,12 +762,12 @@
   opacity: 1;
 }
 
-  .menu-bawah {
+.menu-bawah {
   position: fixed;
   bottom: 15px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.4); /* 🔹 Lebih transparan */
+  background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(6px);
   display: flex;
   justify-content: space-around;
@@ -778,19 +778,19 @@
   border-radius: 30px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
   z-index: 9999;
-  opacity: 0;
+  opacity: 0;               /* disembunyikan dulu */
   pointer-events: none;
   transition: opacity 0.6s ease;
 }
 
-.menu-bawah.show {
+.menu-bawah.show {          /* muncul setelah class 'show' ditambah */
   opacity: 1;
   pointer-events: all;
 }
 
 .menu-bawah a {
   color: #d49a6a;
-  font-size: 18px; /* 🔹 Lebih kecil */
+  font-size: 18px;
   transition: 0.3s;
 }
 
@@ -798,6 +798,7 @@
   color: #a05b37;
   transform: scale(1.15);
 }
+
 
 
   </style>
@@ -995,6 +996,7 @@
   <a href="#rsvp" title="Ucapan"><i class="fa-solid fa-message"></i></a>
 </nav>
 
+
   
 <!--Brand-->
 <footer class="footer-wedding">
@@ -1067,13 +1069,26 @@ openBtn.addEventListener('click', () => {
 
 
   // === MUSIK BERHENTI SAAT TAB TIDAK AKTIF ===
-  document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "visible") {
-      startMusic();
-    } else {
-      bgMusic.pause();
-    }
-  });
+  document.addEventListener("DOMContentLoaded", () => {
+  const openBtn = document.getElementById("openBtn"); // pastikan ID-nya sesuai di HTML
+  const cover = document.getElementById("cover");     // bagian pembuka
+  const invitation = document.querySelector(".invitation"); // bagian isi undangan
+  const menu = document.getElementById("menuNavigasi");
+
+  if (openBtn && cover && invitation && menu) {
+    openBtn.addEventListener("click", () => {
+      cover.style.opacity = "0";
+      setTimeout(() => {
+        cover.style.display = "none";
+        invitation.style.display = "block";
+
+        // 🎯 tampilkan menu setelah undangan terbuka
+        menu.classList.add("show");
+      }, 800);
+    });
+  }
+});
+
 
   // === COUNTDOWN REALTIME ===
   function countdown() {
@@ -1107,16 +1122,5 @@ openBtn.addEventListener('click', () => {
   countdown(); // langsung tampil
 
 
-  document.querySelectorAll('.menu-bawah a').forEach(link => {
-  link.addEventListener('click', function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      window.scrollTo({
-        top: target.offsetTop - 60,
-        behavior: 'smooth'
-      });
-    }
-  });
-});
+  
 </script>
