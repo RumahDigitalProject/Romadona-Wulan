@@ -700,10 +700,9 @@
   margin: 0 auto;
   text-align: center;
 }
-/* PENUTUP */
-
+/* === UCAPAN TERIMA KASIH === */
 #ucapan {
-  background-image: url('beground-penutup.webp');
+  background-image: url('dasar.webp');
   background-size: cover;
   background-position: center;
   padding: 80px 20px;
@@ -711,7 +710,16 @@
   justify-content: center;
   align-items: center;
 }
-    .ucapan-teks {
+.ucapan-box {
+  background: white;
+  padding: 40px 30px 80px;
+  max-width: 500px;
+  text-align: center;
+  border-radius: 40px 40px 80px 80px; /* bagian bawah melengkung */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  position: relative;
+}
+.ucapan-teks {
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
   color: #444;
@@ -722,6 +730,45 @@
   font-family: 'Great Vibes', cursive;
   font-size: 38px;
   color:  #f3a302; 
+}
+
+/*BRAND*/
+.footer-wedding {
+  background-color: #FFFFFF;
+  padding: 13px 10px;
+  text-align: center;
+  border-top: 2px solid #e7a5bd;
+}
+
+.footer-content {
+  font-family: 'Inter', sans-serif;
+  color: #5a4e4d;
+  font-size: 13px;
+}
+
+.footer-content p {
+  margin: 4px 0;
+}
+
+.footer-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.wa-icon-inline img {
+  width: 18px;
+  height: 18px;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.wa-icon-inline img:hover {
+  transform: scale(1.1);
+  opacity: 1;
 }
 
   </style>
@@ -875,9 +922,15 @@
 </form>
 </section>
 
-<!-- PENUTUP -->
+<!-- MUSIK -->
+  <audio id="bgMusic" loop preload="none">
+    <source src="lagu.mp3" type="audio/mpeg">
+  </audio>
+
+<!--Penutup-->
 <section id="ucapan">
-      <p class="ucapan-teks">
+<div class="ucapan-box">
+<p class="ucapan-teks">
       Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu, Atas kehadiran dan doa restunya kami mengucapkan terima kasih..
     </p>
 <p class="ucapan-nama">
@@ -885,11 +938,18 @@
     </p>
 </div>
 </section>
-
-  <!-- MUSIK -->
-  <audio id="bgMusic" loop preload="none">
-    <source src="lagu.mp3" type="audio/mpeg">
-  </audio>
+<!--Brand-->
+<footer class="footer-wedding">
+<div class="footer-content">
+<p>Undangan oleh <strong>Rumah Digital Project</strong></p>
+<div class="footer-row">
+<span>© 2025</span>
+<a class="wa-icon-inline" href="https://wa.me/6285706889273" target="_blank">
+<img alt="WhatsApp" src="https://cdn-icons-png.flaticon.com/512/733/733585.png"/>
+</a>
+</div>
+</div>
+</footer>
 
 <script>
 
