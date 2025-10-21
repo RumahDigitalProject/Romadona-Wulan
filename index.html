@@ -258,7 +258,6 @@
   background-attachment: fixed;
   z-index: -1;
   pointer-events: none;
-    padding: 0 20px;
   }
 
     /* KONTEN */
@@ -837,8 +836,8 @@
 </div>
 </div>
 </div>
-  
-<section class="bg-static1">
+<section id="invitation" style="position: relative; text-align: center;">
+  <div class="bg-static1"></div>
 
   <!-- Tulisan di atas box putih -->
   <p class="teks-atas">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
@@ -1020,7 +1019,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const openBtn = document.getElementById("openBtn");
   const cover = document.getElementById("cover");
   // cari invitation baik id atau class (robust)
-  const invitation = document.getElementById("bg-static1") || document.querySelector(".invitation");
+  const invitation = document.getElementById("invitation") || document.querySelector(".invitation");
   const menu = document.getElementById("menuNavigasi");
   const bgMusic = document.getElementById("bgMusic");
   let timer;
@@ -1125,4 +1124,4 @@ document.addEventListener("DOMContentLoaded", () => {
   timer = setInterval(countdown, 1000);
   countdown();
 });
-</script>
+                                               </script>
