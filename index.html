@@ -767,29 +767,36 @@
   bottom: 15px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.4); /* 🔹 Lebih transparan */
+  backdrop-filter: blur(6px);
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 90%;
-  max-width: 420px;
-  padding: 10px 0;
-  border-radius: 40px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 70%;
+  max-width: 350px;
+  padding: 6px 0;
+  border-radius: 30px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
   z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+.menu-bawah.show {
+  opacity: 1;
+  pointer-events: all;
 }
 
 .menu-bawah a {
   color: #d49a6a;
-  font-size: 22px;
+  font-size: 18px; /* 🔹 Lebih kecil */
   transition: 0.3s;
 }
 
-.menu-bawah a:hover,
-.menu-bawah a:focus {
+.menu-bawah a:hover {
   color: #a05b37;
-  transform: scale(1.2);
+  transform: scale(1.15);
 }
 
 
@@ -1045,14 +1052,18 @@
   
 
   // === AKSI BUKA UNDANGAN ===
-  openBtn.addEventListener("click", () => {
-    cover.style.opacity = "0";
-    setTimeout(() => {
-      cover.style.display = "none";
-      invitation.style.display = "block";
-      startMusic();
-    }, 800);
-  });
+openBtn.addEventListener('click', () => {
+  cover.style.opacity = '0';
+  setTimeout(() => {
+    cover.style.display = 'none';
+    invitation.style.display = 'block';
+    startMusic();
+
+    // 🔹 Tampilkan menu setelah undangan terbuka
+    document.getElementById('menuNavigasi').classList.add('show');
+  }, 800);
+});
+
 
   // === MUSIK BERHENTI SAAT TAB TIDAK AKTIF ===
   document.addEventListener("visibilitychange", () => {
