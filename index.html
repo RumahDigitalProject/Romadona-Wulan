@@ -1013,37 +1013,31 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  // === Ambil Elemen ===
-  const openBtn = document.getElementById("openBtn");
-  const cover = document.getElementById("cover");
-  const invitation = document.getElementById("invitation");
-  const menu = document.getElementById("menuNavigasi");
-  const bgMusic = document.getElementById("bgMusic");
-  const form = document.getElementById("rsvpForm");
-  let timer;
+      const openBtn = document.getElementById("openBtn");
+      const cover = document.getElementById("cover");
+      const invitation = document.getElementById("invitation");
+      const menu = document.getElementById("menuNavigasi");
+      const bgMusic = document.getElementById("bgMusic");
 
-  // === Fungsi Musik ===
-  function startMusic() {
-    if (bgMusic) {
-      const playPromise = bgMusic.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => console.log("Autoplay diblokir browser."));
+      if (openBtn && cover && invitation) {
+        openBtn.addEventListener("click", () => {
+          cover.style.opacity = "0";
+          setTimeout(() => {
+            cover.style.display = "none";
+            invitation.style.display = "block";
+
+            // 🎵 Putar musik
+            if (bgMusic) {
+              bgMusic.play().catch(err => console.log("Autoplay ditolak:", err));
+            }
+
+            // 🎯 Tampilkan menu
+            if (menu) {
+              menu.classList.add("show");
+            }
+          }, 800);
+        });
       }
-    }
-  }
-
-  // === Tombol Buka Undangan ===
-  if (openBtn && cover && invitation) {
-    openBtn.addEventListener("click", () => {
-      cover.style.opacity = "0";
-      setTimeout(() => {
-        cover.style.display = "none";
-        invitation.style.display = "block";
-        startMusic(); // 🎵 Putar musik
-        if (menu) menu.classList.add("show"); // 🎯 Tampilkan menu
-      }, 800);
-    });
-  }
 
   // === Form RSVP ===
   if (form) {
