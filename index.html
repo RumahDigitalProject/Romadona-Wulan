@@ -1068,26 +1068,37 @@ openBtn.addEventListener('click', () => {
 });
 
 
-  // === MUSIK BERHENTI SAAT TAB TIDAK AKTIF ===
-  document.addEventListener("DOMContentLoaded", () => {
-  const openBtn = document.getElementById("openBtn"); // pastikan ID-nya sesuai di HTML
-  const cover = document.getElementById("cover");     // bagian pembuka
-  const invitation = document.querySelector(".invitation"); // bagian isi undangan
-  const menu = document.getElementById("menuNavigasi");
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const openBtn = document.getElementById("openBtn"); // tombol buka undangan
+  const cover = document.getElementById("cover");     // tampilan awal
+  const invitation = document.querySelector(".invitation"); // isi undangan
+  const menu = document.getElementById("menuNavigasi");     // menu bawah
+  const bgMusic = document.getElementById("bgMusic");       // musik
 
-  if (openBtn && cover && invitation && menu) {
+  if (openBtn && cover && invitation) {
     openBtn.addEventListener("click", () => {
+      // animasi hilangkan cover
       cover.style.opacity = "0";
       setTimeout(() => {
         cover.style.display = "none";
         invitation.style.display = "block";
 
-        // 🎯 tampilkan menu setelah undangan terbuka
-        menu.classList.add("show");
+        // 🎵 Putar musik setelah undangan dibuka
+        if (bgMusic) {
+          bgMusic.play().catch(err => console.log("Autoplay ditolak:", err));
+        }
+
+        // 🎯 Tampilkan menu bawah
+        if (menu) {
+          menu.classList.add("show");
+        }
       }, 800);
     });
   }
 });
+</script>
+
 
 
   // === COUNTDOWN REALTIME ===
