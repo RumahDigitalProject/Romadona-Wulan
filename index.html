@@ -258,11 +258,7 @@
   z-index: -1;
   pointer-events: none;
   }
-    .parallax-wrapper {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-    }
+
     /* KONTEN */
     .bismillah {
       text-align: center;
@@ -988,12 +984,7 @@
   timer = setInterval(countdown, 1000);
   countdown(); // langsung tampil
   
-  window.addEventListener("scroll", () => {
-  const depan = document.querySelector(".box-putih-kecil");
-  const scrollY = window.scrollY;
-  // Gerakkan latar depan sedikit lebih cepat dari konten
-  depan.style.transform = `translateY(${scrollY * 0.3}px)`;
-});
+  
 
   
 </script>
