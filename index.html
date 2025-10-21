@@ -246,6 +246,18 @@
   margin-bottom: 0px;
   min-height: 100vh;
 }
+  .bg-static1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('dasar.webp') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  z-index: -1;
+  pointer-events: none;
+  }
     .parallax-wrapper {
   position: relative;
   height: 100vh;
@@ -751,10 +763,8 @@
 </div>
 </div>
 </div>
-  
-  <div id="invitation">
-    <section class="parallax-wrapper">
-    <section class="bg-section-khusus">
+  <section class="invitation" style="position: relative;">
+    <div class="bg-static"></div>
       <div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
       <div class="salam-undangan">
         Assalamu'alaikum Wr. Wb.<br/>
