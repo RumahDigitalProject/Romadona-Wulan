@@ -836,8 +836,8 @@
 </div>
 </div>
 </div>
-  <section class="invitation" style="position: relative;">
-    <div class="bg-static1"></div>
+  <section id="invitation" style="position: relative;">
+    <div class="bg-static"></div>
       <div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
       <div class="salam-undangan">
         Assalamu'alaikum Wr. Wb.<br/>
@@ -1013,39 +1013,62 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-      const openBtn = document.getElementById("openBtn");
-      const cover = document.getElementById("cover");
-      const invitation = document.getElementById("invitation");
-      const menu = document.getElementById("menuNavigasi");
-      const bgMusic = document.getElementById("bgMusic");
+  // elemen utama
+  const openBtn = document.getElementById("openBtn");
+  const cover = document.getElementById("cover");
 
-      if (openBtn && cover && invitation) {
-        openBtn.addEventListener("click", () => {
-          cover.style.opacity = "0";
-          setTimeout(() => {
-            cover.style.display = "none";
-            invitation.style.display = "block";
+  // cari invitation baik id maupun class (robust)
+  const invitation = document.getElementById("invitation") || document.querySelector(".invitation");
 
-            // 🎵 Putar musik
-            if (bgMusic) {
-              bgMusic.play().catch(err => console.log("Autoplay ditolak:", err));
-            }
+  // form RSVP (pastikan id="rsvpForm" ada di HTML)
+  const form = document.getElementById("rsvpForm");
 
-            // 🎯 Tampilkan menu
-            if (menu) {
-              menu.classList.add("show");
-            }
-          }, 800);
-        });
-      }
+  const menu = document.getElementById("menuNavigasi");
+  const bgMusic = document.getElementById("bgMusic");
+  let timer;
 
-  // === Form RSVP ===
+  // helper: safePlay untuk menghindari error autoplay
+  function safePlayAudio(audioEl) {
+    if (!audioEl) return;
+    const p = audioEl.play();
+    if (p !== undefined) p.catch(err => console.warn("Autoplay ditolak:", err));
+  }
+
+  // Pasang listener tombol buka (jika elemen ada)
+  if (openBtn && cover && invitation) {
+    openBtn.addEventListener("click", () => {
+      // transisi cover
+      cover.style.opacity = "0";
+      setTimeout(() => {
+        cover.style.display = "none";
+
+        // tampilkan invitation: jika elemen mempunyai style display inline, override
+        invitation.style.display = "block";
+
+        // play musik aman
+        safePlayAudio(bgMusic);
+
+        // tampilkan menu navigasi jika ada
+        if (menu) menu.classList.add("show");
+
+        // scroll ke atas isi untuk memastikan tampilan rapi
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 600);
+    });
+  } else {
+    // debugging hint: log kalau salah satu elemen penting hilang
+    if (!openBtn) console.warn("openBtn not found");
+    if (!cover) console.warn("cover not found");
+    if (!invitation) console.warn("invitation not found (expected id='invitation' or class='invitation')");
+  }
+
+  // Pasang listener form RSVP kalau ada
   if (form) {
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", function (e) {
       e.preventDefault();
-      const nama = document.getElementById("nama").value.trim();
-      const ucapan = document.getElementById("pesanUcapan").value.trim();
-      const kehadiran = document.getElementById("kehadiran").value;
+      const nama = document.getElementById("nama")?.value.trim() || "";
+      const ucapan = document.getElementById("pesanUcapan")?.value.trim() || "";
+      const kehadiran = document.getElementById("kehadiran")?.value || "";
 
       if (!nama || !ucapan || !kehadiran) {
         alert("Isi semua kolom terlebih dahulu!");
@@ -1059,16 +1082,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // === Countdown ===
+  // Countdown (safe: hanya jika elemen ada)
   function countdown() {
-    const acara = new Date(2025, 10, 10, 8, 0, 0).getTime(); // 📅 10 Nov 2025
-    const now = new Date().getTime();
+    const acara = new Date(2025, 10, 10, 8, 0, 0).getTime(); // 10 Nov 2025 08:00
+    const now = Date.now();
     const selisih = acara - now;
 
     const daysEl = document.getElementById("days");
     const hoursEl = document.getElementById("hours");
     const minutesEl = document.getElementById("minutes");
     const secondsEl = document.getElementById("seconds");
+
+    if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
 
     if (selisih <= 0) {
       document.getElementById("countdown").innerHTML = "<p>Acara Sedang Berlangsung 🎉</p>";
@@ -1081,10 +1106,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const minutes = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((selisih % (1000 * 60)) / 1000);
 
-    daysEl.textContent = days.toString().padStart(2, "0");
-    hoursEl.textContent = hours.toString().padStart(2, "0");
-    minutesEl.textContent = minutes.toString().padStart(2, "0");
-    secondsEl.textContent = seconds.toString().padStart(2, "0");
+    daysEl.textContent = String(days).padStart(2, "0");
+    hoursEl.textContent = String(hours).padStart(2, "0");
+    minutesEl.textContent = String(minutes).padStart(2, "0");
+    secondsEl.textContent = String(seconds).padStart(2, "0");
   }
 
   timer = setInterval(countdown, 1000);
