@@ -400,9 +400,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 40px 20px;
   position: relative;
   z-index: 1;
+  padding-top: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 40px;
 }
 .box-acara {
   background: #7b1f26 url('jadwal.jpg') no-repeat center center;
@@ -842,7 +845,7 @@
 </div>
 </div>
 
-<section class="invitation1">
+
 <section class="acara" style="position: relative;">
 <div class="bg-static"></div> <!-- 🎯 background diam hanya untuk section ini -->
   <!-- Tulisan di atas box putih -->
@@ -1024,7 +1027,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const openBtn = document.getElementById("openBtn");
   const cover = document.getElementById("cover");
   // cari invitation baik id atau class (robust)
-  const invitation = document.getElementById("invitation1") || document.querySelector(".invitation1");
   const menu = document.getElementById("menuNavigasi");
   const bgMusic = document.getElementById("bgMusic");
   let timer;
