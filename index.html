@@ -244,16 +244,16 @@
   padding-left: 20px;
   padding-right: 20px;
   padding-bottom: 40px;
-  background: url('dasar.jpg') no-repeat center center;
+  background-image: url('dasar.jpg');
+  text-align: center;
+  background-repeat: repeat-y;
+  background-size: contain;
+  background-position: top center;
+  background-color: #fff;
+  margin-bottom: 0px;
+  min-height: 100vh;
+
     }
-  .bgn-static {
-  position: absolute;
-  background: url('dasar.jpg') no-repeat center center;
-  background-size: cover;
-  background-attachment: fixed;
-  z-index: -1;
-  pointer-events: none;
-  }
     .bismillah {
       text-align: center;
       font-size: 18px;
@@ -835,8 +835,7 @@
 </div>
 </div>
   
-<section id="invitation" style="position: relative; text-align: center;">
-<div class="bgn-static"></div> <!-- 🎯 background diam hanya untuk section ini -->
+<section class="invitation" style="position: relative; text-align: center;">
   <!-- Tulisan di atas box putih -->
   <p class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
   <p class="salam-undangan">
