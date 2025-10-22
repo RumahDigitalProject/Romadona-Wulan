@@ -244,15 +244,31 @@
   padding-left: 20px;
   padding-right: 20px;
   padding-bottom: 40px;
+  position: relative;
   background-image: url('dasar.jpg');
-  text-align: center;
   background-repeat: repeat-y;
-  background-size: contain;
-  background-position: top center;
+  background-size: cover;
+  background-position: center;
   background-color: #fff;
-  margin-bottom: 0px;
+  background-attachment: fixed;
   min-height: 100vh;
+  text-align: center;
+  overflow: hidden;
+}
 
+/* efek lapisan transparan di atas background */
+.invitation1::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.3); /* bisa kamu ubah jadi 0.2 biar lebih samar */
+  z-index: 1;
+}
+
+/* pastikan semua isi di atas overlay */
+.invitation1 > * {
+  position: relative;
+  z-index: 2;
     }
     .bismillah {
       text-align: center;
