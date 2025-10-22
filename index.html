@@ -710,6 +710,77 @@
   margin: 0 auto;
   text-align: center;
 }
+
+/* === YOUR WISHES === */
+.your-wishes {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  border-top: 2px solid rgba(243, 163, 2, 0.3);
+  border-bottom: 2px solid rgba(243, 163, 2, 0.3);
+  padding: 60px 20px;
+  text-align: center;
+  color: #fff;
+  position: relative;
+}
+
+.your-wishes-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 38px;
+  color: #f3a302;
+  margin-bottom: 40px;
+  text-shadow: 0 0 10px rgba(243, 163, 2, 0.4);
+}
+
+.wishes-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.wish-box {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(243, 163, 2, 0.5);
+  border-radius: 16px;
+  padding: 20px 25px;
+  color: #fff;
+  width: 100%;
+  text-align: left;
+  box-shadow: 0 0 20px rgba(243, 163, 2, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wish-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(243, 163, 2, 0.3);
+}
+
+.wish-text {
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 10px;
+  color: #fff;
+  font-style: italic;
+}
+
+.wish-name {
+  font-size: 14px;
+  color: #f3a302;
+  text-align: right;
+}
+
+/* Responsif */
+@media (max-width: 480px) {
+  .your-wishes-title {
+    font-size: 32px;
+  }
+  .wish-box {
+    padding: 15px 18px;
+  }
+}
+
 /* === UCAPAN TERIMA KASIH === */
 #ucapan {
   background-image: url('dasar.webp');
@@ -988,6 +1059,33 @@
 <button type="submit">Kirim</button>
 </div>
 </form>
+</section>
+
+<!-- === YOUR WISHES === -->
+<section class="your-wishes">
+  <h2 class="your-wishes-title">Your Wishes 💌</h2>
+  
+  <div class="wishes-container">
+    <div class="wish-box">
+      <p class="wish-text">“Selamat menempuh hidup baru, semoga langgeng dan bahagia selalu!”</p>
+      <p class="wish-name">— Fajar & Dina</p>
+    </div>
+
+    <div class="wish-box">
+      <p class="wish-text">“Semoga cinta kalian tumbuh makin kuat setiap harinya 💖.”</p>
+      <p class="wish-name">— Ayu Pratiwi</p>
+    </div>
+
+    <div class="wish-box">
+      <p class="wish-text">“Doa terbaik untuk kalian berdua, jadi keluarga sakinah mawaddah warahmah.”</p>
+      <p class="wish-name">— Budi Santoso</p>
+    </div>
+
+    <div class="wish-box">
+      <p class="wish-text">“Akhirnya menikah juga! Selamat ya, semoga bahagia selamanya 🥰.”</p>
+      <p class="wish-name">— Tika Rahmawati</p>
+    </div>
+  </div>
 </section>
 
 <!-- MUSIK -->
