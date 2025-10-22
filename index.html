@@ -35,6 +35,28 @@
       color: white;
       transition: opacity 1s ease;
     }
+    /* === NAMA TAMU DI COVER === */
+.nama-tamu {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  color: #fff;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
+  transition: opacity 0.5s ease;
+}
+
+/* Jika tidak ada nama tamu, sembunyikan */
+.nama-tamu.hidden {
+  opacity: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
     #cover::after {
       content: '';
       position: absolute;
@@ -969,17 +991,21 @@
 </head>
 <body>
 
-  <!-- COVER -->
-  <div id="cover">
-    <div id="cover-content">
-      <p class="title">The Wedding of</p>
-      <h1 class="names">WULAN & DONA</h1>
-      <p class="guest">Kepada Yth. Bapak/Ibu/Saudara/i</p>
-      <button class="btn-open" id="openBtn">
-        <i class="fa-solid fa-envelope"></i> Buka Undangan
-      </button>
-    </div>
+<!-- COVER -->
+<div id="cover">
+  <div id="cover-content">
+    <p class="title">The Wedding of</p>
+    <h1 class="names">WULAN & DONA</h1>
+
+    <p class="guest">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+    <h3 id="namaTamu" class="nama-tamu"></h3> <!-- 🪶 Nama tamu muncul di sini -->
+
+    <button class="btn-open" id="openBtn">
+      <i class="fa-solid fa-envelope"></i> Buka Undangan
+    </button>
   </div>
+</div>
+
 
     <!-- ISI -->
 <!-- Bagian slideshow -->
@@ -1228,6 +1254,23 @@
 
 
 <script>
+
+  // === NAMA TAMU ===
+  document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const nama = params.get("to");
+  const namaTamu = document.getElementById("namaTamu");
+
+  if (nama && namaTamu) {
+    // Bersihkan + jadi spasi dan decode nama
+    const namaFinal = decodeURIComponent(nama).replace(/\+/g, " ");
+    namaTamu.textContent = namaFinal;
+    namaTamu.classList.remove("hidden");
+  } else if (namaTamu) {
+    namaTamu.classList.add("hidden");
+  }
+});
+  
 document.addEventListener("DOMContentLoaded", () => {
   const openBtn = document.getElementById("openBtn");
   const cover = document.getElementById("cover");
