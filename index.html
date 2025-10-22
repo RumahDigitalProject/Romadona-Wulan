@@ -763,23 +763,82 @@
   margin-bottom: 10px;
   color: #fff;
   font-style: italic;
+/* === YOUR WISHES SECTION === */
+.section-wishes {
+  background: linear-gradient(180deg, #fff7e0 0%, #fff 100%);
+  padding: 80px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Header */
+.wishes-header h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 46px;
+  color: #c18400;
+  margin-bottom: 10px;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.wishes-header p {
+  font-size: 15px;
+  color: #7b1f26;
+  margin-bottom: 50px;
+}
+
+/* List container */
+.wishes-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Card */
+.wish-card {
+  background: rgba(255,255,255,0.9);
+  border-radius: 20px;
+  padding: 25px;
+  border: 2px solid rgba(243, 163, 2, 0.3);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.wish-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(243,163,2,0.25);
+}
+
+/* Text */
+.wish-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #444;
+  font-style: italic;
+  margin-bottom: 12px;
 }
 
 .wish-name {
   font-size: 14px;
-  color: #f3a302;
+  color: #c18400;
+  font-weight: 600;
   text-align: right;
 }
 
 /* Responsif */
-@media (max-width: 480px) {
-  .your-wishes-title {
-    font-size: 32px;
+@media (max-width: 600px) {
+  .wishes-header h2 {
+    font-size: 36px;
   }
-  .wish-box {
-    padding: 15px 18px;
+  .wish-card {
+    padding: 20px;
   }
 }
+
 
 /* === UCAPAN TERIMA KASIH === */
 #ucapan {
@@ -1061,32 +1120,36 @@
 </form>
 </section>
 
-<!-- === YOUR WISHES === -->
-<section class="your-wishes">
-  <h2 class="your-wishes-title">Your Wishes 💌</h2>
-  
-  <div class="wishes-container">
-    <div class="wish-box">
-      <p class="wish-text">“Selamat menempuh hidup baru, semoga langgeng dan bahagia selalu!”</p>
-      <p class="wish-name">— Fajar & Dina</p>
+<!-- === SECTION YOUR WISHES === -->
+<section class="section-wishes">
+  <div class="wishes-header">
+    <h2>💌 Your Wishes</h2>
+    <p>Ucapan hangat dari sahabat dan keluarga tercinta</p>
+  </div>
+
+  <div class="wishes-list">
+    <div class="wish-card">
+      <p class="wish-text">“Selamat menempuh hidup baru! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah.”</p>
+      <p class="wish-name">— Rani Putri</p>
     </div>
 
-    <div class="wish-box">
-      <p class="wish-text">“Semoga cinta kalian tumbuh makin kuat setiap harinya 💖.”</p>
-      <p class="wish-name">— Ayu Pratiwi</p>
+    <div class="wish-card">
+      <p class="wish-text">“Akhirnya bersatu juga! Semoga hari-harimu penuh cinta dan tawa 💖.”</p>
+      <p class="wish-name">— Dwi & Arif</p>
     </div>
 
-    <div class="wish-box">
-      <p class="wish-text">“Doa terbaik untuk kalian berdua, jadi keluarga sakinah mawaddah warahmah.”</p>
-      <p class="wish-name">— Budi Santoso</p>
+    <div class="wish-card">
+      <p class="wish-text">“Selamat ya! Semoga cinta kalian selalu tumbuh setiap harinya.”</p>
+      <p class="wish-name">— Yuliana</p>
     </div>
 
-    <div class="wish-box">
-      <p class="wish-text">“Akhirnya menikah juga! Selamat ya, semoga bahagia selamanya 🥰.”</p>
-      <p class="wish-name">— Tika Rahmawati</p>
+    <div class="wish-card">
+      <p class="wish-text">“Semoga Allah memberkahi pernikahan kalian berdua, langgeng sampai akhir hayat.”</p>
+      <p class="wish-name">— Bima Prasetyo</p>
     </div>
   </div>
 </section>
+
 
 <!-- MUSIK -->
   <audio id="bgMusic" loop preload="none">
