@@ -236,7 +236,6 @@
       }
     
     /* BACKGROUND KHUSUS HANYA UNTUK BAGIAN BISMILLAH SAMPAI PENGANTIN */
-}
 
     /* KONTEN */
     .invitation1 {
@@ -249,27 +248,14 @@
   background-repeat: repeat-y;
   background-size: cover;
   background-position: center;
-  background-color: #fff;
+  background-color:transparent;
   background-attachment: fixed;
   min-height: 100vh;
   text-align: center;
   overflow: hidden;
 }
 
-/* efek lapisan transparan di atas background */
-.invitation1::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.3); /* bisa kamu ubah jadi 0.2 biar lebih samar */
-  z-index: 1;
-}
 
-/* pastikan semua isi di atas overlay */
-.invitation1 > * {
-  position: relative;
-  z-index: 2;
-    }
     .bismillah {
       text-align: center;
       font-size: 18px;
