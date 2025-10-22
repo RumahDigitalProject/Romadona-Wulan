@@ -240,20 +240,23 @@
 
     /* KONTEN */
     #invitation {
-      background: #7b1f26 url('kembang.jpg') no-repeat center center;
-  background-size: cover;
-  background-attachment: fixed; /* 🎯 INI YANG BIKIN BACKGROUND DIAM */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  z-index: 1;
   padding-top: 40px;
   padding-left: 20px;
   padding-right: 20px;
   padding-bottom: 40px;
-  
     }
+  .bgn-static {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('dasar.jpg') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  z-index: -1;
+  pointer-events: none;
+  }
     .bismillah {
       text-align: center;
       font-size: 18px;
@@ -835,6 +838,7 @@
 </div>
   
 <section id="invitation" style="position: relative; text-align: center;">
+<div class="bgn-static"></div> <!-- 🎯 background diam hanya untuk section ini -->
   <!-- Tulisan di atas box putih -->
   <p class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
   <p class="salam-undangan">
