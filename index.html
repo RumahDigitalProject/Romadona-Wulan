@@ -1145,68 +1145,40 @@
 </div>
 </section>
 
-<!-- RSVP Section -->
-<section data-aos="fade-up" id="rsvp">
-<h2>Wishes</h2>
-<form id="rsvpForm">
-<div class="form-wrapper" data-aos="fade-up" data-aos-delay="200">
-<input id="nama" placeholder="Tulis namamu di sini..." required="" type="text"/>
-<textarea id="pesanUcapan" placeholder="Berikan ucapan atau doa..." required=""></textarea>
-<select id="kehadiran" required="">
-<option disabled="" hidden="" selected="" value="">Pilih status kehadiran...</option>
-<option value="Hadir">Hadir</option>
-<option value="Tidak Hadir">Tidak Hadir</option>
-</select>
-<button type="submit">Kirim</button>
-</div>
-</form>
-</section>
+<section id="wishes" class="py-10 bg-[#faf9f7]">
+  <div class="max-w-2xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-6 text-gray-800">Ucapan & Kehadiran</h2>
 
-<!-- === SECTION YOUR WISHES === -->
-<section class="section-wishes">
-  <div class="wishes-header">
-    <h2>💌 Your Wishes</h2>
-    <p>Ucapan hangat dari sahabat dan keluarga</p>
-  </div>
+    <!-- FORM -->
+    <div class="bg-white rounded-2xl shadow-md p-6 mb-10 border border-gray-100">
+      <form id="wishForm" class="space-y-4">
+        <input type="text" id="nama" placeholder="Nama kamu" required
+          class="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-300 outline-none" />
 
-  <!-- KOTAK UTAMA -->
-  <div class="wishes-box" id="wishesBox">
-    <div class="wish-card">
-      <p class="wish-text">“Selamat menempuh hidup baru! Semoga jadi keluarga sakinah mawaddah warahmah.”</p>
-      <p class="wish-name">— Rani Putri</p>
+        <select id="kehadiran" required
+          class="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-300 outline-none">
+          <option value="" disabled selected>Konfirmasi kehadiran</option>
+          <option value="Hadir">Hadir</option>
+          <option value="Tidak Hadir">Tidak Hadir</option>
+          <option value="Belum Pasti">Belum Pasti</option>
+        </select>
+
+        <textarea id="ucapan" rows="3" placeholder="Tulis ucapan terbaikmu..."
+          class="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-300 outline-none"
+          required></textarea>
+
+        <button type="submit"
+          class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 rounded-xl shadow-md transition duration-300">
+          Kirim Ucapan 💌
+        </button>
+      </form>
     </div>
 
-    <div class="wish-card">
-      <p class="wish-text">“Akhirnya menikah juga! Semoga cinta kalian semakin tumbuh setiap hari 💖.”</p>
-      <p class="wish-name">— Arif & Dwi</p>
-    </div>
-
-    <div class="wish-card">
-      <p class="wish-text">“Doa terbaik untuk kalian berdua. Semoga rumah tangga penuh kebahagiaan dan rezeki.”</p>
-      <p class="wish-name">— Yuliana</p>
-    </div>
-
-    <!-- Tambahan ucapan (disembunyikan dulu) -->
-    <div class="extra-wishes">
-      <div class="wish-card">
-        <p class="wish-text">“Selamat menempuh perjalanan baru bersama pasangan hidup. Semoga bahagia selamanya.”</p>
-        <p class="wish-name">— Bima Prasetyo</p>
-      </div>
-
-      <div class="wish-card">
-        <p class="wish-text">“Langgeng selalu ya! Semoga cinta kalian makin kuat dari hari ke hari.”</p>
-        <p class="wish-name">— Aulia & Rendra</p>
-      </div>
-
-      <div class="wish-card">
-        <p class="wish-text">“Pernikahan kalian adalah awal kisah indah yang diberkahi Allah SWT 🤍.”</p>
-        <p class="wish-name">— Sarah Fauziah</p>
-      </div>
-    </div>
-
-    <button class="btn-more" id="btnMore">Lihat Selengkapnya ↓</button>
+    <!-- DAFTAR UCAPAN -->
+    <div id="wishList" class="space-y-4"></div>
   </div>
 </section>
+
 
 
 
@@ -1257,51 +1229,7 @@
 
 <script>
 
-  // === NAMA TAMU ===
-  document.addEventListener("DOMContentLoaded", () => {
-  const params = new URLSearchParams(window.location.search);
-  const nama = params.get("to");
-  const namaTamu = document.getElementById("namaTamu");
 
-  if (nama && namaTamu) {
-    // Bersihkan + jadi spasi dan decode nama
-    const namaFinal = decodeURIComponent(nama).replace(/\+/g, " ");
-    namaTamu.textContent = namaFinal;
-    namaTamu.classList.remove("hidden");
-  } else if (namaTamu) {
-    namaTamu.classList.add("hidden");
-  }
-});
-
-// === SHEET ===
-document.getElementById("rsvpForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  // Ambil data dari input form
-  const data = {
-    nama: document.getElementById("nama").value.trim(),
-    ucapan: document.getElementById("pesanUcapan").value.trim(),
-    kehadiran: document.getElementById("kehadiran").value
-  };
-
-  // Kirim ke Google Apps Script (ganti URL di bawah!)
-  fetch("https://script.google.com/macros/s/AKfycbyfDUY2BUCM4OvgUVK-OaMDdcCj4Fq_SiewOD_JyI6JfipInok9ExDbm271EpNulO7v/exec", {
-    method: "POST",
-    mode: "no-cors",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-  })
-  .then(() => {
-    alert("Terima kasih! Ucapanmu sudah terkirim 💌");
-    document.getElementById("rsvpForm").reset(); // kosongkan form
-  })
-  .catch(err => {
-    console.error("Gagal mengirim ucapan:", err);
-    alert("Ups! Gagal mengirim ucapan 😢. Coba lagi ya.");
-  });
-});
   
 document.addEventListener("DOMContentLoaded", () => {
   const openBtn = document.getElementById("openBtn");
@@ -1368,39 +1296,7 @@ document.addEventListener("DOMContentLoaded", () => {
     safePause();
   });
 
-  // === RSVP form (jika ada) ===
-  const form = document.getElementById("rsvpForm");
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const nama = document.getElementById("nama")?.value.trim() || "";
-      const ucapan = document.getElementById("pesanUcapan")?.value.trim() || "";
-      const kehadiran = document.getElementById("kehadiran")?.value || "";
 
-      if (!nama || !ucapan || !kehadiran) {
-        alert("Isi semua kolom terlebih dahulu!");
-        return;
-      }
-
-      const nomorWhatsApp = "6285706889273";
-      const pesan = `Halo, saya *${nama}*\nUcapan: ${ucapan}\nKehadiran: *${kehadiran}*`;
-      const url = `https://wa.me/${nomorWhatsApp}?text=${encodeURIComponent(pesan)}`;
-      window.open(url, "_blank");
-    });
-  }
-
-  // === WISH BOX ===
-  document.getElementById("btnMore").addEventListener("click", function() {
-  const box = document.getElementById("wishesBox");
-  box.classList.toggle("show-more");
-
-  // ubah teks tombol
-  if (box.classList.contains("show-more")) {
-    this.textContent = "Tutup ↑";
-  } else {
-    this.textContent = "Lihat Selengkapnya ↓";
-  }
-});
   
   // === Countdown (safe) ===
   function countdown() {
