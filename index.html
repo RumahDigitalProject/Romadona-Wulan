@@ -1272,6 +1272,36 @@
     namaTamu.classList.add("hidden");
   }
 });
+
+// === SHEET ===
+document.getElementById("rsvpForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  // Ambil data dari input form
+  const data = {
+    nama: document.getElementById("nama").value.trim(),
+    ucapan: document.getElementById("pesanUcapan").value.trim(),
+    kehadiran: document.getElementById("kehadiran").value
+  };
+
+  // Kirim ke Google Apps Script (ganti URL di bawah!)
+  fetch("https://script.google.com/macros/s/AKfycbyfDUY2BUCM4OvgUVK-OaMDdcCj4Fq_SiewOD_JyI6JfipInok9ExDbm271EpNulO7v/exec", {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+  .then(() => {
+    alert("Terima kasih! Ucapanmu sudah terkirim 💌");
+    document.getElementById("rsvpForm").reset(); // kosongkan form
+  })
+  .catch(err => {
+    console.error("Gagal mengirim ucapan:", err);
+    alert("Ups! Gagal mengirim ucapan 😢. Coba lagi ya.");
+  });
+});
   
 document.addEventListener("DOMContentLoaded", () => {
   const openBtn = document.getElementById("openBtn");
