@@ -734,145 +734,65 @@
   text-align: center;
 }
 
-/* === YOUR WISHES === */
-.your-wishes {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(8px);
-  border-top: 2px solid rgba(243, 163, 2, 0.3);
-  border-bottom: 2px solid rgba(243, 163, 2, 0.3);
-  padding: 60px 20px;
-  text-align: center;
-  color: #fff;
-  position: relative;
-}
-
-.your-wishes-title {
-  font-family: 'Great Vibes', cursive;
-  font-size: 38px;
-  color: #f3a302;
-  margin-bottom: 40px;
-  text-shadow: 0 0 10px rgba(243, 163, 2, 0.4);
-}
-
-.wishes-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 25px;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.wish-box {
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(243, 163, 2, 0.5);
-  border-radius: 16px;
-  padding: 20px 25px;
-  color: #fff;
-  width: 100%;
-  text-align: left;
-  box-shadow: 0 0 20px rgba(243, 163, 2, 0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.wish-box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 25px rgba(243, 163, 2, 0.3);
-}
-
-.wish-text {
-  font-size: 15px;
-  line-height: 1.7;
-  margin-bottom: 10px;
-  color: #fff;
-  font-style: italic;
-}
-/* === YOUR WISHES SECTION === */
 .section-wishes {
-  background: linear-gradient(180deg, #fff7e0 0%, #fff 100%);
-  padding: 80px 20px;
   text-align: center;
-  position: relative;
+  padding: 60px 0;
+  background: #fffafc;
+  overflow: hidden;
 }
 
 .wishes-header h2 {
-  font-family: 'Great Vibes', cursive;
-  font-size: 46px;
-  color: #c18400;
-  margin-bottom: 10px;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 .wishes-header p {
-  font-size: 15px;
-  color: #7b1f26;
-  margin-bottom: 40px;
+  color: #888;
+  margin-bottom: 2rem;
 }
 
-/* KOTAK UTAMA */
-.wishes-box {
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 30px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-  padding: 30px 25px;
-  max-width: 800px;
-  margin: 0 auto;
+/* SLIDER */
+.wishes-slider {
+  width: 100%;
   overflow: hidden;
-  transition: all 0.5s ease;
+  position: relative;
+}
+
+.wishes-track {
+  display: flex;
+  gap: 2rem;
+  animation: scroll 40s linear infinite;
 }
 
 .wish-card {
-  background: #ffffff;
-  border-left: 4px solid #f3a302;
+  flex: 0 0 auto;
+  background: white;
   border-radius: 12px;
-  padding: 18px 20px;
-  margin-bottom: 20px;
-  text-align: left;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  padding: 20px;
+  min-width: 300px;
+  max-width: 320px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .wish-text {
-  font-size: 10px;
-  line-height: 1.6;
-  color: #444;
   font-style: italic;
+  color: #555;
+  margin-bottom: 10px;
 }
 
 .wish-name {
-  font-size: 14px;
-  color: #c18400;
-  text-align: right;
-  margin-top: 8px;
-  font-weight: 600;
-}
-
-/* Tambahan ucapan disembunyikan */
-.extra-wishes {
-  display: none;
-  opacity: 0;
-  transition: all 0.5s ease;
-}
-
-/* Tombol */
-.btn-more {
-  background: #f3a302;
-  border: none;
-  color: #fff;
-  font-size: 14px;
   font-weight: bold;
-  border-radius: 30px;
-  padding: 10px 25px;
-  cursor: pointer;
-  transition: background 0.3s ease;
+  color: #d46a92;
 }
 
-.btn-more:hover {
-  background: #d98c00;
-}
-
-/* Ketika aktif (lihat selengkapnya terbuka) */
-.wishes-box.show-more .extra-wishes {
-  display: block;
-  opacity: 1;
+/* Animasi berjalan dari kanan ke kiri */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 
@@ -1169,25 +1089,25 @@
     <p>Ucapan hangat dari sahabat dan keluarga</p>
   </div>
 
-  <!-- KOTAK UTAMA -->
-  <div class="wishes-box" id="wishesBox">
-    <div class="wish-card">
-      <p class="wish-text">“Selamat menempuh hidup baru! Semoga jadi keluarga sakinah mawaddah warahmah.”</p>
-      <p class="wish-name">— Rani Putri</p>
-    </div>
+  <!-- SLIDER -->
+  <div class="wishes-slider">
+    <div class="wishes-track">
+      <!-- Setiap wish-card bisa kamu tambah manual di sini -->
+      <div class="wish-card">
+        <p class="wish-text">“Selamat menempuh hidup baru! Semoga jadi keluarga sakinah mawaddah warahmah.”</p>
+        <p class="wish-name">— Rani Putri</p>
+      </div>
 
-    <div class="wish-card">
-      <p class="wish-text">“Akhirnya menikah juga! Semoga cinta kalian semakin tumbuh setiap hari 💖.”</p>
-      <p class="wish-name">— Arif & Dwi</p>
-    </div>
+      <div class="wish-card">
+        <p class="wish-text">“Akhirnya menikah juga! Semoga cinta kalian semakin tumbuh setiap hari 💖.”</p>
+        <p class="wish-name">— Arif & Dwi</p>
+      </div>
 
-    <div class="wish-card">
-      <p class="wish-text">“Doa terbaik untuk kalian berdua. Semoga rumah tangga penuh kebahagiaan dan rezeki.”</p>
-      <p class="wish-name">— Yuliana</p>
-    </div>
+      <div class="wish-card">
+        <p class="wish-text">“Doa terbaik untuk kalian berdua. Semoga rumah tangga penuh kebahagiaan dan rezeki.”</p>
+        <p class="wish-name">— Yuliana</p>
+      </div>
 
-    <!-- Tambahan ucapan (disembunyikan dulu) -->
-    <div class="extra-wishes">
       <div class="wish-card">
         <p class="wish-text">“Selamat menempuh perjalanan baru bersama pasangan hidup. Semoga bahagia selamanya.”</p>
         <p class="wish-name">— Bima Prasetyo</p>
@@ -1202,9 +1122,18 @@
         <p class="wish-text">“Pernikahan kalian adalah awal kisah indah yang diberkahi Allah SWT 🤍.”</p>
         <p class="wish-name">— Sarah Fauziah</p>
       </div>
-    </div>
 
-    <button class="btn-more" id="btnMore">Lihat Selengkapnya ↓</button>
+      <!-- Duplikat isi biar loopingnya mulus -->
+      <div class="wish-card">
+        <p class="wish-text">“Selamat menempuh hidup baru! Semoga jadi keluarga sakinah mawaddah warahmah.”</p>
+        <p class="wish-name">— Rani Putri</p>
+      </div>
+
+      <div class="wish-card">
+        <p class="wish-text">“Akhirnya menikah juga! Semoga cinta kalian semakin tumbuh setiap hari 💖.”</p>
+        <p class="wish-name">— Arif & Dwi</p>
+      </div>
+    </div>
   </div>
 </section>
 
