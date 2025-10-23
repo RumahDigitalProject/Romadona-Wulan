@@ -986,153 +986,74 @@
   transform: scale(1.15);
 }
 
-/* === BAGIAN DASAR === */
 body {
+  font-family: 'Poppins', sans-serif;
+  background: #faf7f2;
   margin: 0;
-  font-family: "Poppins", sans-serif;
-  background-color: #faf9f7;
+  padding: 0;
 }
 
 .wishes-section {
-  background: #faf9f7;
-  padding: 80px 20px;
+  max-width: 600px;
+  margin: 50px auto;
+  background: white;
+  padding: 25px 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-.wishes-container {
-  max-width: 700px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.wishes-title {
-  font-size: 2.4rem;
-  color: #444;
-  margin-bottom: 30px;
-  font-family: "Playfair Display", serif;
-}
-
-/* === FORM === */
-.wishes-form-card {
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-  padding: 30px;
-  margin-bottom: 50px;
-  border: 1px solid #eee;
-  transition: all 0.3s ease;
-}
-
-.wishes-form-card:hover {
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-#wishForm {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-#wishForm input,
-#wishForm select,
-#wishForm textarea {
-  padding: 12px 15px;
+.wish-form input,
+.wish-form select,
+.wish-form textarea {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
   border: 1px solid #ddd;
-  border-radius: 10px;
-  font-size: 1rem;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  border-radius: 8px;
+  font-size: 14px;
 }
 
-#wishForm input:focus,
-#wishForm select:focus,
-#wishForm textarea:focus {
-  outline: none;
-  border-color: #e5a4a4;
-  box-shadow: 0 0 0 3px rgba(229, 164, 164, 0.2);
-}
-
-#wishForm button {
-  background: linear-gradient(135deg, #e5a4a4, #eac9c1);
-  color: #fff;
-  font-weight: 600;
-  font-size: 1rem;
-  border: none;
-  border-radius: 10px;
+.wish-form button {
+  width: 100%;
   padding: 12px;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
-}
-
-#wishForm button:hover {
-  background: linear-gradient(135deg, #e09b9b, #e0b4aa);
-  transform: translateY(-2px);
-}
-
-/* === DAFTAR UCAPAN === */
-.wish-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  text-align: left;
-}
-
-.wish-card {
-  background: #fff;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  padding: 20px 25px;
-  border-left: 5px solid #e5a4a4;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s forwards;
-}
-
-.wish-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.wish-name {
+  background-color: #b27b62;
+  border: none;
+  color: white;
   font-weight: 600;
-  font-size: 1.1rem;
-  color: #333;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-.wish-status {
-  font-size: 0.9rem;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-weight: 500;
+.wish-form button:hover {
+  background-color: #96654e;
 }
 
-.wish-status.hadir {
-  background: #d1fae5;
-  color: #065f46;
+.result-box {
+  margin-top: 30px;
 }
 
-.wish-status.tidak {
-  background: #fee2e2;
-  color: #991b1b;
+.wish-item {
+  background: #fff5ef;
+  border: 1px solid #f1d9c6;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 10px;
 }
 
-.wish-status.belum {
-  background: #fef3c7;
-  color: #92400e;
+.wish-item strong {
+  color: #b27b62;
 }
 
-.wish-text {
-  font-style: italic;
-  color: #555;
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
 }
 
-/* === ANIMASI === */
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
+
 
 
   </style>
@@ -1292,32 +1213,30 @@ body {
 </div>
 </section>
 
-  <section id="wishes" class="wishes-section">
-    <div class="wishes-container">
-      <h2 class="wishes-title">Ucapan & Kehadiran</h2>
 
-      <!-- FORM -->
-      <div class="wishes-form-card">
-        <form id="wishForm">
-          <input type="text" id="nama" placeholder="Nama kamu" required>
-          
-          <select id="kehadiran" required>
-            <option value="" disabled selected>Konfirmasi kehadiran</option>
-            <option value="Hadir">Hadir</option>
-            <option value="Tidak Hadir">Tidak Hadir</option>
-            <option value="Belum Pasti">Belum Pasti</option>
-          </select>
-          
-          <textarea id="ucapan" placeholder="Tulis ucapan terbaikmu..." rows="3" required></textarea>
+  <section class="wishes-section">
+    <h2>💌 Kirim Ucapan & Konfirmasi Kehadiran</h2>
+    <form id="wishForm" class="wish-form">
+      <input type="text" id="nama" placeholder="Nama kamu" required>
+      <select id="kehadiran" required>
+        <option value="" disabled selected>Apakah kamu akan hadir?</option>
+        <option value="Hadir">Hadir</option>
+        <option value="Tidak Hadir">Tidak Hadir</option>
+      </select>
+      <textarea id="ucapan" placeholder="Tulis ucapanmu..." required></textarea>
+      <button type="submit" id="submitBtn">Kirim Ucapan 💌</button>
+    </form>
 
-          <button type="submit">Kirim Ucapan 💌</button>
-        </form>
-      </div>
-
-      <!-- LIST UCAPAN -->
-      <div id="wishList" class="wish-list"></div>
+    <div class="result-box">
+      <h3>Ucapan Tamu 🥰</h3>
+      <div id="wishContainer" class="wish-container"></div>
     </div>
   </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
 
 
 
@@ -1368,60 +1287,73 @@ body {
 
 
 <script>
-// Ganti dengan URL Web App Google Apps Script kamu
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyWrQ6lf4R81g4nJbaDm6nOvrC9EW2qoY7jmvAofR0H7cdVkEBepW9qTP3uQmDpYu8l/exec";
+// Ganti URL ini dengan URL Web App kamu
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw1H1pFRmp3W361oDJuQ8QT44whA1CvEyxQwtRUUmyCUwTK8JDW2FuZ3u9-b3dQ4K7x/exec";
 
-// Ambil & tampilkan data ucapan
-async function loadWishes() {
-  const res = await fetch(SCRIPT_URL);
-  const data = await res.json();
-  const list = document.getElementById("wishList");
-  list.innerHTML = "";
+const form = document.getElementById("wishForm");
+const container = document.getElementById("wishContainer");
+const submitBtn = document.getElementById("submitBtn");
 
-  data.forEach(wish => {
-    const card = document.createElement("div");
-    card.className = "wish-card";
-
-    const statusClass =
-      wish.kehadiran === "Hadir"
-        ? "hadir"
-        : wish.kehadiran === "Tidak Hadir"
-        ? "tidak"
-        : "belum";
-
-    card.innerHTML = `
-      <div class="wish-header">
-        <span class="wish-name">${wish.nama}</span>
-        <span class="wish-status ${statusClass}">${wish.kehadiran}</span>
-      </div>
-      <div class="wish-text">“${wish.ucapan}”</div>
-    `;
-    list.appendChild(card);
-  });
-}
-
-// Kirim data ke Google Sheet
-document.getElementById("wishForm").addEventListener("submit", async (e) => {
+// Kirim data ke Google Sheets
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const nama = document.getElementById("nama").value.trim();
-  const ucapan = document.getElementById("ucapan").value.trim();
-  const kehadiran = document.getElementById("kehadiran").value;
+  submitBtn.disabled = true;
+  submitBtn.innerText = "Mengirim...";
 
-  if (!nama || !ucapan || !kehadiran) return alert("Harap isi semua kolom.");
+  const data = {
+    nama: document.getElementById("nama").value.trim(),
+    kehadiran: document.getElementById("kehadiran").value,
+    ucapan: document.getElementById("ucapan").value.trim(),
+  };
 
-  await fetch(SCRIPT_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ nama, ucapan, kehadiran }),
-  });
+  try {
+    const res = await fetch(SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
 
-  document.getElementById("wishForm").reset();
-  loadWishes();
+    const result = await res.json();
+    if (result.result === "success") {
+      alert("Terima kasih, ucapanmu sudah terkirim 💖");
+      form.reset();
+      loadWishes();
+    } else {
+      alert("Terjadi kesalahan: " + result.message);
+    }
+  } catch (err) {
+    alert("Gagal mengirim: " + err.message);
+  }
+
+  submitBtn.disabled = false;
+  submitBtn.innerText = "Kirim Ucapan 💌";
 });
 
-// Load awal & update otomatis setiap 10 detik
+// Ambil dan tampilkan data
+async function loadWishes() {
+  try {
+    const res = await fetch(SCRIPT_URL);
+    const data = await res.json();
+
+    container.innerHTML = "";
+    data.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "wish-item fade-in";
+      div.innerHTML = `
+        <strong>${item.nama}</strong> (${item.kehadiran})<br>
+        <p>${item.ucapan}</p>
+      `;
+      container.appendChild(div);
+    });
+  } catch (err) {
+    console.error("Gagal memuat data:", err);
+  }
+}
+
+// Jalankan otomatis saat halaman dibuka
 loadWishes();
-setInterval(loadWishes, 10000);
+setInterval(loadWishes, 10000); // refresh tiap 10 detik
+
 
 
   
