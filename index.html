@@ -987,74 +987,75 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
-  background: #faf7f2;
-  margin: 0;
-  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background: #fff8fa;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
 }
 
-.wishes-section {
-  max-width: 600px;
-  margin: 50px auto;
+.wishes-container {
+  max-width: 500px;
+  width: 100%;
   background: white;
+  border-radius: 20px;
   padding: 25px 30px;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
 }
 
-.wish-form input,
-.wish-form select,
-.wish-form textarea {
-  width: 100%;
-  margin-bottom: 15px;
+h2, h3 {
+  text-align: center;
+  color: #d63384;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input, select, textarea {
   padding: 10px;
-  border: 1px solid #ddd;
   border-radius: 8px;
-  font-size: 14px;
+  border: 1px solid #ddd;
+  font-size: 15px;
 }
 
-.wish-form button {
-  width: 100%;
-  padding: 12px;
-  background-color: #b27b62;
-  border: none;
+button {
+  padding: 10px;
+  background-color: #d63384;
   color: white;
-  font-weight: 600;
+  border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  font-size: 16px;
+  transition: background 0.2s;
 }
 
-.wish-form button:hover {
-  background-color: #96654e;
+button:hover {
+  background-color: #b12a6f;
 }
 
-.result-box {
-  margin-top: 30px;
+#wishesList {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .wish-item {
-  background: #fff5ef;
-  border: 1px solid #f1d9c6;
+  border: 1px solid #eee;
   border-radius: 12px;
-  padding: 12px 16px;
-  margin-bottom: 10px;
+  padding: 10px 15px;
+  background: #fff1f7;
 }
 
-.wish-item strong {
-  color: #b27b62;
+.wish-item h4 {
+  margin: 0;
+  color: #b12a6f;
 }
-
-.fade-in {
-  animation: fadeIn 0.5s ease-in;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-
 
   </style>
 </head>
@@ -1214,28 +1215,30 @@ body {
 </section>
 
 
-  <section class="wishes-section">
-    <h2>💌 Kirim Ucapan & Konfirmasi Kehadiran</h2>
-    <form id="wishForm" class="wish-form">
+    <section class="wishes-container">
+    <h2>💌 Kirim Ucapan</h2>
+
+    <form id="wishesForm">
       <input type="text" id="nama" placeholder="Nama kamu" required>
       <select id="kehadiran" required>
-        <option value="" disabled selected>Apakah kamu akan hadir?</option>
+        <option value="">Konfirmasi Kehadiran</option>
         <option value="Hadir">Hadir</option>
         <option value="Tidak Hadir">Tidak Hadir</option>
       </select>
-      <textarea id="ucapan" placeholder="Tulis ucapanmu..." required></textarea>
-      <button type="submit" id="submitBtn">Kirim Ucapan 💌</button>
+      <textarea id="ucapan" placeholder="Tulis ucapanmu di sini..." required></textarea>
+      <button type="submit">Kirim Ucapan 💖</button>
     </form>
 
-    <div class="result-box">
-      <h3>Ucapan Tamu 🥰</h3>
-      <div id="wishContainer" class="wish-container"></div>
-    </div>
+    <h3>Ucapan dari Tamu:</h3>
+    <div id="wishesList"></div>
   </section>
 
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
+
   <script src="script.js"></script>
-</body>
-</html>
+
 
 
 
@@ -1287,68 +1290,59 @@ body {
 
 
 <script>
-// Ganti URL ini dengan URL Web App kamu
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwgP6-IRbzzeGIexwarURA_mihv_7E4KciQZWrbBgLAerPTv8zxhSNZxbvVCdpV62E6/exec";
+// Firebase config (isi dengan punyamu)
+const firebaseConfig = {
+  apiKey: "ISI_API_KEY_KAMU",
+  authDomain: "ISI_AUTH_DOMAIN_KAMU",
+  databaseURL: "ISI_DATABASE_URL_KAMU",
+  projectId: "ISI_PROJECT_ID_KAMU",
+  storageBucket: "ISI_STORAGE_BUCKET_KAMU",
+  messagingSenderId: "ISI_MESSAGING_ID_KAMU",
+  appId: "ISI_APP_ID_KAMU"
+};
 
-const form = document.getElementById("wishForm");
-const container = document.getElementById("wishContainer");
-const submitBtn = document.getElementById("submitBtn");
+// Inisialisasi Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database().ref("wishes");
 
-// Kirim data ke Google Sheets
-form.addEventListener("submit", async (e) => {
+// Fungsi kirim ucapan
+document.getElementById("wishesForm").addEventListener("submit", (e) => {
   e.preventDefault();
-  submitBtn.disabled = true;
-  submitBtn.innerText = "Mengirim...";
 
-  const data = {
-    nama: document.getElementById("nama").value.trim(),
-    kehadiran: document.getElementById("kehadiran").value,
-    ucapan: document.getElementById("ucapan").value.trim(),
-  };
+  const nama = document.getElementById("nama").value;
+  const kehadiran = document.getElementById("kehadiran").value;
+  const ucapan = document.getElementById("ucapan").value;
 
-  try {
-    const res = await fetch(SCRIPT_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
+  db.push({
+    nama: nama,
+    kehadiran: kehadiran,
+    ucapan: ucapan,
+    waktu: Date.now()
+  });
 
-    const result = await res.json();
-    if (result.result === "success") {
-      alert("Terima kasih, ucapanmu sudah terkirim 💖");
-      form.reset();
-      loadWishes();
-    } else {
-      alert("Terjadi kesalahan: " + result.message);
-    }
-  } catch (err) {
-    alert("Gagal mengirim: " + err.message);
-  }
-
-  submitBtn.disabled = false;
-  submitBtn.innerText = "Kirim Ucapan 💌";
+  document.getElementById("wishesForm").reset();
 });
 
-// Ambil dan tampilkan data
-async function loadWishes() {
-  try {
-    const res = await fetch(SCRIPT_URL);
-    const data = await res.json();
+// Menampilkan ucapan realtime
+db.on("value", (snapshot) => {
+  const list = document.getElementById("wishesList");
+  list.innerHTML = "";
 
-    container.innerHTML = "";
-    data.forEach(item => {
+  const data = snapshot.val();
+  if (data) {
+    const entries = Object.values(data).reverse();
+    entries.forEach(item => {
       const div = document.createElement("div");
-      div.className = "wish-item fade-in";
+      div.className = "wish-item";
       div.innerHTML = `
-        <strong>${item.nama}</strong> (${item.kehadiran})<br>
+        <h4>${item.nama} <small>(${item.kehadiran})</small></h4>
         <p>${item.ucapan}</p>
       `;
-      container.appendChild(div);
+      list.appendChild(div);
     });
-  } catch (err) {
-    console.error("Gagal memuat data:", err);
   }
-}
+});
+
 
 // Jalankan otomatis saat halaman dibuka
 loadWishes();
