@@ -1218,137 +1218,128 @@
 </div>
 </footer>
 
-
-
 <script>
-// === HASIL UCAPAN ===
-  const slider = document.getElementById('wishesSlider');
-  const track = slider.querySelector('.wishes-track');
+document.addEventListener("DOMContentLoaded", () => {
+  // ============================================================
+  // === HASIL UCAPAN (SLIDER BERGERAK + GESER MANUAL) ===
+  // ============================================================
+  const slider = document.getElementById("wishesSlider");
+  const track = slider?.querySelector(".wishes-track");
+  if (slider && track) {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    let touchStartX = 0;
 
-  let isDown = false;
-  let startX;
-  let scrollLeft;
+    // Drag pakai mouse
+    slider.addEventListener("mousedown", (e) => {
+      isDown = true;
+      track.style.animationPlayState = "paused";
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    });
+    slider.addEventListener("mouseleave", () => {
+      isDown = false;
+      track.style.animationPlayState = "running";
+    });
+    slider.addEventListener("mouseup", () => {
+      isDown = false;
+      track.style.animationPlayState = "running";
+    });
+    slider.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      slider.scrollLeft = scrollLeft - walk;
+    });
 
-  // Geser manual (drag)
-  slider.addEventListener('mousedown', (e) => {
-    isDown = true;
-    track.style.animationPlayState = 'paused';
-    startX = e.pageX - slider.offsetLeft;
-    scrollLeft = slider.scrollLeft;
-  });
+    // Geser pakai sentuhan (HP)
+    slider.addEventListener("touchstart", (e) => {
+      touchStartX = e.touches[0].clientX;
+      track.style.animationPlayState = "paused";
+    });
+    slider.addEventListener("touchend", () => {
+      track.style.animationPlayState = "running";
+    });
+    slider.addEventListener("touchmove", (e) => {
+      const touchMoveX = e.touches[0].clientX;
+      const move = touchStartX - touchMoveX;
+      slider.scrollLeft += move;
+    });
+  }
 
-  slider.addEventListener('mouseleave', () => {
-    isDown = false;
-    track.style.animationPlayState = 'running';
-  });
-
-  slider.addEventListener('mouseup', () => {
-    isDown = false;
-    track.style.animationPlayState = 'running';
-  });
-
-  slider.addEventListener('mousemove', (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - slider.offsetLeft;
-    const walk = (x - startX) * 1.5; // kecepatan drag
-    slider.scrollLeft = scrollLeft - walk;
-  });
-
-  // Support swipe di HP
-  let touchStartX = 0;
-  slider.addEventListener('touchstart', (e) => {
-    touchStartX = e.touches[0].clientX;
-    track.style.animationPlayState = 'paused';
-  });
-  slider.addEventListener('touchend', () => {
-    track.style.animationPlayState = 'running';
-  });
-  slider.addEventListener('touchmove', (e) => {
-    const touchMoveX = e.touches[0].clientX;
-    const move = touchStartX - touchMoveX;
-    slider.scrollLeft += move;
-  });
-  
-  // === NAMA TAMU ===
-  document.addEventListener("DOMContentLoaded", () => {
+  // ============================================================
+  // === NAMA TAMU (AMBIL DARI URL) ===
+  // ============================================================
   const params = new URLSearchParams(window.location.search);
   const nama = params.get("to");
   const namaTamu = document.getElementById("namaTamu");
-
   if (nama && namaTamu) {
-    // Bersihkan + jadi spasi dan decode nama
     const namaFinal = decodeURIComponent(nama).replace(/\+/g, " ");
     namaTamu.textContent = namaFinal;
     namaTamu.classList.remove("hidden");
   } else if (namaTamu) {
     namaTamu.classList.add("hidden");
   }
-});
 
-// === SHEET ===
-document.getElementById("rsvpForm").addEventListener("submit", function(e) {
-  e.preventDefault();
+  // ============================================================
+  // === RSVP KE GOOGLE SHEET ===
+  // ============================================================
+  const sheetForm = document.getElementById("rsvpForm");
+  if (sheetForm) {
+    sheetForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const data = {
+        nama: document.getElementById("nama").value.trim(),
+        ucapan: document.getElementById("pesanUcapan").value.trim(),
+        kehadiran: document.getElementById("kehadiran").value,
+      };
+      fetch("https://script.google.com/macros/s/AKfycbyfDUY2BUCM4OvgUVK-OaMDdcCj4Fq_SiewOD_JyI6JfipInok9ExDbm271EpNulO7v/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+        .then(() => {
+          alert("Terima kasih! Ucapanmu sudah terkirim 💌");
+          sheetForm.reset();
+        })
+        .catch((err) => {
+          console.error("Gagal mengirim ucapan:", err);
+          alert("Ups! Gagal mengirim ucapan 😢. Coba lagi ya.");
+        });
+    });
+  }
 
-  // Ambil data dari input form
-  const data = {
-    nama: document.getElementById("nama").value.trim(),
-    ucapan: document.getElementById("pesanUcapan").value.trim(),
-    kehadiran: document.getElementById("kehadiran").value
-  };
-
-  // Kirim ke Google Apps Script (ganti URL di bawah!)
-  fetch("https://script.google.com/macros/s/AKfycbyfDUY2BUCM4OvgUVK-OaMDdcCj4Fq_SiewOD_JyI6JfipInok9ExDbm271EpNulO7v/exec", {
-    method: "POST",
-    mode: "no-cors",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-  })
-  .then(() => {
-    alert("Terima kasih! Ucapanmu sudah terkirim 💌");
-    document.getElementById("rsvpForm").reset(); // kosongkan form
-  })
-  .catch(err => {
-    console.error("Gagal mengirim ucapan:", err);
-    alert("Ups! Gagal mengirim ucapan 😢. Coba lagi ya.");
-  });
-});
-  
-document.addEventListener("DOMContentLoaded", () => {
+  // ============================================================
+  // === BUKA UNDANGAN (COVER, MUSIK, MENU) ===
+  // ============================================================
   const openBtn = document.getElementById("openBtn");
   const cover = document.getElementById("cover");
-  // cari invitation baik id atau class (robust)
   const invitation = document.getElementById("invitation1") || document.querySelector(".invitation1");
   const menu = document.getElementById("menuNavigasi");
   const bgMusic = document.getElementById("bgMusic");
-  let timer;
-  let isOpened = false; // status: apakah user sudah membuka undangan
+  let isOpened = false;
 
-  // safe play/pause
   function safePlay() {
     if (!bgMusic) return;
     const p = bgMusic.play();
-    if (p !== undefined) p.catch(err => console.warn("Play ditolak:", err));
+    if (p !== undefined) p.catch((err) => console.warn("Play ditolak:", err));
   }
   function safePause() {
     if (!bgMusic) return;
-    try { bgMusic.pause(); } catch(e){/*ignore*/ }
+    try { bgMusic.pause(); } catch (e) {}
   }
 
-  // === Klik tombol Buka Undangan ===
   if (openBtn && cover && invitation) {
     openBtn.addEventListener("click", () => {
-      // buka UI
       cover.style.opacity = "0";
       setTimeout(() => {
         cover.style.display = "none";
         invitation.style.display = "block";
-        isOpened = true;            // tandai sudah dibuka
-        // putar musik *hanya saat ini* (karena user klik)
+        isOpened = true;
         safePlay();
-        // tampilkan menu bila ada
         if (menu) menu.classList.add("show");
         window.scrollTo({ top: 0, behavior: "smooth" });
       }, 600);
@@ -1356,32 +1347,28 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     if (!openBtn) console.warn("openBtn not found");
     if (!cover) console.warn("cover not found");
-    if (!invitation) console.warn("invitation not found (expected id='invitation' or class='invitation')");
+    if (!invitation) console.warn("invitation not found");
   }
 
-  // === Pause / Resume saat visibility / fokus (hanya jika sudah dibuka) ===
+  // Pause / resume musik
   document.addEventListener("visibilitychange", () => {
-    if (!isOpened) return; // belum buka undangan → jangan sentuh musik
+    if (!isOpened) return;
     if (document.visibilityState === "visible") safePlay();
     else safePause();
   });
-
   window.addEventListener("blur", () => {
-    if (!isOpened) return;
-    safePause();
+    if (isOpened) safePause();
   });
-
   window.addEventListener("focus", () => {
-    if (!isOpened) return;
-    safePlay();
+    if (isOpened) safePlay();
   });
-
-  // Pastikan juga saat unload (tab ditutup / reload) musik berhenti
   window.addEventListener("beforeunload", () => {
     safePause();
   });
 
-  // === RSVP form (jika ada) ===
+  // ============================================================
+  // === RSVP WHATSAPP ===
+  // ============================================================
   const form = document.getElementById("rsvpForm");
   if (form) {
     form.addEventListener("submit", (e) => {
@@ -1402,47 +1389,65 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // === WISH BOX ===
-  document.getElementById("btnMore").addEventListener("click", function() {
-  const box = document.getElementById("wishesBox");
-  box.classList.toggle("show-more");
-
-  // ubah teks tombol
-  if (box.classList.contains("show-more")) {
-    this.textContent = "Tutup ↑";
-  } else {
-    this.textContent = "Lihat Selengkapnya ↓";
+  // ============================================================
+  // === WISH BOX (Lihat Selengkapnya) ===
+  // ============================================================
+  const btnMore = document.getElementById("btnMore");
+  if (btnMore) {
+    btnMore.addEventListener("click", function () {
+      const box = document.getElementById("wishesBox");
+      box.classList.toggle("show-more");
+      this.textContent = box.classList.contains("show-more")
+        ? "Tutup ↑"
+        : "Lihat Selengkapnya ↓";
+    });
   }
-});
-  
-  // === Countdown (safe) ===
+
+  // ============================================================
+  // === COUNTDOWN ACARA ===
+  // ============================================================
   function countdown() {
+    // ⚠️ Bulan dimulai dari 0 = Januari → 10 = November
     const target = new Date(2025, 10, 10, 8, 0, 0).getTime();
     const now = Date.now();
     const diff = target - now;
+
     const daysEl = document.getElementById("days");
     const hoursEl = document.getElementById("hours");
     const minutesEl = document.getElementById("minutes");
     const secondsEl = document.getElementById("seconds");
-    if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
-    if (diff <= 0) { document.getElementById("countdown").innerHTML = "<p>Acara Sedang Berlangsung 🎉</p>"; return; }
-    const d = Math.floor(diff / (1000*60*60*24));
-    const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-    const m = Math.floor((diff % (1000*60*60)) / (1000*60));
-    const s = Math.floor((diff % (1000*60)) / 1000);
-    daysEl.textContent = String(d).padStart(2,"0");
-    hoursEl.textContent = String(h).padStart(2,"0");
-    minutesEl.textContent = String(m).padStart(2,"0");
-    secondsEl.textContent = String(s).padStart(2,"0");
-  }
-  timer = setInterval(countdown, 1000);
-  countdown();
-});
+    const wrapper = document.getElementById("countdown");
 
-    // === SCROLL HALUS UNTUK MENU BAWAH ===
-  const navLinks = document.querySelectorAll('#menuNavigasi a[href^="#"], #menuNavigasi a[href^="."]');
-  navLinks.forEach(link => {
-    link.addEventListener("click", function(e) {
+    if (!daysEl || !hoursEl || !minutesEl || !secondsEl || !wrapper) return;
+
+    if (diff <= 0) {
+      wrapper.innerHTML = "<p>Acara Sedang Berlangsung 🎉</p>";
+      clearInterval(timer);
+      return;
+    }
+
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+    daysEl.textContent = String(d).padStart(2, "0");
+    hoursEl.textContent = String(h).padStart(2, "0");
+    minutesEl.textContent = String(m).padStart(2, "0");
+    secondsEl.textContent = String(s).padStart(2, "0");
+  }
+
+  const timer = setInterval(countdown, 1000);
+  countdown(); // panggil langsung sekali biar muncul awal
+
+  // ============================================================
+  // === SCROLL HALUS UNTUK MENU ===
+  // ============================================================
+  const navLinks = document.querySelectorAll(
+    '#menuNavigasi a[href^="#"], #menuNavigasi a[href^="."]'
+  );
+  navLinks.forEach((link) => {
+    link.addEventListener("click", function (e) {
       e.preventDefault();
       const selector = this.getAttribute("href");
       const target = document.querySelector(selector);
@@ -1450,13 +1455,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const start = window.pageYOffset;
       const end = target.getBoundingClientRect().top + window.pageYOffset;
-      const duration = 500; // ⏱️ durasi scroll 1.2 detik (ubah sesuai selera)
+      const duration = 500;
       const startTime = performance.now();
 
       function smoothScroll(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        const ease = progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress;
+        const ease =
+          progress < 0.5
+            ? 2 * progress * progress
+            : -1 + (4 - 2 * progress) * progress;
         window.scrollTo(0, start + (end - start) * ease);
         if (progress < 1) requestAnimationFrame(smoothScroll);
       }
@@ -1464,5 +1472,7 @@ document.addEventListener("DOMContentLoaded", () => {
       requestAnimationFrame(smoothScroll);
     });
   });
+});
+</script>
 
-                                               </script>
+
