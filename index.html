@@ -1216,33 +1216,7 @@ button:hover {
 
 
     
-    <h2>💌 Kirim Ucapan</h2>
-
-    <section id="rsvp"section class="Ucapan">
-      <input type="text" id="nama" placeholder="Nama kamu" required>
-      <select id="kehadiran" required>
-        <option value="">Konfirmasi Kehadiran</option>
-        <option value="Hadir">Hadir</option>
-        <option value="Tidak Hadir">Tidak Hadir</option>
-      </select>
-      <textarea id="ucapan" placeholder="Tulis ucapanmu di sini..." required></textarea>
-      <button type="submit">Kirim Ucapan 💖</button>
-    </form>
-
-    <h3>Ucapan dari Tamu:</h3>
-    <div id="wishesList"></div>
-  </section>
-
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
-
-  <script src="script.js"></script>
-
-
-
-
-
+    
 
 <!-- MUSIK -->
   <audio id="bgMusic" loop preload="none">
@@ -1290,57 +1264,7 @@ button:hover {
 
 
 <script>
-// Firebase config (isi dengan punyamu)
-const firebaseConfig = {
-  apiKey: "ISI_API_KEY_KAMU",
-  authDomain: "ISI_AUTH_DOMAIN_KAMU",
-  databaseURL: "ISI_DATABASE_URL_KAMU",
-  projectId: "ISI_PROJECT_ID_KAMU",
-  storageBucket: "ISI_STORAGE_BUCKET_KAMU",
-  messagingSenderId: "ISI_MESSAGING_ID_KAMU",
-  appId: "ISI_APP_ID_KAMU"
-};
 
-// Inisialisasi Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database().ref("wishes");
-
-// Fungsi kirim ucapan
-document.getElementById("wishesForm").addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const nama = document.getElementById("nama").value;
-  const kehadiran = document.getElementById("kehadiran").value;
-  const ucapan = document.getElementById("ucapan").value;
-
-  db.push({
-    nama: nama,
-    kehadiran: kehadiran,
-    ucapan: ucapan,
-    waktu: Date.now()
-  });
-
-  document.getElementById("wishesForm").reset();
-});
-
-// Menampilkan ucapan realtime
-db.on("value", (snapshot) => {
-  const list = document.getElementById("wishesList");
-  list.innerHTML = "";
-
-  const data = snapshot.val();
-  if (data) {
-    const entries = Object.values(data).reverse();
-    entries.forEach(item => {
-      const div = document.createElement("div");
-      div.className = "wish-item";
-      div.innerHTML = `
-        <h4>${item.nama} <small>(${item.kehadiran})</small></h4>
-        <p>${item.ucapan}</p>
-      `;
-      list.appendChild(div);
-    });
-  }
 
 
 // Jalankan otomatis saat halaman dibuka
