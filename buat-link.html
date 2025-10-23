@@ -113,40 +113,45 @@
     </div>
   </div>
 
-  <script>
-    // 🏠 URL undangan utama
-    const baseUrl = "https://rumahdigitalproject.github.io/Romadona-Wulan/";
+<script>
+  // 🏠 URL undangan utama (pastikan ada trailing slash jika index di root)
+  const baseUrl = "https://rumahdigitalproject.github.io/Romadona-Wulan/";
 
-    document.getElementById("buatLink").addEventListener("click", () => {
-      const nama = document.getElementById("namaTamu").value.trim();
-      if (!nama) {
-        alert("Masukkan nama tamu dulu!");
-        return;
-      }
+  document.getElementById("buatLink").addEventListener("click", () => {
+    const nama = document.getElementById("namaTamu").value.trim();
+    if (!nama) {
+      alert("Masukkan nama tamu dulu!");
+      return;
+    }
 
-      const encodedName = encodeURIComponent(nama);
-      const link = `${baseUrl}?to=${encodedName}`;
+    // buat link undangan (sudah di-encode untuk parameter)
+    const encodedName = encodeURIComponent(nama);
+    const link = `${baseUrl}?to=${encodedName}`;
 
-      // tampilkan link hasil
-      const hasilDiv = document.getElementById("hasil");
-      const linkEl = document.getElementById("linkUndangan");
-      const btnWa = document.getElementById("btnKirimWa");
+    // tampilkan link hasil
+    const hasilDiv = document.getElementById("hasil");
+    const linkEl = document.getElementById("linkUndangan");
+    const btnWa = document.getElementById("btnKirimWa");
 
-      hasilDiv.style.display = "block";
-      linkEl.href = link;
-      linkEl.textContent = link;
+    hasilDiv.style.display = "block";
+    linkEl.href = link;
+    linkEl.textContent = link;
 
-      // teks pesan WhatsApp otomatis
-      const pesan = `Assalamu’alaikum Wr. Wb.%0A%0A` +
-        `Dengan penuh rasa syukur, kami mengundang Bapak/Ibu/Saudara/i *${nama}* ` +
-        `untuk hadir dalam acara pernikahan kami:%0A%0A` +
-        `💍 *Dona & Wulan*%0A📅 *10 - 11 November 2025*%0A📍 *Kampung Berkah, Wlingi*%0A%0A` +
-        `Silakan buka undangan lengkapnya melalui link berikut:%0A${link}%0A%0A` +
-        `Atas kehadiran & doa restunya kami ucapkan terima kasih.%0A%0A_Wassalamu’alaikum Wr. Wb._`;
+    // --- Buat pesan WA yang rapi, lalu encode seluruh pesan sebelum dimasukkan ke URL ---
+    const plainPesan = `Assalamu’alaikum Wr. Wb.\n\n` +
+      `Dengan penuh rasa syukur, kami mengundang Bapak/Ibu/Saudara/i *${nama}* ` +
+      `untuk hadir dalam acara pernikahan kami:\n\n` +
+      `💍 *Dona & Wulan*\n📅 *10 - 11 November 2025*\n📍 *Kampung Berkah, Wlingi*\n\n` +
+      `Silakan buka undangan lengkapnya melalui link berikut:\n${link}\n\n` +
+      `Atas kehadiran & doa restunya kami ucapkan terima kasih.\n\n` +
+      `Wassalamu’alaikum Wr. Wb.`;
 
-      const waLink = `https://wa.me/?text=${pesan}`;
-      btnWa.href = waLink;
-    });
-  </script>
-</body>
-</html>
+    // encode seluruh pesan agar aman dimasukkan ke query string
+    const waUrl = `https://wa.me/?text=${encodeURIComponent(plainPesan)}`;
+
+    // set tombol WA
+    btnWa.href = waUrl;
+    btnWa.setAttribute('rel', 'noopener noreferrer'); // keamanan
+    btnWa.setAttribute('target', '_blank');
+  });
+</script>
