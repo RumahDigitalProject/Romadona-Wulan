@@ -24,7 +24,7 @@
       border-radius: 20px;
       padding: 30px 40px;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-      max-width: 400px;
+      max-width: 420px;
       width: 100%;
       backdrop-filter: blur(8px);
     }
@@ -76,6 +76,23 @@
       text-decoration: underline;
       word-break: break-all;
     }
+
+    .btn-wa {
+      display: inline-block;
+      background-color: #25D366;
+      color: white;
+      font-weight: bold;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      margin-top: 15px;
+      transition: background 0.3s;
+    }
+
+    .btn-wa:hover {
+      background-color: #1ea955;
+    }
   </style>
 </head>
 <body>
@@ -89,6 +106,10 @@
     <div class="hasil" id="hasil" style="display:none;">
       <p>Link undangan siap dikirim:</p>
       <a id="linkUndangan" class="link" href="#" target="_blank"></a>
+      <br />
+      <a id="btnKirimWa" class="btn-wa" href="#" target="_blank">
+        📩 Kirim via WhatsApp
+      </a>
     </div>
   </div>
 
@@ -106,12 +127,25 @@
       const encodedName = encodeURIComponent(nama);
       const link = `${baseUrl}?to=${encodedName}`;
 
+      // tampilkan link hasil
       const hasilDiv = document.getElementById("hasil");
       const linkEl = document.getElementById("linkUndangan");
+      const btnWa = document.getElementById("btnKirimWa");
 
       hasilDiv.style.display = "block";
       linkEl.href = link;
       linkEl.textContent = link;
+
+      // teks pesan WhatsApp otomatis
+      const pesan = `Assalamu’alaikum Wr. Wb.%0A%0A` +
+        `Dengan penuh rasa syukur, kami mengundang Bapak/Ibu/Saudara/i *${nama}* ` +
+        `untuk hadir dalam acara pernikahan kami:%0A%0A` +
+        `💍 *Dona & Wulan*%0A📅 *10 - 11 November 2025*%0A📍 *Kampung Berkah, Wlingi*%0A%0A` +
+        `Silakan buka undangan lengkapnya melalui link berikut:%0A${link}%0A%0A` +
+        `Atas kehadiran & doa restunya kami ucapkan terima kasih.%0A%0A_Wassalamu’alaikum Wr. Wb._`;
+
+      const waLink = `https://wa.me/?text=${pesan}`;
+      btnWa.href = waLink;
     });
   </script>
 </body>
