@@ -751,17 +751,42 @@
   margin-bottom: 2rem;
 }
 
+.section-wishes {
+  text-align: center;
+  padding: 60px 0;
+  background: #fffafc;
+  overflow: hidden;
+}
+
+.wishes-header h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.wishes-header p {
+  color: #888;
+  margin-bottom: 2rem;
+}
+
 /* SLIDER */
 .wishes-slider {
   width: 100%;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
   position: relative;
+}
+
+.wishes-slider::-webkit-scrollbar {
+  display: none;
 }
 
 .wishes-track {
   display: flex;
   gap: 2rem;
-  animation: scroll 40s linear infinite;
+  width: max-content;
+  animation: scroll 25s linear infinite; /* lebih cepat dari 40s */
 }
 
 .wish-card {
@@ -785,15 +810,22 @@
   color: #d46a92;
 }
 
-/* Animasi berjalan dari kanan ke kiri */
+/* Auto-scroll animasi */
 @keyframes scroll {
-  0% {
+  from {
     transform: translateX(0);
   }
-  100% {
+  to {
     transform: translateX(-50%);
   }
 }
+
+/* Pause animasi saat dihover / digeser */
+.wishes-slider:hover .wishes-track,
+.wishes-slider:active .wishes-track {
+  animation-play-state: paused;
+}
+
 
 
 /* === UCAPAN TERIMA KASIH === */
@@ -1090,9 +1122,8 @@
   </div>
 
   <!-- SLIDER -->
-  <div class="wishes-slider">
+  <div class="wishes-slider" id="wishesSlider">
     <div class="wishes-track">
-      <!-- Setiap wish-card bisa kamu tambah manual di sini -->
       <div class="wish-card">
         <p class="wish-text">“Selamat menempuh hidup baru! Semoga jadi keluarga sakinah mawaddah warahmah.”</p>
         <p class="wish-name">— Rani Putri</p>
@@ -1136,6 +1167,7 @@
     </div>
   </div>
 </section>
+
 
 
 
@@ -1185,7 +1217,55 @@
 
 
 <script>
+// === HASIL UCAPAN ===
+  const slider = document.getElementById('wishesSlider');
+  const track = slider.querySelector('.wishes-track');
 
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  // Geser manual (drag)
+  slider.addEventListener('mousedown', (e) => {
+    isDown = true;
+    track.style.animationPlayState = 'paused';
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+
+  slider.addEventListener('mouseleave', () => {
+    isDown = false;
+    track.style.animationPlayState = 'running';
+  });
+
+  slider.addEventListener('mouseup', () => {
+    isDown = false;
+    track.style.animationPlayState = 'running';
+  });
+
+  slider.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 1.5; // kecepatan drag
+    slider.scrollLeft = scrollLeft - walk;
+  });
+
+  // Support swipe di HP
+  let touchStartX = 0;
+  slider.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    track.style.animationPlayState = 'paused';
+  });
+  slider.addEventListener('touchend', () => {
+    track.style.animationPlayState = 'running';
+  });
+  slider.addEventListener('touchmove', (e) => {
+    const touchMoveX = e.touches[0].clientX;
+    const move = touchStartX - touchMoveX;
+    slider.scrollLeft += move;
+  });
+  
   // === NAMA TAMU ===
   document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
