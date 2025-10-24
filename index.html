@@ -1372,9 +1372,10 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => document.getElementById('hero-countdown')?.classList.add('zoom-in', 'show'), 1000);
     setTimeout(() => document.getElementById('hero-tanggal')?.classList.add('fade-in-up', 'show'), 1400);
   });
-[...animatedElements, ...galeriItems]
-  .filter(el => !el.closest('.menu-bawah')) // abaikan menu navigasi
-  .forEach(el => observer.observe(el));
+// Hindari menu bawah ter-observe
+const menuBawah = document.querySelector('.menu-bawah');
+observer.unobserve(menuBawah);
+
 
   // ============================================================
   // === NAMA TAMU (AMBIL DARI URL) ===
