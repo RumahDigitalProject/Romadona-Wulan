@@ -667,12 +667,13 @@
 }
 
 
-/* === BACKGROUND UTAMA SEPERTI .acara === */
+
+/* === BACKGROUND UTAMA SEPERTI .acara (versi gelap) === */
 #rsvp {
   position: relative;
-  background: #7b1f26 url('kembang.webp') no-repeat center center;
+  background: #4e1419 url('kembang.webp') no-repeat center center;
   background-size: cover;
-  background-attachment: fixed; /* 🔥 bikin background diam saat scroll */
+  background-attachment: fixed;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -682,15 +683,17 @@
   z-index: 1;
 }
 
-/* Lapisan lembut di atas background */
+/* 🌓 Overlay gelap di atas background */
 #rsvp::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255,255,255,0.6); /* efek lembut */
+  background: rgba(0, 0, 0, 0.45); /* 🔥 gelap tapi transparan */
+  backdrop-filter: blur(2px);      /* ✨ sedikit blur biar lembut */
   z-index: 0;
 }
 
+/* Pastikan konten di atas overlay */
 #rsvp * {
   position: relative;
   z-index: 1;
@@ -698,11 +701,11 @@
 
 /* === FORM WRAPPER === */
 .form-wrapper {
-  background: #fff url('netral.webp') no-repeat center center;
+  background: rgba(255, 255, 255, 0.92) url('netral.webp') no-repeat center center;
   background-size: 100% 100%;
   padding: 40px 24px;
   border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
   max-width: 480px;
   margin: 40px auto 80px;
   text-align: center;
@@ -712,7 +715,7 @@
 #rsvp h2 {
   font-size: 28px;
   margin-bottom: 20px;
-  color: #333;
+  color: #fff; /* ubah jadi putih biar kontras */
   font-family: 'Great Vibes', cursive;
 }
 
@@ -722,21 +725,22 @@
 #rsvp select {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ccc;
+  border: 1px solid #bbb;
   border-radius: 10px;
   margin-bottom: 16px;
   font-size: 16px;
   box-sizing: border-box;
+  background-color: rgba(255,255,255,0.9);
 }
 
 #rsvp input::placeholder,
 #rsvp textarea::placeholder {
-  color: #999;
+  color: #888;
   font-style: italic;
 }
 
 #rsvp select:invalid {
-  color: #999;
+  color: #888;
   font-style: italic;
 }
 
@@ -761,19 +765,18 @@
   text-align: center;
   padding: 40px 0 20px;
   overflow: hidden;
-  background: transparent; /* biar ikut background utama */
+  background: transparent;
 }
 
 .wishes-header h2 {
   font-family: 'Great Vibes', cursive;
   font-size: 2.4em;
-  color: #b76e79;
+  color: #f8cdd3; /* warna lembut biar kontras */
   margin-bottom: 0.5rem;
-  letter-spacing: 1px;
 }
 
 .wishes-header p {
-  color: #555;
+  color: #eee;
   margin-bottom: 2rem;
 }
 
@@ -805,7 +808,7 @@
   padding: 20px;
   min-width: 300px;
   max-width: 320px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 .wish-text {
@@ -819,7 +822,6 @@
   color: #d46a92;
 }
 
-/* Animasi geser */
 @keyframes scroll {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
