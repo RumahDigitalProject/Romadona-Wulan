@@ -1571,6 +1571,23 @@ window.addEventListener('load', () => {
   setTimeout(() => heroCountdown?.classList.add('show'), 1000);
   setTimeout(() => heroTanggal?.classList.add('show'), 1400);
 });
+
+
+  
+  document.addEventListener("DOMContentLoaded", () => {
+  const elemenAnimasi = document.querySelectorAll(".animasi-scroll");
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("muncul");
+      }
+    });
+  }, { threshold: 0.15 });
+
+  elemenAnimasi.forEach((el) => observer.observe(el));
+});
+
   
   // ============================================================
   // === SCROLL HALUS UNTUK MENU ===
