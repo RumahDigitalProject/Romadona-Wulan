@@ -667,23 +667,27 @@
 }
 
 
-
-/* === BACKGROUND BESAR UNTUK KEDUANYA === */
+/* === BACKGROUND UTAMA SEPERTI .acara === */
 #rsvp {
   position: relative;
+  background: #7b1f26 url('kembang.webp') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed; /* 🔥 bikin background diam saat scroll */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 80px 20px;
   text-align: center;
-  border-radius: 0;
-  max-width: 100%;
-  box-shadow: none;
+  z-index: 1;
 }
 
-/* Lapisan lembut agar konten mudah dibaca */
+/* Lapisan lembut di atas background */
 #rsvp::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.6); /* efek lembut */
   z-index: 0;
 }
 
@@ -692,7 +696,7 @@
   z-index: 1;
 }
 
-/* === FORM SECTION === */
+/* === FORM WRAPPER === */
 .form-wrapper {
   background: #fff url('netral.webp') no-repeat center center;
   background-size: 100% 100%;
@@ -704,6 +708,7 @@
   text-align: center;
 }
 
+/* Judul */
 #rsvp h2 {
   font-size: 28px;
   margin-bottom: 20px;
@@ -756,7 +761,7 @@
   text-align: center;
   padding: 40px 0 20px;
   overflow: hidden;
-  background: transparent; /* pakai background dari #rsvp */
+  background: transparent; /* biar ikut background utama */
 }
 
 .wishes-header h2 {
@@ -824,6 +829,7 @@
 .wishes-slider:active .wishes-track {
   animation-play-state: paused;
 }
+
 
 
 /* === UCAPAN TERIMA KASIH === */
