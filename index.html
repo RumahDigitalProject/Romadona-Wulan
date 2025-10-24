@@ -1363,7 +1363,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, { threshold: 0.15 });
 
-  [...animatedElements, ...galeriItems].forEach(el => observer.observe(el));
+  [...animatedElements, ...galeriItems]
+  .filter(el => !el.closest('.menu-bawah')) // abaikan menu bawah
+  .forEach(el => observer.observe(el));
+
 
   // ANIMASI HERO (sekali saat load)
   window.addEventListener('DOMContentLoaded', () => {
@@ -1372,9 +1375,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => document.getElementById('hero-countdown')?.classList.add('zoom-in', 'show'), 1000);
     setTimeout(() => document.getElementById('hero-tanggal')?.classList.add('fade-in-up', 'show'), 1400);
   });
-// Hindari menu bawah ter-observe
-const menuBawah = document.querySelector('.menu-bawah');
-observer.unobserve(menuBawah);
 
 
   // ============================================================
