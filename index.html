@@ -948,6 +948,52 @@
   transform: scale(1.15);
 }
 
+/* ==== ANIMASI DASAR ==== */
+.fade-in-up,
+.fade-in-down,
+.fade-in-left,
+.fade-in-right,
+.zoom-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+.fade-in-down {
+  transform: translateY(-30px);
+}
+
+.fade-in-left {
+  transform: translateX(-30px);
+}
+
+.fade-in-right {
+  transform: translateX(30px);
+}
+
+.zoom-in {
+  transform: scale(0.9);
+}
+
+/* Saat elemen terlihat */
+.show {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+
+/* Delay biar animasi muncul bertahap */
+.staggered-delay {
+  transition-delay: 0.1s;
+}
+
+.staggered-delay-2 {
+  transition-delay: 0.3s;
+}
+
+.staggered-delay-3 {
+  transition-delay: 0.5s;
+}
+
 
 
   </style>
@@ -1275,6 +1321,57 @@ document.addEventListener("DOMContentLoaded", () => {
       slider.scrollLeft += move;
     });
   }
+
+
+  
+  // ANIMASI SCROLL MASUK
+  const animatedElements = [
+    ...document.querySelectorAll('.pengantin'),
+    ...document.querySelectorAll('.jadwal-box'),
+    ...document.querySelectorAll('.ucapan-box'),
+    ...document.querySelectorAll('.box-acara'),
+    ...document.querySelectorAll('.salam-undangan'),
+    ...document.querySelectorAll('.bismillah'),
+    ...document.querySelectorAll('.galeri-title'),
+    ...document.querySelectorAll('.nama-pengantin'),
+    ...document.querySelectorAll('.orang-tua'),
+    ...document.querySelectorAll('.ucapan-teks'),
+    ...document.querySelectorAll('.ucapan-nama')
+  ];
+
+  animatedElements.forEach((el, i) => {
+    const delayClass = i % 3 === 0 ? 'staggered-delay' : i % 3 === 1 ? 'staggered-delay-2' : 'staggered-delay-3';
+    if (el.classList.contains('pengantin')) {
+      el.classList.add('zoom-in', delayClass);
+    } else {
+      el.classList.add('fade-in-up', delayClass);
+    }
+  });
+
+  const galeriItems = document.querySelectorAll('.galeri-item');
+  galeriItems.forEach((item, i) => {
+    item.classList.add(i % 2 === 0 ? 'fade-in-left' : 'fade-in-right');
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      } else {
+        entry.target.classList.remove('show');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  [...animatedElements, ...galeriItems].forEach(el => observer.observe(el));
+
+  // ANIMASI HERO (sekali saat load)
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => document.getElementById('hero-title')?.classList.add('fade-in-down', 'show'), 200);
+    setTimeout(() => document.getElementById('hero-nama')?.classList.add('fade-in-up', 'show'), 600);
+    setTimeout(() => document.getElementById('hero-countdown')?.classList.add('zoom-in', 'show'), 1000);
+    setTimeout(() => document.getElementById('hero-tanggal')?.classList.add('fade-in-up', 'show'), 1400);
+  });
 
   // ============================================================
   // === NAMA TAMU (AMBIL DARI URL) ===
