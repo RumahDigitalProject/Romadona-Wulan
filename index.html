@@ -666,19 +666,46 @@
   }
 }
 
-/* RSVP SECTION */
+/* === LAPISAN DASAR SECTION RSVP === */
 #rsvp {
-  background: #7b1f26 url('netral.webp') no-repeat center center;
-  background-size: contain;   /* biar nggak di-zoom */
-  background-size: 100% 100%;
+  position: relative;
+  background: #7b1f26 url('bg-dasar.webp') no-repeat center center;
+  background-size: cover; /* biar nutup seluruh area */
+  padding: 80px 20px; /* tambahkan ruang biar konten gak nempel */
+  text-align: center;
+  border-radius: 0; /* biar full lebar */
+  max-width: 100%; /* biar bisa full width */
+  box-shadow: none; /* hapus dulu bayangan di luar */
+}
+
+/* Overlay lembut di atas background dasar */
+#rsvp::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.5); /* efek transparan */
+  z-index: 0;
+}
+
+/* Supaya konten tetap di atas overlay */
+#rsvp * {
+  position: relative;
+  z-index: 1;
+}
+
+/* === KOTAK PEMBUNGKUS FORM (lapisan kedua) === */
+.form-wrapper {
+  background: #fff url('netral.webp') no-repeat center center;
+  background-size: 100% 100%; /* sesuai ukuran file kamu */
   padding: 40px 24px;
-  margin: 40px auto;
   border-radius: 16px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.1);
   max-width: 480px;
+  margin: 40px auto;
   text-align: center;
 }
 
+/* === Style lainnya tetap sama === */
 #rsvp h2 {
   text-align: center;
   font-size: 28px;
@@ -687,7 +714,6 @@
   font-family: 'Great Vibes', cursive;
 }
 
-/* Sembunyikan label */
 #rsvp label {
   display: none;
 }
@@ -704,14 +730,12 @@
   box-sizing: border-box;
 }
 
-/* Placeholder style */
 #rsvp input::placeholder,
 #rsvp textarea::placeholder {
   color: #999;
   font-style: italic;
 }
 
-/* Placeholder untuk select */
 #rsvp select:invalid {
   color: #999;
   font-style: italic;
@@ -730,23 +754,19 @@
 }
 
 #rsvp button:hover {
-  background: #f3a302; ;
+  background: #d78e02;
 }
 
-.form-wrapper {
-  max-width: 200px;
-  margin: 0 auto;
-  text-align: center;
-}
 
 /*HASIL UCAPAN*/
     
 .section-wishes {
   text-align: center;
   padding: 60px 0;
-  background: #fffafc;
   overflow: hidden;
-  background: #7b1f26 
+  background: #7b1f26 url('netral.webp') no-repeat center center;
+  background-size: contain;   /* biar nggak di-zoom */
+  background-size: 100% 100%; 
 }
 
 .wishes-header h2 {
