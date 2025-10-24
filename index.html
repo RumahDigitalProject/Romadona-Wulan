@@ -1578,19 +1578,7 @@ window.addEventListener('load', () => {
 
 
   
-  document.addEventListener("DOMContentLoaded", () => {
-  const elemenAnimasi = document.querySelectorAll(".animasi-scroll");
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("muncul");
-      }
-    });
-  }, { threshold: 0.15 });
-
-  elemenAnimasi.forEach((el) => observer.observe(el));
-});
+  
 
   
   // ============================================================
