@@ -948,6 +948,31 @@
   transform: scale(1.15);
 }
 
+/* ==== Animasi Scroll Dasar ==== */
+.fade-in-up,
+.fade-in-left,
+.fade-in-right,
+.zoom-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(.2,.9,.2,1);
+  will-change: opacity, transform;
+}
+
+.fade-in-left { transform: translateX(-40px); }
+.fade-in-right { transform: translateX(40px); }
+.zoom-in { transform: scale(0.9); }
+
+/* Saat elemen masuk layar */
+.show {
+  opacity: 1 !important;
+  transform: translate(0, 0) scale(1) !important;
+}
+
+/* Delay biar gak bareng semua */
+.staggered-delay   { transition-delay: 0.1s; }
+.staggered-delay-2 { transition-delay: 0.25s; }
+.staggered-delay-3 { transition-delay: 0.4s; }
 
 
   </style>
