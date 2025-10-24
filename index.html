@@ -1476,6 +1476,60 @@ document.addEventListener("DOMContentLoaded", () => {
   const timer = setInterval(countdown, 1000);
   countdown(); // panggil langsung sekali biar muncul awal
 
+
+  
+document.addEventListener('DOMContentLoaded', () => {
+  // Elemen-elemen yang mau dianimasikan
+  const animatedElements = [
+    ...document.querySelectorAll('.pengantin'),
+    ...document.querySelectorAll('.jadwal-box'),
+    ...document.querySelectorAll('.ucapan-box'),
+    ...document.querySelectorAll('.box-acara'),
+    ...document.querySelectorAll('.salam-undangan'),
+    ...document.querySelectorAll('.bismillah'),
+    ...document.querySelectorAll('.galeri-title'),
+    ...document.querySelectorAll('.nama-pengantin'),
+    ...document.querySelectorAll('.orang-tua'),
+    ...document.querySelectorAll('.ucapan-teks'),
+    ...document.querySelectorAll('.ucapan-nama')
+  ];
+
+  // Tambahkan kelas animasi + delay
+  animatedElements.forEach((el, i) => {
+    const delayClass =
+      i % 3 === 0 ? 'staggered-delay' :
+      i % 3 === 1 ? 'staggered-delay-2' :
+      'staggered-delay-3';
+
+    if (el.classList.contains('pengantin')) {
+      el.classList.add('zoom-in', delayClass);
+    } else {
+      el.classList.add('fade-in-up', delayClass);
+    }
+  });
+
+  // Elemen galeri (bergantian kiri-kanan)
+  const galeriItems = document.querySelectorAll('.galeri-item');
+  galeriItems.forEach((item, i) => {
+    item.classList.add(i % 2 === 0 ? 'fade-in-left' : 'fade-in-right');
+  });
+
+  // Observer scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      } else {
+        entry.target.classList.remove('show'); // kalau mau animasi hilang saat keluar
+      }
+    });
+  }, { threshold: 0.15 });
+
+  // Gabungkan semua elemen & mulai observe
+  [...animatedElements, ...galeriItems].forEach(el => observer.observe(el));
+});
+
+  
   // ============================================================
   // === SCROLL HALUS UNTUK MENU ===
   // ============================================================
