@@ -914,50 +914,55 @@
 
 
 
-/* ==== ANIMASI DASAR ==== */
-.fade-in-up,
-.fade-in-down,
-.fade-in-left,
-.fade-in-right,
-.zoom-in {
+.fade-in-up {
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.8s ease-out;
 }
-
-.fade-in-down {
-  transform: translateY(-30px);
+.fade-in-up.show {
+  opacity: 1;
+  transform: none;
 }
 
 .fade-in-left {
+  opacity: 0;
   transform: translateX(-30px);
+  transition: all 0.8s ease-out;
+}
+.fade-in-left.show {
+  opacity: 1;
+  transform: none;
 }
 
 .fade-in-right {
+  opacity: 0;
   transform: translateX(30px);
+  transition: all 0.8s ease-out;
+}
+.fade-in-right.show {
+  opacity: 1;
+  transform: none;
 }
 
 .zoom-in {
-  transform: scale(0.9);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.8s ease-out;
 }
-
-/* Saat elemen terlihat */
-.show {
+.zoom-in.show {
   opacity: 1;
-  transform: translate(0, 0) scale(1);
+  transform: scale(1);
 }
 
-/* Delay biar animasi muncul bertahap */
+/* Delay variasi */
 .staggered-delay {
-  transition-delay: 0.1s;
+  transition-delay: 0.2s;
 }
-
 .staggered-delay-2 {
-  transition-delay: 0.3s;
+  transition-delay: 0.4s;
 }
-
 .staggered-delay-3 {
-  transition-delay: 0.5s;
+  transition-delay: 0.6s;
 }
 
 
@@ -1300,12 +1305,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   animatedElements.forEach((el, i) => {
     const delayClass = i % 3 === 0 ? 'staggered-delay' : i % 3 === 1 ? 'staggered-delay-2' : 'staggered-delay-3';
-    if (el.classList.contains('pengantin')) {
-      el.classList.add('zoom-in', delayClass);
-    } else {
-      el.classList.add('fade-in-up', delayClass);
-    }
-  });
+    animatedElements.forEach((el, i) => {
+  const delayClass =
+    i % 3 === 0
+      ? "staggered-delay"
+      : i % 3 === 1
+      ? "staggered-delay-2"
+      : "staggered-delay-3";
+
+  // Variasi animasi otomatis berdasarkan urutan
+  const animations = ["fade-in-up", "fade-in-left", "fade-in-right", "zoom-in"];
+  const randomAnim = animations[i % animations.length];
+
+  el.classList.add(randomAnim, delayClass);
+});
+
 
   const galeriItems = document.querySelectorAll('.galeri-item');
   galeriItems.forEach((item, i) => {
