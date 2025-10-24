@@ -948,6 +948,18 @@
   transform: scale(1.15);
 }
 
+/* Animasi dasar */
+.animasi-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease-out;
+}
+
+/* Saat muncul di layar */
+.animasi-scroll.muncul {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 
   </style>
@@ -1189,7 +1201,7 @@
 
 <!--Penutup-->
 <section id="ucapan">
-<div class="ucapan-box">
+<div class="ucapan-box animasi-scroll">
   <div class="pengantin">
             <img alt="Pengantin Perempuan" class="foto" src="foto1.webp" loading="lazy"/>
 <p class="ucapan-teks">
@@ -1226,6 +1238,18 @@
 </footer>
 
 <script>
+// ===ANIMASI ===
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('muncul');
+      }
+    });
+  });
+
+  document.querySelectorAll('.animasi-scroll').forEach(el => observer.observe(el));
+
+  
 document.addEventListener("DOMContentLoaded", () => {
   // ============================================================
   // === HASIL UCAPAN (SLIDER BERGERAK + GESER MANUAL) ===
