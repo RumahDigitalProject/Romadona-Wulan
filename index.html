@@ -948,18 +948,20 @@
   transform: scale(1.15);
 }
 
-/* Animasi dasar */
+/* Posisi awal (belum terlihat) */
 .animasi-scroll {
   opacity: 0;
   transform: translateY(40px);
-  transition: all 0.8s ease-out;
+  transition: all 0.8s cubic-bezier(.2,.9,.2,1);
+  will-change: opacity, transform;
 }
 
-/* Saat muncul di layar */
+/* Saat terlihat di layar */
 .animasi-scroll.muncul {
   opacity: 1;
   transform: translateY(0);
 }
+
 
 
   </style>
@@ -1062,7 +1064,7 @@
 <!-- ACARA: Akad -->
 <section class="acara" style="position: relative;">
 <div class="bg-static"></div> <!-- 🎯 background diam hanya untuk section ini -->
-<div class="box-acara">
+<div class="box-acara animasi-scroll">
 <p class="judul">Akad Nikah</p>
 <p class="tglacara">Selasa, 11 November 2025</p>
 <p class="waktuacara">Pukul 10:00 WIB</p>
@@ -1239,15 +1241,19 @@
 
 <script>
 // ===ANIMASI ===
+  document.addEventListener('DOMContentLoaded', () => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('muncul');
+      } else {
+        entry.target.classList.remove('muncul');
       }
     });
-  });
+  }, { threshold: 0.15 }); // makin kecil = lebih cepat muncul
 
   document.querySelectorAll('.animasi-scroll').forEach(el => observer.observe(el));
+});
 
   
 document.addEventListener("DOMContentLoaded", () => {
