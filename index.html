@@ -1543,6 +1543,24 @@ window.addEventListener('load', () => {
   const timer = setInterval(countdown, 1000);
   countdown(); // panggil langsung sekali biar muncul awal
 
+// HERO SECTION ANIMASI
+window.addEventListener('load', () => {
+  const heroTitle = document.getElementById('hero-title');
+  const heroNama = document.getElementById('hero-nama');
+  const heroCountdown = document.getElementById('hero-countdown');
+  const heroTanggal = document.getElementById('hero-tanggal');
+
+  heroTitle?.classList.add('fade-in-down');
+  heroNama?.classList.add('fade-in-up');
+  heroCountdown?.classList.add('zoom-in');
+  heroTanggal?.classList.add('fade-in-up');
+
+  setTimeout(() => heroTitle?.classList.add('show'), 200);
+  setTimeout(() => heroNama?.classList.add('show'), 600);
+  setTimeout(() => heroCountdown?.classList.add('show'), 1000);
+  setTimeout(() => heroTanggal?.classList.add('show'), 1400);
+});
+  
   // ============================================================
   // === SCROLL HALUS UNTUK MENU ===
   // ============================================================
