@@ -948,31 +948,19 @@
   transform: scale(1.15);
 }
 
-/* ==== Animasi Scroll Dasar ==== */
-.fade-in-up,
-.fade-in-left,
-.fade-in-right,
-.zoom-in {
+/* Animasi dasar */
+.animasi-scroll {
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(.2,.9,.2,1);
-  will-change: opacity, transform;
+  transform: translateY(40px);
+  transition: all 0.8s ease-out;
 }
 
-.fade-in-left { transform: translateX(-40px); }
-.fade-in-right { transform: translateX(40px); }
-.zoom-in { transform: scale(0.9); }
-
-/* Saat elemen masuk layar */
-.show {
-  opacity: 1 !important;
-  transform: translate(0, 0) scale(1) !important;
+/* Saat muncul di layar */
+.animasi-scroll.muncul {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* Delay biar gak bareng semua */
-.staggered-delay   { transition-delay: 0.1s; }
-.staggered-delay-2 { transition-delay: 0.25s; }
-.staggered-delay-3 { transition-delay: 0.4s; }
 
 
   </style>
@@ -1028,7 +1016,7 @@
   </p>
 
   <!-- BOX PUTIH DI TENGAH -->
-  <div class="box-putih-kecil">
+  <div class="box-putih-kecil animasi-scroll">
     <div class="profil">
       <div class="pengantin">
         <img alt="Pengantin Laki-laki" class="foto" src="romadona.webp" loading="lazy"/>
@@ -1500,59 +1488,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const timer = setInterval(countdown, 1000);
   countdown(); // panggil langsung sekali biar muncul awal
+  
+document.addEventListener('DOMContentLoaded', () => {
 
 
   
-document.addEventListener('DOMContentLoaded', () => {
-  // Elemen-elemen yang mau dianimasikan
-  const animatedElements = [
-    ...document.querySelectorAll('.pengantin'),
-    ...document.querySelectorAll('.jadwal-box'),
-    ...document.querySelectorAll('.ucapan-box'),
-    ...document.querySelectorAll('.box-acara'),
-    ...document.querySelectorAll('.salam-undangan'),
-    ...document.querySelectorAll('.bismillah'),
-    ...document.querySelectorAll('.galeri-title'),
-    ...document.querySelectorAll('.nama-pengantin'),
-    ...document.querySelectorAll('.orang-tua'),
-    ...document.querySelectorAll('.ucapan-teks'),
-    ...document.querySelectorAll('.ucapan-nama')
-  ];
-
-  // Tambahkan kelas animasi + delay
-  animatedElements.forEach((el, i) => {
-    const delayClass =
-      i % 3 === 0 ? 'staggered-delay' :
-      i % 3 === 1 ? 'staggered-delay-2' :
-      'staggered-delay-3';
-
-    if (el.classList.contains('pengantin')) {
-      el.classList.add('zoom-in', delayClass);
-    } else {
-      el.classList.add('fade-in-up', delayClass);
-    }
-  });
-
-  // Elemen galeri (bergantian kiri-kanan)
-  const galeriItems = document.querySelectorAll('.galeri-item');
-  galeriItems.forEach((item, i) => {
-    item.classList.add(i % 2 === 0 ? 'fade-in-left' : 'fade-in-right');
-  });
-
-  // Observer scroll
-  const observer = new IntersectionObserver(entries => {
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('show');
-      } else {
-        entry.target.classList.remove('show'); // kalau mau animasi hilang saat keluar
+        entry.target.classList.add('muncul');
       }
     });
-  }, { threshold: 0.15 });
+  });
 
-  // Gabungkan semua elemen & mulai observe
-  [...animatedElements, ...galeriItems].forEach(el => observer.observe(el));
-});
+  document.querySelectorAll('.animasi-scroll').forEach(el => observer.observe(el));
+
 
   
   // ============================================================
