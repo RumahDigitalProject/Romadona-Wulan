@@ -666,58 +666,54 @@
   }
 }
 
-/* === LAPISAN DASAR SECTION RSVP === */
+
+
+/* === BACKGROUND BESAR UNTUK KEDUANYA === */
 #rsvp {
   position: relative;
   background: #7b1f26 url('bg-dasar.webp') no-repeat center center;
-  background-size: cover; /* biar nutup seluruh area */
-  padding: 80px 20px; /* tambahkan ruang biar konten gak nempel */
+  background-size: cover;
+  padding: 80px 20px;
   text-align: center;
-  border-radius: 0; /* biar full lebar */
-  max-width: 100%; /* biar bisa full width */
-  box-shadow: none; /* hapus dulu bayangan di luar */
+  border-radius: 0;
+  max-width: 100%;
+  box-shadow: none;
 }
 
-/* Overlay lembut di atas background dasar */
+/* Lapisan lembut agar konten mudah dibaca */
 #rsvp::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255,255,255,0.5); /* efek transparan */
+  background: rgba(255,255,255,0.5);
   z-index: 0;
 }
 
-/* Supaya konten tetap di atas overlay */
 #rsvp * {
   position: relative;
   z-index: 1;
 }
 
-/* === KOTAK PEMBUNGKUS FORM (lapisan kedua) === */
+/* === FORM SECTION === */
 .form-wrapper {
   background: #fff url('netral.webp') no-repeat center center;
-  background-size: 100% 100%; /* sesuai ukuran file kamu */
+  background-size: 100% 100%;
   padding: 40px 24px;
   border-radius: 16px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.1);
   max-width: 480px;
-  margin: 40px auto;
+  margin: 40px auto 80px;
   text-align: center;
 }
 
-/* === Style lainnya tetap sama === */
 #rsvp h2 {
-  text-align: center;
   font-size: 28px;
   margin-bottom: 20px;
   color: #333;
   font-family: 'Great Vibes', cursive;
 }
 
-#rsvp label {
-  display: none;
-}
-
+/* Input dan tombol */
 #rsvp input,
 #rsvp textarea,
 #rsvp select {
@@ -744,7 +740,7 @@
 #rsvp button {
   width: 100%;
   padding: 12px;
-  background: #f3a302; 
+  background: #f3a302;
   color: white;
   border: none;
   border-radius: 10px;
@@ -757,45 +753,24 @@
   background: #d78e02;
 }
 
-
-/*HASIL UCAPAN*/
-    
+/* === WISHES SECTION === */
 .section-wishes {
   text-align: center;
-  padding: 60px 0;
+  padding: 40px 0 20px;
   overflow: hidden;
-  background: #7b1f26 url('netral.webp') no-repeat center center;
-  background-size: contain;   /* biar nggak di-zoom */
-  background-size: 100% 100%; 
+  background: transparent; /* pakai background dari #rsvp */
 }
 
 .wishes-header h2 {
   font-family: 'Great Vibes', cursive;
-  font-size: 2.8em;
+  font-size: 2.4em;
   color: #b76e79;
-  margin-bottom: 50px;
+  margin-bottom: 0.5rem;
   letter-spacing: 1px;
 }
 
 .wishes-header p {
-  color: #888;
-  margin-bottom: 2rem;
-}
-
-.section-wishes {
-  text-align: center;
-  padding: 60px 0;
-  background: #fffafc;
-  overflow: hidden;
-}
-
-.wishes-header h2 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-.wishes-header p {
-  color: #888;
+  color: #555;
   margin-bottom: 2rem;
 }
 
@@ -807,7 +782,6 @@
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   position: relative;
-    
 }
 
 .wishes-slider::-webkit-scrollbar {
@@ -818,17 +792,17 @@
   display: flex;
   gap: 2rem;
   width: max-content;
-  animation: scroll 25s linear infinite; /* lebih cepat dari 40s */
+  animation: scroll 25s linear infinite;
 }
 
 .wish-card {
   flex: 0 0 auto;
-  background: white;
+  background: rgba(255,255,255,0.9);
   border-radius: 12px;
   padding: 20px;
   min-width: 300px;
   max-width: 320px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .wish-text {
@@ -842,22 +816,16 @@
   color: #d46a92;
 }
 
-/* Auto-scroll animasi */
+/* Animasi geser */
 @keyframes scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
-/* Pause animasi saat dihover / digeser */
 .wishes-slider:hover .wishes-track,
 .wishes-slider:active .wishes-track {
   animation-play-state: paused;
 }
-
 
 
 /* === UCAPAN TERIMA KASIH === */
@@ -1144,78 +1112,62 @@
 </div>
 </section>
 
-<!-- RSVP Section -->
-<section data-aos="fade-up" id="rsvp">
-<h2>Wishes</h2>
-<form id="rsvpForm">
-<div class="form-wrapper" data-aos="fade-up" data-aos-delay="200">
-<input id="nama" placeholder="Tulis namamu di sini..." required="" type="text"/>
-<textarea id="pesanUcapan" placeholder="Berikan ucapan atau doa..." required=""></textarea>
-<select id="kehadiran" required="">
-<option disabled="" hidden="" selected="" value="">Pilih status kehadiran...</option>
-<option value="Hadir">Hadir</option>
-<option value="Tidak Hadir">Tidak Hadir</option>
-</select>
-<button type="submit">Kirim</button>
-</div>
-</form>
-</section>
-
-<!-- === SECTION YOUR WISHES === -->
-<section class="section-wishes">
-  <div class="wishes-header">
-    <h2>Your Wishes</h2>
-    <p>Ucapan hangat dari sahabat dan keluarga</p>
+<!-- === RSVP + WISHES DALAM 1 BACKGROUND === -->
+<section id="rsvp">
+  <!-- Bagian Form -->
+  <div class="rsvp-content" data-aos="fade-up">
+    <h2>Wishes</h2>
+    <form id="rsvpForm">
+      <div class="form-wrapper" data-aos="fade-up" data-aos-delay="200">
+        <input id="nama" placeholder="Tulis namamu di sini..." required type="text" />
+        <textarea id="pesanUcapan" placeholder="Berikan ucapan atau doa..." required></textarea>
+        <select id="kehadiran" required>
+          <option disabled hidden selected value="">Pilih status kehadiran...</option>
+          <option value="Hadir">Hadir</option>
+          <option value="Tidak Hadir">Tidak Hadir</option>
+        </select>
+        <button type="submit">Kirim</button>
+      </div>
+    </form>
   </div>
 
-  <!-- SLIDER -->
-  <div class="wishes-slider" id="wishesSlider">
-    <div class="wishes-track">
-      <div class="wish-card">
-        <p class="wish-text">“Selamat menempuh hidup baru! Semoga jadi keluarga sakinah mawaddah warahmah.”</p>
-        <p class="wish-name">— Rani Putri</p>
-      </div>
+  <!-- Bagian Ucapan (dalam background yang sama) -->
+  <div class="section-wishes" data-aos="fade-up" data-aos-delay="400">
+    <div class="wishes-header">
+      <h2>Your Wishes</h2>
+      <p>Ucapan hangat dari sahabat dan keluarga</p>
+    </div>
 
-      <div class="wish-card">
-        <p class="wish-text">“Akhirnya menikah juga! Semoga cinta kalian semakin tumbuh setiap hari 💖.”</p>
-        <p class="wish-name">— Arif & Dwi</p>
-      </div>
+    <div class="wishes-slider" id="wishesSlider">
+      <div class="wishes-track">
+        <div class="wish-card">
+          <p class="wish-text">“Selamat menempuh hidup baru! Semoga jadi keluarga sakinah mawaddah warahmah.”</p>
+          <p class="wish-name">— Rani Putri</p>
+        </div>
 
-      <div class="wish-card">
-        <p class="wish-text">“Doa terbaik untuk kalian berdua. Semoga rumah tangga penuh kebahagiaan dan rezeki.”</p>
-        <p class="wish-name">— Yuliana</p>
-      </div>
+        <div class="wish-card">
+          <p class="wish-text">“Akhirnya menikah juga! Semoga cinta kalian semakin tumbuh setiap hari 💖.”</p>
+          <p class="wish-name">— Arif & Dwi</p>
+        </div>
 
-      <div class="wish-card">
-        <p class="wish-text">“Selamat menempuh perjalanan baru bersama pasangan hidup. Semoga bahagia selamanya.”</p>
-        <p class="wish-name">— Bima Prasetyo</p>
-      </div>
+        <div class="wish-card">
+          <p class="wish-text">“Doa terbaik untuk kalian berdua. Semoga rumah tangga penuh kebahagiaan dan rezeki.”</p>
+          <p class="wish-name">— Yuliana</p>
+        </div>
 
-      <div class="wish-card">
-        <p class="wish-text">“Langgeng selalu ya! Semoga cinta kalian makin kuat dari hari ke hari.”</p>
-        <p class="wish-name">— Aulia & Rendra</p>
-      </div>
+        <div class="wish-card">
+          <p class="wish-text">“Langgeng selalu ya! Semoga cinta kalian makin kuat dari hari ke hari.”</p>
+          <p class="wish-name">— Aulia & Rendra</p>
+        </div>
 
-      <div class="wish-card">
-        <p class="wish-text">“Pernikahan kalian adalah awal kisah indah yang diberkahi Allah SWT 🤍.”</p>
-        <p class="wish-name">— Sarah Fauziah</p>
-      </div>
-
-      <!-- Duplikat isi biar loopingnya mulus -->
-      <div class="wish-card">
-        <p class="wish-text">“Selamat menempuh hidup baru! Semoga jadi keluarga sakinah mawaddah warahmah.”</p>
-        <p class="wish-name">— Rani Putri</p>
-      </div>
-
-      <div class="wish-card">
-        <p class="wish-text">“Akhirnya menikah juga! Semoga cinta kalian semakin tumbuh setiap hari 💖.”</p>
-        <p class="wish-name">— Arif & Dwi</p>
+        <div class="wish-card">
+          <p class="wish-text">“Pernikahan kalian adalah awal kisah indah yang diberkahi Allah SWT 🤍.”</p>
+          <p class="wish-name">— Sarah Fauziah</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
-
-
 
 
 <!-- MUSIK -->
