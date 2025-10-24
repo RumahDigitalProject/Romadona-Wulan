@@ -930,6 +930,13 @@
   opacity: 0;               /* disembunyikan dulu */
   pointer-events: none;
   transition: opacity 0.6s ease;
+  position: fixed;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%) translateZ(0); /* pastikan tetap center */
+  isolation: isolate; /* cegah warisan transform dari parent lain */
+  z-index: 99999; /* pastikan di atas semua animasi */
+  }
 }
 
 .menu-bawah.show {          /* muncul setelah class 'show' ditambah */
@@ -947,6 +954,15 @@
   color: #a05b37;
   transform: scale(1.15);
 }
+    /* ==== FIX MENU BAWAH BERGESER ==== */
+
+
+html, body {
+  transform: none !important;   /* pastikan body tidak ikut animasi */
+  perspective: none !important; /* cegah pengaruh perspective/transform ancestor */
+  overflow-x: hidden;
+}
+
 
 /* ==== ANIMASI DASAR ==== */
 .fade-in-up,
@@ -1363,9 +1379,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, { threshold: 0.15 });
 
-  [...animatedElements, ...galeriItems]
+[...animatedElements, ...galeriItems]
   .filter(el => !el.closest('.menu-bawah')) // abaikan menu bawah
   .forEach(el => observer.observe(el));
+
+window.addEventListener('load', () => {
+  const menu = document.querySelector('.menu-bawah');
+  if (menu) {
+    menu.classList.add('show');
+  }
+});
 
 
   // ANIMASI HERO (sekali saat load)
