@@ -1374,37 +1374,55 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-const form = document.getElementById("rsvpForm");
-if (form) {
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
+  // ============================================================
+  // === RSVP KE GOOGLE SHEET + WHATSAPP ===
+  // ============================================================
 
-    const nama = document.getElementById("nama").value.trim();
-    const ucapan = document.getElementById("pesanUcapan").value.trim();
-    const kehadiran = document.getElementById("kehadiran").value;
+  const form = document.getElementById("rsvpForm");
 
-    if (!nama || !ucapan || !kehadiran) {
-      alert("Isi semua kolom terlebih dahulu!");
-      return;
-    }
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-    // Kirim ke Google Sheet
-    fetch("https://script.google.com/macros/s/AKfycbzxdssNf-5zyGMBvapkE83DSzv2fdtQImFYoinMQi2oGjkHsp2YH5AimU-yT1-0dJWg/exec", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nama, ucapan, kehadiran }),
+      const nama = document.getElementById("nama").value.trim();
+      const ucapan = document.getElementById("pesanUcapan").value.trim();
+      const kehadiran = document.getElementById("kehadiran").value;
+
+      if (!nama || !ucapan || !kehadiran) {
+        alert("Isi semua kolom terlebih dahulu!");
+        return;
+      }
+
+      // === Kirim ke Google Sheet ===
+      const scriptURL =
+        "https://script.google.com/macros/s/AKfycbyf1JxcPdAO1ijnt_jk5UG73TH5cbVWVLeoEzAVKZA3MvW12hrSZrv53XA5EqRMsxcV/exec";
+
+      const params = new URLSearchParams({
+        nama: nama,
+        ucapan: ucapan,
+        hadir: kehadiran,
+      });
+
+      try {
+        await fetch(`${scriptURL}?${params.toString()}`, { method: "GET" });
+        console.log("Data terkirim ke Sheet!");
+      } catch (error) {
+        console.error("Gagal kirim ke Sheet:", error);
+        alert("Gagal menyimpan ke data, tapi pesan tetap dikirim ke WhatsApp.");
+      }
+
+      // === Kirim ke WhatsApp ===
+      const nomorWhatsApp = "6285706889273"; // Ganti dengan nomor WA kamu
+      const pesan = `Halo, saya *${nama}*\nUcapan: ${ucapan}\nKehadiran: *${kehadiran}*`;
+      const waURL = `https://wa.me/${nomorWhatsApp}?text=${encodeURIComponent(pesan)}`;
+
+      window.open(waURL, "_blank");
+
+      // === Reset form ===
+      form.reset();
+      alert("Terima kasih! Ucapan kamu sudah terkirim 🙏");
     });
-
-    // Kirim ke WhatsApp
-    const nomorWhatsApp = "6285706889273";
-    const pesan = `Halo, saya *${nama}*\nUcapan: ${ucapan}\nKehadiran: *${kehadiran}*`;
-    const waURL = `https://wa.me/${nomorWhatsApp}?text=${encodeURIComponent(pesan)}`;
-    window.open(waURL, "_blank");
-
-    form.reset();
-    alert("Terima kasih atas ucapannya!");
-  });
-}
+                          }
 
 
   // ============================================================
