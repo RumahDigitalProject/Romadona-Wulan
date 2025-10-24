@@ -1373,28 +1373,58 @@ document.addEventListener("DOMContentLoaded", () => {
     safePause();
   });
 
-  // ============================================================
-  // === RSVP WHATSAPP ===
-  // ============================================================
-  const form = document.getElementById("rsvpForm");
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const nama = document.getElementById("nama")?.value.trim() || "";
-      const ucapan = document.getElementById("pesanUcapan")?.value.trim() || "";
-      const kehadiran = document.getElementById("kehadiran")?.value || "";
+<script>
+// ============================================================
+// === RSVP WHATSAPP + GOOGLE SHEET ===
+// ============================================================
+const form = document.getElementById("rsvpForm");
+if (form) {
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const nama = document.getElementById("nama")?.value.trim() || "";
+    const ucapan = document.getElementById("pesanUcapan")?.value.trim() || "";
+    const kehadiran = document.getElementById("kehadiran")?.value || "";
 
-      if (!nama || !ucapan || !kehadiran) {
-        alert("Isi semua kolom terlebih dahulu!");
-        return;
-      }
+    if (!nama || !ucapan || !kehadiran) {
+      alert("Isi semua kolom terlebih dahulu!");
+      return;
+    }
 
-      const nomorWhatsApp = "6285706889273";
-      const pesan = `Halo, saya *${nama}*\nUcapan: ${ucapan}\nKehadiran: *${kehadiran}*`;
-      const url = `https://wa.me/${nomorWhatsApp}?text=${encodeURIComponent(pesan)}`;
-      window.open(url, "_blank");
-    });
-  }
+    // Ganti dengan URL Web App dari Google Apps Script kamu
+    const scriptURL = "https://script.google.com/macros/s/AKfycbx-LlkNHNO-tmiGltXVmrRt0ak17tQquGF6xlL7ynPBivrk-D8pzO5FvFrYjVaGBZuL/exec";
+
+    // 1️⃣ Simpan data ke Google Sheet
+    fetch(scriptURL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nama: nama,
+        pesan: ucapan,
+        kehadiran: kehadiran,
+      }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log("Tersimpan di Google Sheet:", result);
+
+        // 2️⃣ Kirim ke WhatsApp
+        const nomorWhatsApp = "6285706889273";
+        const pesan = `Halo, saya *${nama}*\nUcapan: ${ucapan}\nKehadiran: *${kehadiran}*`;
+        const url = `https://wa.me/${nomorWhatsApp}?text=${encodeURIComponent(pesan)}`;
+        window.open(url, "_blank");
+
+        // Reset form
+        form.reset();
+        alert("Terima kasih atas ucapannya!");
+      })
+      .catch((error) => {
+        console.error("Gagal menyimpan:", error);
+        alert("Terjadi kesalahan saat menyimpan ke Google Sheet.");
+      });
+  });
+}
+</script>
+
 
   // ============================================================
   // === WISH BOX (Lihat Selengkapnya) ===
