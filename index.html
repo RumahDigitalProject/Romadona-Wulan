@@ -970,9 +970,15 @@
 [data-anim="right"] {
   transform: translateX(50px);
 }
-[data-anim="zoom"] {
-  transform: scale(0.9);
+[data-anim="zoom-up"] {
+  opacity: 0;
+  transform: scale(0.8) translateY(40px);
 }
+.animasi-scroll.muncul[data-anim="zoom-up"] {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
 
 
   </style>
@@ -1076,11 +1082,11 @@
 <section class="acara" style="position: relative;">
 <div class="bg-static"></div> <!-- 🎯 background diam hanya untuk section ini -->
 <div class="box-acara animasi-scroll">
-<p class="judul">Akad Nikah</p>
-<p class="tglacara">Selasa, 11 November 2025</p>
-<p class="waktuacara">Pukul 10:00 WIB</p>
+<p class="judul animasi-scroll" data-anim="zoom-up">Akad Nikah</p>
+<p class="tglacara animasi-scroll" data-anim="zoom-up">Selasa, 11 November 2025</p>
+<p class="waktuacara animasi-scroll" data-anim="zoom-up">Pukul 10:00 WIB</p>
 <div class="ikon-rumah">- - - - - - 🏠 - - - - - -</div>
-<p class="alamatacara">Kampung Berkah Kletek RT 01 / RW 07, Wlingi</p>
+<p class="alamatacara animasi-scroll" data-anim="zoom-up">Kampung Berkah Kletek RT 01 / RW 07, Wlingi</p>
 <!-- Tombol Maps untuk Akad -->
 <div class="tombol-maps">
 <a href="https://maps.app.goo.gl/mZFxvHmS3FoStpxH6" rel="noopener" target="_blank">📍 Lihat Maps Lokasi</a>
