@@ -874,21 +874,27 @@
   color:  #f3a302; 
 }
 
-/*BRAND*/
+/* === FOOTER BRAND === */
 .footer-wedding {
-  background: rgba(255,255,255,0.4);
-  backdrop-filter: blur(10px);
-  padding: 45px 30px;
+  background-color: #ffffff;
+  padding: 50px 45px;
   text-align: center;
-  border-top: 2px solid rgba(255,255,255,0.4);
-  border-radius: 30px 30px 0 0;
-  color: #4a3d3c;
-  box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+  border-top: 2px solid #e7a5bd;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 2;
 }
 
 .footer-content {
   font-family: 'Inter', sans-serif;
+  color: #5a4e4d;
   font-size: 13px;
+}
+
+.footer-content p {
+  margin: 4px 0;
 }
 
 .footer-row {
@@ -896,22 +902,21 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
-  margin-top: 6px;
+  margin-top: 4px;
 }
 
 .wa-icon-inline img {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   filter: grayscale(100%);
-  opacity: 0.8;
-  transition: all 0.3s ease;
+  opacity: 0.7;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .wa-icon-inline img:hover {
-  transform: scale(1.15);
+  transform: scale(1.1);
   opacity: 1;
 }
-
 
 
 .menu-bawah {
@@ -1242,21 +1247,27 @@
 
 
   
+<!-- === BRAND / FOOTER UNDANGAN === -->
 <footer class="footer-wedding">
-  <svg class="footer-wave" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
-    <path fill="#fff" fill-opacity="1" d="M0,64L60,74.7C120,85,240,107,360,117.3C480,128,600,128,720,117.3C840,107,960,85,1080,69.3C1200,53,1320,43,1380,37.3L1440,32L1440,0L0,0Z"></path>
-  </svg>
-
   <div class="footer-content">
     <p>Undangan oleh <strong>Rumah Digital Project</strong></p>
     <div class="footer-row">
       <span>© 2025</span>
-      <a class="wa-icon-inline" href="https://wa.me/6285706889273" target="_blank">
-        <img alt="WhatsApp" src="https://cdn-icons-png.flaticon.com/512/733/733585.png"/>
+      <a 
+        class="wa-icon-inline" 
+        href="https://wa.me/6285706889273" 
+        target="_blank" 
+        rel="noopener noreferrer"
+      >
+        <img 
+          alt="WhatsApp" 
+          src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
+        />
       </a>
     </div>
   </div>
 </footer>
+
 
 
 <script>
