@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <!-- Open Graph -->
-  <meta property="og:title" content="Undangan Romadona & Wulan" />
-  <meta property="og:description" content="Official Invitation Digital Romadona & Wulan | By Rumah Digital." />
+  <meta property="og:title" content="Undangan Kirana & Bagas" />
+  <meta property="og:description" content="Official Invitation Digital Kirana & Bagas | By Rumah Digital." />
   <meta property="og:image" content="https://rumahdigitalproject.github.io/Romadona-Wulan/foto4.webp" />
   <meta property="og:url" content="https://rumahdigitalproject.github.io/Romadona-Wulan/" />
 
@@ -11,9 +10,14 @@
   <meta name="theme-color" content="#000" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>The Wedding of Romadona & Wulan</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+  <title>The Wedding of Kirana & Bagas</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&family=Scheherazade+New&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
 
   <style>
     /* RESET */
@@ -365,7 +369,7 @@
     .alamat1 {
       font-size: 12px;
       color: #555;
-      margin-top: 12l0px
+      margin-top: 10px;
       font-style: italic;
     }
 
@@ -446,7 +450,15 @@
 }
 
 /* Teks atas & bawah countdown */
-#countdown-section .tgl {
+#countdown-section .jdl-countdown {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  margin-bottom: 10px;
+}
+#countdown-section .tgl-countdown {
   font-size: 1.2rem;
   font-weight: 500;
   color: #fff;
@@ -566,26 +578,6 @@
   background-color: rgba(0, 0, 0, 0.4); /* putih 50% transparan */
   z-index: 1;
     }
-/* Default: sembunyi dan posisi awal */
-.slide-in-left,
-.slide-in-right {
-  opacity: 0;
-  transition: all 0.8s ease-out;
-}
-
-.slide-in-left {
-  transform: translateX(-80px);
-}
-.slide-in-right {
-  transform: translateX(80px);
-}
-
-/* Saat masuk layar */
-.slide-in-left.show,
-.slide-in-right.show {
-  opacity: 1;
-  transform: translateX(0);
-}
 
 /*MAPAS*/
 .tombol-maps {
@@ -911,39 +903,40 @@
   transform: scale(1.15);
 }
 
-/* Posisi awal (belum terlihat) */
+/* Posisi awal (belum terlihat) & OPTIMASI HARDWARE ACCELERATION */
 .animasi-scroll {
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(40px) translateZ(0);
   transition: all 1.5s ease-out;
   will-change: opacity, transform;
+  backface-visibility: hidden;
 }
 
 .animasi-scroll.muncul {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) translateZ(0);
 }
 
 /* Arah animasi */
 [data-anim="up"] {
-  transform: translateY(40px);
+  transform: translateY(40px) translateZ(0);
 }
 [data-anim="down"] {
-  transform: translateY(-40px);
+  transform: translateY(-40px) translateZ(0);
 }
 [data-anim="left"] {
-  transform: translateX(-50px);
+  transform: translateX(-50px) translateZ(0);
 }
 [data-anim="right"] {
-  transform: translateX(50px);
+  transform: translateX(50px) translateZ(0);
 }
 [data-anim="zoom-up"] {
   opacity: 0;
-  transform: scale(0.8) translateY(40px);
+  transform: scale(0.8) translateY(40px) translateZ(0);
 }
 .animasi-scroll.muncul[data-anim="zoom-up"] {
   opacity: 1;
-  transform: scale(1) translateY(0);
+  transform: scale(1) translateY(0) translateZ(0);
 }
 
 
@@ -952,16 +945,13 @@
 </head>
 <body>
 
-<!-- COVER -->
 <div id="cover">
   <div id="cover-content">
     <p class="title">The Wedding of</p>
-    <h1 class="names">WULAN & DONA</h1>
+    <h1 class="names">KIRANA & BAGAS</h1>
 
     <p class="guest">Kepada Yth. Bapak/Ibu/Saudara/i</p>
-    <h3 id="namaTamu" class="nama-tamu"></h3> <!-- 🪶 Nama tamu muncul di sini -->
-
-    <button class="btn-open" id="openBtn">
+    <h3 id="namaTamu" class="nama-tamu"></h3> <button class="btn-open" id="openBtn">
       <i class="fa-solid fa-envelope"></i> Buka Undangan
     </button>
     <p class="guest1">mohon maaf apabila ada salah penulisan nama/gelar/dsb</p>
@@ -969,30 +959,24 @@
 </div>
 
 
-    <!-- ISI -->
-<!-- Bagian slideshow -->
-<div class="slideshow">
+    <div class="slideshow">
 <div class="slide slide1"></div>
 <div class="slide slide2"></div>
-<!-- ✨ Tambahkan efek hujan di sini -->
 <div class="black-overlay"></div>
-<!-- Konten nama pengantin -->
 <div class="content-wrapper">
 <div class="nama-wrapper" id="hero-nama">
 <div class="nama">
-<div>Wulan & Dona</div>
+<div>Kirana & Bagas</div>
 </div>
 <div class="guest">
-<div>10 - 11 November 2025</div>
+<div>15 - 16 Mei 2028</div>
 </div>
 </div>
 </div>
 </div>
   
 <section id="invitation1" section class="invitation1" style="position: relative;">
-<div class="bg-static"></div> <!-- 🎯 background diam hanya untuk section ini -->
-  <!-- Tulisan di atas box putih -->
-  <p class="bismillah animasi-scroll" data-anim="left">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+<div class="bg-static"></div> <p class="bismillah animasi-scroll" data-anim="left">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
   <p class="salam-undangan animasi-scroll" data-anim="right">
     Assalamu'alaikum Wr. Wb.<br>
     Maha suci Allah SWT yang telah menciptakan makhluk-Nya berpasang-pasangan.<br>
@@ -1000,28 +984,26 @@
     untuk menghadiri acara pernikahan kami.
   </p>
 
-  <!-- BOX PUTIH DI TENGAH -->
   <div class="box-putih-kecil animasi-scroll">
     <div class="profil">
       <div class="pengantin animasi-scroll">
-        <img alt="Pengantin Laki-laki" class="foto" src="romadona.webp" loading="lazy"/>
-        <h2 class="nama-pengantin">Romadona</h2>
-        <p class="orang-tua">Putra dari Bapak Katimin &amp; Ibu Jamiati</p>
-        <p class="alamat1">( Desa Krisik, Dsn Rambut Monte RT 01 RW 04, Gandusari )</p>
+        <img alt="Pengantin Laki-laki" class="foto" src="romadona.webp" loading="lazy" decoding="async"/>
+        <h2 class="nama-pengantin">Bagas Mahendra</h2>
+        <p class="orang-tua">Putra dari Bapak Surya Kusuma & Ibu Rini Astuti</p>
+        <p class="alamat1">( Perumahan Graha Asri, Surabaya )</p>
       </div>
 
-      <div class="and-symbol animasi-scroll">&amp;</div>
+      <div class="and-symbol animasi-scroll">&</div>
 
       <div class="pengantin animasi-scroll">
-        <img alt="Pengantin Perempuan" class="foto" src="sri.webp" loading="lazy"/>
-        <h2 class="nama-pengantin">Sri Wulandari</h2>
-        <p class="orang-tua">Putri dari Bapak Triman Wahyudi &amp; Ibu Sunarti</p>
-        <p class="alamat1">( Kampung Berkah Kletek RT 01 RW 07, Wlingi )</p>
+        <img alt="Pengantin Perempuan" class="foto" src="sri.webp" loading="lazy" decoding="async"/>
+        <h2 class="nama-pengantin">Kirana Larasati</h2>
+        <p class="orang-tua">Putri dari Bapak Wahyu Hidayat & Ibu Ningsih</p>
+        <p class="alamat1">( Jl. Merpati Putih No. 12, Sidoarjo )</p>
       </div>
     </div>
   </div>
 
-  <!-- Tulisan di bawah box putih -->
   <div class="teks-bawah">
     <p class="bismillah animasi-scroll" data-anim="left">وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةًۗ اِنَّ فِيْ ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ ۝٢١</p>
     <p class="arti-ayat animasi-scroll" data-anim="right">
@@ -1033,9 +1015,8 @@
 
 
 
-<!-- === COUNTDOWN ACARA === -->
 <section id="countdown-section" class="countdown-section">
-  <p class="tgl animasi-scroll" data-anim="up">Menuju Hari Bahagia</h2>
+  <p class="jdl-countdown animasi-scroll" data-anim="up">Menuju Hari Bahagia</p>
 
   <div id="countdown">
     <div class="animasi-scroll" data-anim="zoom-up"><span id="days">00</span><small>Hari</small></div>
@@ -1044,35 +1025,29 @@
     <div class="animasi-scroll" data-anim="zoom-up"><span id="seconds">00</span><small>Detik</small></div>
   </div>
 
-  <p class="tgl animasi-scroll" data-anim="down">10 - 11 November 2025</h2>
+  <p class="tgl-countdown animasi-scroll" data-anim="down">15 - 16 Mei 2028</p>
 </section>
 
 
-<!-- ACARA: Akad -->
 <section class="acara" style="position: relative;">
-<div class="bg-static"></div> <!-- 🎯 background diam hanya untuk section ini -->
-<div class="box-acara animasi-scroll">
+<div class="bg-static"></div> <div class="box-acara animasi-scroll">
 <p class="judul animasi-scroll" data-anim="zoom-up">Akad Nikah</p>
-<p class="tglacara animasi-scroll" data-anim="zoom-up">Selasa, 11 November 2025</p>
-<p class="waktuacara animasi-scroll" data-anim="zoom-up">Pukul 11:00 WIB</p>
+<p class="tglacara animasi-scroll" data-anim="zoom-up">Senin, 15 Mei 2028</p>
+<p class="waktuacara animasi-scroll" data-anim="zoom-up">Pukul 08:00 WIB</p>
 <div class="ikon-rumah animasi-scroll" data-anim="zoom-up">- - - - - - 🏠 - - - - - -</div>
-<p class="alamatacara animasi-scroll" data-anim="zoom-up">Kampung Berkah Kletek RT 01 / RW 07, Wlingi</p>
-<!-- Tombol Maps untuk Akad -->
+<p class="alamatacara animasi-scroll" data-anim="zoom-up">Gedung Graha Sabha<br>Jl. Pahlawan No. 45, Sidoarjo</p>
 <div class="tombol-maps animasi-scroll" data-anim="zoom-up">
 <a href="https://maps.app.goo.gl/mZFxvHmS3FoStpxH6" rel="noopener" target="_blank">📍 Lihat Maps Lokasi</a>
 </div>
 </div>
 </div>
 </section>
-<!-- ACARA: Resepsi -->
 <section class="acara" style="position: relative;">
-<div class="bg-static"></div> <!-- 🎯 background diam hanya untuk section ini -->
-<div class="box-acara animasi-scroll">
+<div class="bg-static"></div> <div class="box-acara animasi-scroll">
 <p class="judul animasi-scroll" data-anim="zoom-up">Resepsi pernikahan</p>
-<p class="tglacara animasi-scroll" data-anim="zoom-up">Senin - Selasa, 10 - 11 November 2025</p>
+<p class="tglacara animasi-scroll" data-anim="zoom-up">Senin - Selasa, 15 - 16 Mei 2028</p>
 <div class="ikon-rumah animasi-scroll" data-anim="zoom-up">- - - - - - 🏠 - - - - - -</div>
-<p class="alamatacara animasi-scroll" data-anim="zoom-up">Kampung Berkah Kletek RT 01 / RW 07, Wlingi</p>
-<!-- Tombol Maps untuk Akad -->
+<p class="alamatacara animasi-scroll" data-anim="zoom-up">Gedung Graha Sabha<br>Jl. Pahlawan No. 45, Sidoarjo</p>
 <div class="tombol-maps animasi-scroll" data-anim="zoom-up">
 <a href="https://maps.app.goo.gl/mZFxvHmS3FoStpxH6" rel="noopener" target="_blank">📍 Lihat Maps Lokasi</a>
 </div>
@@ -1080,36 +1055,30 @@
 </div>
 </section>
 
-<!-- Galeri -->
 <section id="galeri-section" section class="galeri-section">
 <h2 class="galeri-title animasi-scroll">Galeri</h2>
 <div class="galeri-grid">
-<!-- Foto 1 Besar -->
 <div class="galeri-item large animasi-scroll" data-anim="down">
-<img alt="Galeri Foto 1" src="foto1.webp"/>
+<img alt="Galeri Foto 1" src="foto1.webp" loading="lazy" decoding="async"/>
 </div>
-<!-- Foto 2 & 3 -->
-<div class="galeri-item small animasi-scroll" data-anim="left"">
-<img alt="Galeri Foto 2" src="foto2.webp"/>
+<div class="galeri-item small animasi-scroll" data-anim="left">
+<img alt="Galeri Foto 2" src="foto2.webp" loading="lazy" decoding="async"/>
 </div>
 <div class="galeri-item small animasi-scroll" data-anim="right">
-<img alt="Galeri Foto 3" src="foto3.webp"/>
+<img alt="Galeri Foto 3" src="foto3.webp" loading="lazy" decoding="async"/>
 </div>
-<!-- Foto 4 Besar -->
 <div class="galeri-item large animasi-scroll" data-anim="up">
-<img alt="Galeri Foto 4" src="foto4.webp"/>
+<img alt="Galeri Foto 4" src="foto4.webp" loading="lazy" decoding="async"/>
 </div>
-<!-- Foto 5 & 6 -->
-<div class="galeri-item small animasi-scroll" data-anim="left"">
-<img alt="Galeri Foto 5" src="foto5.webp"/>
+<div class="galeri-item small animasi-scroll" data-anim="left">
+<img alt="Galeri Foto 5" src="foto5.webp" loading="lazy" decoding="async"/>
 </div>
 <div class="galeri-item small animasi-scroll" data-anim="right">
-<img alt="Galeri Foto 6" src="foto6.webp"/>
+<img alt="Galeri Foto 6" src="foto6.webp" loading="lazy" decoding="async"/>
 </div>
 </div>
 </section>
 
-<!-- === SECTION RSVP & UCAPAN === -->
 <section id="rsvp" class="section" style="padding:60px 20px; text-align:center; color:#fff;">
   <div class="rsvp-container">
     <h2 class="RSVP-title animasi-scroll"> Rsvp & Ucapan</h2>
@@ -1138,26 +1107,23 @@
   
 
 
-<!-- MUSIK -->
-  <audio id="bgMusic" loop preload="none">
+<audio id="bgMusic" loop preload="none">
     <source src="lagu.mp3" type="audio/mpeg">
   </audio>
 
-<!--Penutup-->
 <section id="ucapan">
 <div class="ucapan-box animasi-scroll">
   <div class="pengantin animasi-scroll" data-anim="zoom-up">
-            <img alt="Pengantin Perempuan" class="foto" src="foto1.webp" loading="lazy"/>
+            <img alt="Pengantin Perempuan" class="foto" src="foto1.webp" loading="lazy" decoding="async"/>
 <p class="ucapan-teks animasi-scroll" data-anim="zoom-up">
       Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu, Atas kehadiran dan doa restunya kami mengucapkan terima kasih..
     </p>
 <p class="ucapan-nama animasi-scroll" data-anim="zoom-up">
-      Wulan &amp; Dona
+      Kirana & Bagas
     </p>
 </div>
 </section>
 
-<!-- === MENU NAVIGASI BAWAH === -->
 <nav class="menu-bawah" id="menuNavigasi">
   <a href="#hero-nama" title="Beranda"><i class="fa-solid fa-house"></i></a>
   <a href="#invitation1" title="invitation1"><i class="fa-solid fa-heart"></i></a>
@@ -1168,7 +1134,6 @@
 
 
   
-<!-- === FOOTER UNDANGAN (GAYA INVIGLORY) === -->
 <footer class="footer-wedding">
   <div class="footer-content">
     <p class="footer-made">Made With By</p>
@@ -1188,7 +1153,7 @@
       </a>
     </div>
 
-    <p class="footer-copy">© 2025 Rumah Digital Project</p>
+    <p class="footer-copy">© 2028 Rumah Digital Project</p>
   </div>
 </footer>
 
@@ -1262,23 +1227,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // ============================================================
-  // === COUNTDOWN ACARA ===
+  // === COUNTDOWN ACARA TERBARU (LOGIKA OTOMATIS BERGANTI TULISAN) ===
   // ============================================================
   function countdown() {
-    const target = new Date(2025, 11, 10, 8, 0, 0).getTime();
-    const diff = target - Date.now();
+    // Target: 15 Mei 2028 Jam 08:00 WIB (Bulan dimulai dari 0, jadi 4 = Mei)
+    const target = new Date(2028, 4, 15, 8, 0, 0).getTime();
+    
+    // Berakhir pada: 17 Mei 2028 Jam 00:00 WIB
+    const endEvent = new Date(2028, 4, 17, 0, 0, 0).getTime();
+    
+    const now = Date.now();
+    const diff = target - now;
 
+    const el = id => document.getElementById(id);
+    const countdownDiv = document.getElementById("countdown");
+    const titleDiv = document.querySelector("#countdown-section .jdl-countdown");
+    const tglDiv = document.querySelector("#countdown-section .tgl-countdown");
+
+    // Jika sekarang sudah lewat dari 16 Mei (tgl 17 ke atas)
+    if (now >= endEvent) {
+      countdownDiv.innerHTML = "<p style='color:#fff; font-size:1.2rem;'>Terima kasih atas doa dan restunya.</p>";
+      if(titleDiv) titleDiv.innerHTML = "Acara Telah Selesai";
+      if(tglDiv) tglDiv.style.display = "none";
+      clearInterval(timer);
+      return;
+    } 
+    // Jika hari ini adalah tgl 15 atau 16
+    else if (now >= target && now < endEvent) {
+      countdownDiv.innerHTML = "<p style='color:#fff; font-size:1.2rem;'>Acara sedang berlangsung saat ini.</p>";
+      if(titleDiv) titleDiv.innerHTML = "Acara Sedang Berlangsung 🎉";
+      if(tglDiv) tglDiv.style.display = "none";
+      clearInterval(timer);
+      return;
+    }
+
+    // Hitung mundur kalau belum tanggal 15 Mei 2028
     const d = Math.floor(diff / (1000 * 60 * 60 * 24));
     const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-    const el = id => document.getElementById(id);
-    if (diff <= 0) {
-      el("countdown").innerHTML = "<p>Acara Sedang Berlangsung 🎉</p>";
-      clearInterval(timer);
-      return;
-    }
     el("days").textContent = d.toString().padStart(2, "0");
     el("hours").textContent = h.toString().padStart(2, "0");
     el("minutes").textContent = m.toString().padStart(2, "0");
@@ -1383,3 +1371,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 </script>
+</body>
+</html>
+
